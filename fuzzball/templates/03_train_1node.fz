@@ -4,12 +4,19 @@ volumes:
   shared:
     use: @PROVISIONER@
     name: @VOLUME@
+  out:
+    egress:
+      - source:
+          uri: file://results.tgz
+        destination:
+          uri: fuzzball://group/results/train-1n-@COLLECT_TAG@.tgz
 jobs:
   train-1node:
     image:
       uri: @IMAGE@
     mounts:
       /shared: shared
+      /out: out
     cwd: @REPO_DIR@
     env:
       - PYTHONUNBUFFERED=1
@@ -17,12 +24,18 @@ jobs:
       #!/bin/bash
       set -eu
       [ -f fuzzball/cluster.env ] && . fuzzball/cluster.env
+      set +e
       NNODES=1 bash scripts/launch_train.sh @CONFIG_1N@
+      RC=$?
+      RUN=$(basename @CONFIG_1N@ .yaml)
+      cat results/runs/$RUN/summary.json 2>/dev/null
+      tar czf /out/results.tgz --exclude='*/ckpt/epoch_*' results/runs/$RUN
+      exit $RC
     resource:
       cpu:
         cores: 16
       memory:
-        size: 100GB
+        size: 100GiB
       devices:
         nvidia.com/gpu: 1
       exclusive: true

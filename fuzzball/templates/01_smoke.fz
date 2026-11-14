@@ -1,32 +1,50 @@
-# Single GB10 smoke test: GPU visible, CUDA works, AutoModel + Mamba kernels import, model present.
+# Single GB10 smoke test: preflight (GPU, CUDA, AutoModel + Mamba kernels, model files), then ONE
+# training step of the real config (gbs 16, seq 3072, no checkpoint).
+# Gate: finite loss, exit 0, peak memory about 64 GB.
+# Results: results/runs/smoke-1n on the volume, plus a tarball in the object cache:
+#   fb://group/results/smoke-1n-@COLLECT_TAG@.tgz
 version: v4
 volumes:
   shared:
     use: @PROVISIONER@
     name: @VOLUME@
+  out:
+    egress:
+      - source:
+          uri: file://results.tgz
+        destination:
+          uri: fuzzball://group/results/smoke-1n-@COLLECT_TAG@.tgz
 jobs:
-  preflight:
+  smoke:
     image:
       uri: @IMAGE@
     mounts:
       /shared: shared
+      /out: out
     cwd: @REPO_DIR@
     env:
       - PYTHONUNBUFFERED=1
       - MODEL_DIR=@MODEL_DIR@
     script: |
       #!/bin/bash
-      set -eu
+      set -u
       date -u; hostname; uname -m
       nvidia-smi
-      python3 scripts/00_preflight.py --need-gpu --model-dir @MODEL_DIR@
+      python3 scripts/00_preflight.py --need-gpu --model-dir @MODEL_DIR@ || exit 1
+      [ -f fuzzball/cluster.env ] && . fuzzball/cluster.env
+      NNODES=1 bash scripts/launch_train.sh configs/smoke-1n.yaml
+      RC=$?
+      cat results/runs/smoke-1n/summary.json 2>/dev/null || true
+      tar czf /out/results.tgz results/runs/smoke-1n results/preflight 2>/dev/null || true
+      exit $RC
     resource:
       cpu:
-        cores: 8
+        cores: 16
       memory:
-        size: 32GB
+        size: 100GiB
       devices:
         nvidia.com/gpu: 1
+      exclusive: true
     policy:
       timeout:
-        execute: 20m
+        execute: 45m

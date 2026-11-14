@@ -1,17 +1,24 @@
 # Two-node distributed training. Config made by:
-#   python scripts/06_make_config.py --mode replicate --nodes 2 ...   (or shard / ep / ddp)
+#   python scripts/06_make_config.py --mode ddp --nodes 2 ...   (or ep / shard); 00_stage_code.fz makes ddp-2n, ep-2n
 # Each node logs to results/runs/<run>/logs/<host>.log; rank 0 writes ckpt/training.jsonl.
 version: v4
 volumes:
   shared:
     use: @PROVISIONER@
     name: @VOLUME@
+  out:
+    egress:
+      - source:
+          uri: file://results.tgz
+        destination:
+          uri: fuzzball://group/results/train-2n-@COLLECT_TAG@.tgz
 jobs:
   train-2node:
     image:
       uri: @IMAGE@
     mounts:
       /shared: shared
+      /out: out
     env:
       - MULTINODE_WRAPPER_FORWARD_STREAMS=1
       - PYTHONUNBUFFERED=1
@@ -21,14 +28,15 @@ jobs:
       . /multinode/generic-helper
       HEAD=$MULTINODE_NODE_IP
       echo "hosts: $MULTINODE_HOSTLIST_NOSLOTS  head: $HEAD"
-      exec_rank0 "bash @REPO_DIR@/fuzzball/node_entry.sh 0 $HEAD train @CONFIG_2N@"
+      RUN=$(basename @CONFIG_2N@ .yaml)
+      exec_rank0 "bash @REPO_DIR@/fuzzball/node_entry.sh 0 $HEAD train @CONFIG_2N@; rc=\$?; cd @REPO_DIR@ && cat results/runs/$RUN/summary.json; tar czf /out/results.tgz --exclude='*/ckpt/epoch_*' results/runs/$RUN; exit \$rc"
       exec_rankN "bash @REPO_DIR@/fuzzball/node_entry.sh 1 $HEAD train @CONFIG_2N@"
       wait_rank0
     resource:
       cpu:
         cores: 16
       memory:
-        size: 100GB
+        size: 100GiB
       devices:
         nvidia.com/gpu: 1
       exclusive: true

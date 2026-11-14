@@ -1,16 +1,24 @@
 # Two GB10 nodes: NCCL all-reduce correctness + bandwidth sweep. Communication proof only.
-# Output: results/nccl/nccl_report.json on the shared volume (status must be PASS with 2 distinct hosts).
+# Output: results/nccl/nccl_report.json on the shared volume (status must be PASS with 2 distinct hosts),
+# copied to fb://group/results/nccl-@COLLECT_TAG@.tgz.
 version: v4
 volumes:
   shared:
     use: @PROVISIONER@
     name: @VOLUME@
+  out:
+    egress:
+      - source:
+          uri: file://results.tgz
+        destination:
+          uri: fuzzball://group/results/nccl-@COLLECT_TAG@.tgz
 jobs:
   nccl-2node:
     image:
       uri: @IMAGE@
     mounts:
       /shared: shared
+      /out: out
     env:
       - MULTINODE_WRAPPER_FORWARD_STREAMS=1
       - PYTHONUNBUFFERED=1
@@ -20,7 +28,7 @@ jobs:
       . /multinode/generic-helper
       HEAD=$MULTINODE_NODE_IP
       echo "hosts: $MULTINODE_HOSTLIST_NOSLOTS  head: $HEAD"
-      exec_rank0 "bash @REPO_DIR@/fuzzball/node_entry.sh 0 $HEAD nccl"
+      exec_rank0 "bash @REPO_DIR@/fuzzball/node_entry.sh 0 $HEAD nccl; rc=\$?; cd @REPO_DIR@ && tar czf /out/results.tgz results/nccl; exit \$rc"
       exec_rankN "bash @REPO_DIR@/fuzzball/node_entry.sh 1 $HEAD nccl"
       wait_rank0
     resource:

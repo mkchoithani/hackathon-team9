@@ -1,0 +1,49 @@
+# Stage the code on the shared volume and generate the training configs there.
+# Run after fuzzball/setup.fz (model download) and again whenever the dev branch changes.
+# Re-running is safe: git pull --ff-only, configs are regenerated.
+# The repo is public, so the clone needs no credentials. Configs must be generated on the
+# cluster: 06_make_config.py loads the AutoModel recipe that ships inside the image.
+version: v4
+volumes:
+  shared:
+    use: @PROVISIONER@
+    name: @VOLUME@
+jobs:
+  stage:
+    image:
+      uri: @IMAGE@
+    mounts:
+      /shared: shared
+    env:
+      - PYTHONUNBUFFERED=1
+      - MODEL_DIR=@MODEL_DIR@
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      export HOME=${HOME:-/tmp}; [ -w "$HOME" ] || export HOME=/tmp
+      git config --global --add safe.directory '*'   # volume owner may differ from the container user
+      if [ -d @REPO_DIR@/.git ]; then
+        git -C @REPO_DIR@ fetch --quiet origin @GIT_BRANCH@
+        git -C @REPO_DIR@ checkout --quiet @GIT_BRANCH@
+        git -C @REPO_DIR@ pull --ff-only --quiet
+      else
+        git clone --quiet --branch @GIT_BRANCH@ @GIT_URL@ @REPO_DIR@
+      fi
+      cd @REPO_DIR@
+      git log -1 --format='code: %h %s (%cd)'
+      ls "$MODEL_DIR"/config.json >/dev/null || { echo "model missing at $MODEL_DIR: run fuzzball/setup.fz first"; exit 1; }
+      # Same global batch (16) and sequence length (3072) everywhere = fair 1-node vs 2-node comparison.
+      python3 scripts/06_make_config.py --mode single --run smoke-1n  --steps 1  --val '' --no-save
+      python3 scripts/06_make_config.py --mode single --run single-1n --steps 20
+      python3 scripts/06_make_config.py --mode ddp    --run ddp-2n    --steps 20
+      python3 scripts/06_make_config.py --mode ep     --run ep-2n     --steps 20
+      ls -l configs/
+      echo STAGE_DONE
+    resource:
+      cpu:
+        cores: 4
+      memory:
+        size: 16GiB
+    policy:
+      timeout:
+        execute: 30m
