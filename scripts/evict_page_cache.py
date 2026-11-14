@@ -17,9 +17,12 @@ from pathlib import Path
 
 
 def mem_available_gib():
-    for line in open("/proc/meminfo"):
-        if line.startswith("MemAvailable:"):
-            return int(line.split()[1]) / 2**20
+    try:
+        for line in open("/proc/meminfo"):
+            if line.startswith("MemAvailable:"):
+                return int(line.split()[1]) / 2**20
+    except OSError:
+        pass
     return -1.0
 
 
