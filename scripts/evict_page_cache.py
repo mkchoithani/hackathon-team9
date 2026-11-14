@@ -37,12 +37,16 @@ def evict(dirs):
             except OSError:
                 continue
             try:
-                os.fdatasync(fd)  # dirty pages (fresh copy) must be written before they can be dropped
+                if hasattr(os, "fdatasync"):
+                    os.fdatasync(fd)  # dirty pages (fresh copy) must be written before they can be dropped
             except OSError:
                 pass
             try:
-                os.posix_fadvise(fd, 0, 0, os.POSIX_FADV_DONTNEED)
-                n += 1
+                if hasattr(os, "posix_fadvise"):  # Linux only
+                    os.posix_fadvise(fd, 0, 0, os.POSIX_FADV_DONTNEED)
+                    n += 1
+            except OSError:
+                pass
             finally:
                 os.close(fd)
     return n
