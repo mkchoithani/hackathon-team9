@@ -88,6 +88,27 @@ if _SRC:
     except Exception as e:
         _log(f"hook NOT installed: {e!r}")
 
+    # Hugging Face transformers (scripts/07_predict.py --backend hf) loads shards with
+    # safetensors.safe_open, which mmaps in Rust and never calls Python's mmap: stage those too.
+    try:
+        import safetensors as _st
+
+        _orig_safe_open = _st.safe_open
+
+        def safe_open(filename, *args, **kwargs):
+            path = os.fspath(filename)
+            if path.startswith(_SRC) and path.endswith(".safetensors"):
+                try:
+                    path = _stage(path)
+                except Exception as e:
+                    _log(f"staging failed for {path}, using NFS: {e!r}")
+            return _orig_safe_open(path, *args, **kwargs)
+
+        _st.safe_open = safe_open
+        _log(f"safe_open hook active in pid {os.getpid()}")
+    except Exception as e:
+        _log(f"safe_open hook NOT installed: {e!r}")
+
 # Chain to any other sitecustomize.py this one shadows (e.g. the DUMP_STACKS_EVERY one).
 _me = os.path.dirname(os.path.abspath(__file__))
 for _d in sys.path:
