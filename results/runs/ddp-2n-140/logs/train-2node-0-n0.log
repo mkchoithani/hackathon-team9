@@ -1,0 +1,1258 @@
+[fastload] mmap hook active in pid 177 for /shared/nemotron-3-nano-30b-a3b-bf16
+[fastload] mmap hook active in pid 207 for /shared/nemotron-3-nano-30b-a3b-bf16
+cfg-path: /shared/hackathon-team9/configs/ddp-2n-140.yaml
+W1114 22:26:40.293000 207 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1114 22:26:40.318000 207 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+W1114 22:26:41.924000 207 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 22:26:41.925000 207 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1114 22:26:41.926000 207 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 22:26:41.926000 207 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1114 22:26:41.927000 207 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 22:26:41.927000 207 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1114 22:26:41.928000 207 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 22:26:41.929000 207 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+> initializing torch distributed with 2 workers.
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlopen(libnccl-env.so) failed: libnccl-env.so: cannot open shared object file: No such file or directory
+train-2node-0:207:207 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+train-2node-0:207:207 [0] NCCL INFO NCCL_SOCKET_IFNAME set to ^lo,fb0,docker0
+train-2node-0:207:207 [0] NCCL INFO cudaDriverVersion 13040
+train-2node-0:207:207 [0] NCCL INFO NCCL version 2.30.7+cuda13.3
+train-2node-0:207:207 [0] NCCL INFO NCCL git version HEAD a5187fa2e
+train-2node-0:207:207 [0] NCCL INFO NCCL_NET_PLUGIN set by environment to spcx
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlopen(spcx) failed: spcx: cannot open shared object file: No such file or directory
+train-2node-0:207:207 [0] NCCL INFO NET/Plugin: Loaded net plugin SPCX (v12)
+train-2node-0:207:207 [0] NCCL INFO NET/Plugin: Loaded collnet plugin SPCX (v12)
+train-2node-0:207:207 [0] NCCL INFO Successfully loaded external network plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+train-2node-0:207:207 [0] NCCL INFO Registering new plugin entry for commId: 2889818230560841572
+train-2node-0:207:207 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so (SPCX Ver. 1.4-0)
+train-2node-0:207:207 [0] NCCL INFO NCCL_SOCKET_IFNAME set to ^lo,fb0,docker0
+train-2node-0:207:207 [0] NCCL INFO NET/DEVX : device:mlx5_0 hcaCaps=0xd
+
+[2026-11-14 22:26:53] train-2node-0:207:207 [0] init.cc:449 NCCL WARN Spectrum-X (SPCX) NCCL plugin is not supported on device:mlx5_0, skipping ..
+train-2node-0:207:207 [0] NCCL INFO NET/DEVX : device:mlx5_1 hcaCaps=0xd
+train-2node-0:207:207 [0] NCCL INFO NET/DEVX : device:mlx5_2 hcaCaps=0xd
+
+[2026-11-14 22:26:53] train-2node-0:207:207 [0] init.cc:449 NCCL WARN Spectrum-X (SPCX) NCCL plugin is not supported on device:mlx5_2, skipping ..
+train-2node-0:207:207 [0] NCCL INFO NET/DEVX : device:mlx5_3 hcaCaps=0xd
+train-2node-0:207:207 [0] NCCL INFO NET/IB : No device found.
+train-2node-0:207:207 [0] NCCL INFO NET/IB : Using [RO]; OOB lan0:192.168.99.27<0>
+train-2node-0:207:207 [0] NCCL INFO Failed to initialize NET plugin SPCX
+train-2node-0:207:207 [0] NCCL INFO Deregistering plugin entry for commId: 2889818230560841572
+
+[2026-11-14 22:26:53] train-2node-0:207:207 [0] misc/ibvwrap.cc:402 (wrap_ibv_query_port_speed) NCCL WARN Call to ibv_query_port_speed failed with error Protocol not supported errno 93
+train-2node-0:207:207 [0] NCCL INFO NET/IB: [0] mlx5_0:uverbs0:1/RoCE provider=Mlx5 speed=100000 context=0x48eaa620 pciPath=/sys/devices/pci0000:00/0000:00:00.0/0000:01:00.0 ar=0 oooRqSize=0
+
+[2026-11-14 22:26:53] train-2node-0:207:207 [0] misc/ibvwrap.cc:402 (wrap_ibv_query_port_speed) NCCL WARN Call to ibv_query_port_speed failed with error Protocol not supported errno 93
+train-2node-0:207:207 [0] NCCL INFO NET/IB: [2] mlx5_2:uverbs2:1/RoCE provider=Mlx5 speed=100000 context=0x48fe7750 pciPath=/sys/devices/pci0002:00/0002:00:00.0/0002:01:00.0 ar=0 oooRqSize=0
+train-2node-0:207:207 [0] NCCL INFO NET/IB : Made virtual device [0] name=mlx5_0 speed=100000 ndevs=1 rail=-1 plane=-1
+train-2node-0:207:207 [0] NCCL INFO NET/IB : Made virtual device [1] name=mlx5_2 speed=100000 ndevs=1 rail=-1 plane=-1
+train-2node-0:207:207 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_2:1/RoCE [RO]; OOB lan0:192.168.99.27<0>
+train-2node-0:207:207 [0] NCCL INFO Initialized NET plugin IB
+train-2node-0:207:207 [0] NCCL INFO Assigned NET plugin IB to comm
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlopen(libnccl-rma.so) failed: libnccl-rma.so: cannot open shared object file: No such file or directory
+train-2node-0:207:207 [0] NCCL INFO RMA/Plugin: Could not find: libnccl-rma.so
+train-2node-0:207:207 [0] NCCL INFO RMA/Plugin: Failed to load external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so, dlHandle: (nil), ncclRma: (nil)
+train-2node-0:207:207 [0] NCCL INFO RMA/Plugin: Loaded rma plugin SPCX_RMA (v13)
+train-2node-0:207:207 [0] NCCL INFO RMA/Plugin: Successfully loaded external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+train-2node-0:207:207 [0] NCCL INFO Registering new plugin entry for commId: 2889818230560841572
+train-2node-0:207:207 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so (SPCX Ver. 1.4-0)
+train-2node-0:207:207 [0] NCCL INFO GIN: no IB devices found
+train-2node-0:207:207 [0] NCCL INFO plugin/rma/rma_v13.cc:18 (ncclRma_init) -> 3
+train-2node-0:207:207 [0] NCCL INFO RMA/Plugin: Assigned plugin RMA_IB_PROXY to comm
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlopen(libnccl-gin.so) failed: libnccl-gin.so: cannot open shared object file: No such file or directory
+train-2node-0:207:207 [0] NCCL INFO GIN/Plugin: Could not find: libnccl-gin.so
+train-2node-0:207:207 [0] NCCL INFO GIN/Plugin: Failed to load external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so, dlHandle: (nil), ncclGin: (nil)
+train-2node-0:207:207 [0] NCCL INFO GIN/Plugin: Loaded gin plugin SPCX_GIN (v13)
+train-2node-0:207:207 [0] NCCL INFO GIN/Plugin: Successfully loaded external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+train-2node-0:207:207 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so (SPCX Ver. 1.4-0)
+train-2node-0:207:207 [0] NCCL INFO GIN: no IB devices found
+train-2node-0:207:207 [0] NCCL INFO GIN/Plugin: Assigned plugin GIN_IB_GDAKI type 3 to comm
+train-2node-0:207:207 [0] NCCL INFO Using network IB
+train-2node-0:207:207 [0] NCCL INFO Loaded NVML from libnvidia-ml.so.1
+train-2node-0:207:207 [0] NCCL INFO [Rank 0] ncclCommInitRankConfig comm 0x463b9260 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId f01000 commId 0x281ab25eaa06df64 - Init START
+train-2node-0:207:207 [0] NCCL INFO RAS client listening socket at ::1<28028>
+train-2node-0:207:207 [0] NCCL INFO NET/GIN_IB_GDAKI : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+train-2node-0:207:207 [0] NCCL INFO NET/GIN_IB_GDAKI : GPU Direct RDMA Disabled for HCA 1 'mlx5_2'
+train-2node-0:207:207 [0] NCCL INFO NET/RMA_IB_PROXY : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+train-2node-0:207:207 [0] NCCL INFO NET/RMA_IB_PROXY : GPU Direct RDMA Disabled for HCA 1 'mlx5_2'
+train-2node-0:207:207 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 0 'mlx5_0'
+train-2node-0:207:207 [0] NCCL INFO NET/IB : GPU Direct RDMA Disabled for HCA 1 'mlx5_2'
+train-2node-0:207:207 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 0 is empty, ignoring. (GPU affinity =  ; CPU affinity = 0-15).
+train-2node-0:207:207 [0] NCCL INFO Rank 0: 2 Net devices
+train-2node-0:207:207 [0] NCCL INFO Rank 0: 0 CollNet devices
+train-2node-0:207:207 [0] NCCL INFO Local Net device counts across ranks: min 2 max 2
+train-2node-0:207:207 [0] NCCL INFO Local CollNet device counts across ranks: min 0 max 0
+train-2node-0:207:207 [0] NCCL INFO comm 0x463b9260 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+train-2node-0:207:207 [0] NCCL INFO Channel 00/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 01/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 02/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 03/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 04/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 05/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 06/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 07/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 08/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 09/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 10/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 11/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 12/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 13/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 14/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 15/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 16/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 17/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 18/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 19/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 20/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 21/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 22/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 23/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 24/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 25/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 26/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 27/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 28/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 29/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 30/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 31/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 32/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 33/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 34/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 35/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 36/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 37/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 38/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 39/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 40/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 41/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 42/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 43/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 44/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 45/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 46/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 47/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 48/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 49/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 50/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 51/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 52/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 53/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 54/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 55/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 56/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 57/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 58/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 59/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 60/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 61/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 62/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Channel 63/64 : 0 1
+train-2node-0:207:207 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] 1/-1/-1->0->-1 [7] 1/-1/-1->0->-1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1 [16] 1/-1/-1->0->-1 [17] 1/-1/-1->0->-1 [18] 1/-1/-1->0->-1 [19] 1/-1/-1->0->-1 [20] 1/-1/-1->0->-1 [21] 1/-1/-1->0->-1 [22] 1/-1/-1->0->-1 [23] 1/-1/-1->0->-1 [24] 1/-1/-1->0->-1 [25] 1/-1/-1->0->-1 [26] 1/-1/-1->0->-1 [27] 1/-1/-1->0->-1 [28] 1/-1/-1->0->-1 [29] 1/-1/-1->0->-1 [30] 1/-1/-1->0->-1 [31] 1/-1/-1->0->-1 [32] -1/-1/-1->0->1 [33] -1/-1/-1->0->1 [34] -1/-1/-1->0->1 [35] -1/-1/-1->0->1 [36] -1/-1/-1->0->1 [37] -1/-1/-1->0->1 [38] -1/-1/-1->0->1 [39] -1/-1/-1->0->1 [40] -1/-1/-1->0->1 [41] -1/-1/-1->0->1 [42] -1/-1/-1->0->1 [43] -1/-1/-1->0->1 [44] -1/-1/-1->0->1 [45] -1/-1/-1->0->1 [46] -1/-1/-1->0->1 [47] -1/-1/-1->0->1 [48] -1/-1/-1->0->1 [49] -1/-1/-1->0->1 [50] -1/-1/-1->0->1 [51] -1/-1/
+train-2node-0:207:207 [0] NCCL INFO P2P Chunksize set to 262144
+train-2node-0:207:207 [0] NCCL INFO Tuning P2P operations with maxP2pPeers = 2
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlopen(libnccl-profiler.so) failed: libnccl-profiler.so: cannot open shared object file: No such file or directory
+train-2node-0:207:207 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v6) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v6
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v5) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v5
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v4) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v4
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v3) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v3
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v2) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v2
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v1) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v1
+train-2node-0:207:207 [0] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+train-2node-0:207:268 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 11
+train-2node-0:207:267 [0] NCCL INFO [Proxy Service] Device 0 CPU core 0
+train-2node-0:207:267 [0] NCCL INFO proxy listening socket at 192.168.99.27<53615>
+train-2node-0:207:207 [0] NCCL INFO ncclOsDlopen(libnccl-tuner.so) failed: libnccl-tuner.so: cannot open shared object file: No such file or directory
+train-2node-0:207:207 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+train-2node-0:207:207 [0] NCCL INFO TUNER/Plugin: Using SPCX (v5)
+train-2node-0:207:207 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+train-2node-0:207:207 [0] NCCL INFO 64 coll channels, 64 collnet channels, 0 nvls channels, 64 p2p channels, 2 p2p channels per peer
+train-2node-0:207:207 [0] NCCL INFO Symmetric memory is not supported. cuMemEnable 1, globalGinSupport 0, cuMemGdrSupport 0
+train-2node-0:207:207 [0] NCCL INFO CC Off, workFifoBytes 1048576
+train-2node-0:207:207 [0] NCCL INFO ncclCommInitRankConfig comm 0x463b9260 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId f01000 commId 0x281ab25eaa06df64 - Init COMPLETE
+train-2node-0:207:207 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 2 total 0.74 (kernels 0.37, alloc 0.07, bootstrap 0.24, allgathers 0.00, topo 0.01, graphs 0.00, connections 0.05, rest 0.00)
+train-2node-0:207:207 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:269 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 2
+train-2node-0:207:207 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 02/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 03/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 04/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 05/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 06/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 07/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 08/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 09/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 10/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 11/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 12/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 13/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 14/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 15/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 16/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 17/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 18/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 19/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 20/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 21/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 22/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 23/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 24/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 25/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 26/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 27/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 28/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 29/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 30/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 31/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 32/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 33/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 34/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 35/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 36/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 37/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 38/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 39/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 40/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 41/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 42/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 43/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 44/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 45/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 46/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 47/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 48/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 49/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 50/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 51/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 52/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 53/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 54/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 55/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 56/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 57/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 58/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 59/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 60/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 61/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 62/0 : 1[0] -> 0[0] [receive] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 63/0 : 1[0] -> 0[0] [receive] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 08/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 09/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 10/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 11/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 14/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 15/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 16/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 17/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 18/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 19/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 20/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 21/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 22/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 23/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 24/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 25/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 26/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 27/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 28/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 29/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 30/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 31/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 32/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 33/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 34/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 35/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 36/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 37/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 38/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 39/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 40/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 41/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 42/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 43/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 44/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 45/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 46/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 47/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 48/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 49/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 50/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 51/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 52/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 53/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 54/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 55/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 56/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 57/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 58/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 59/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 60/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 61/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:207 [0] NCCL INFO Channel 62/0 : 0[0] -> 1[0] [send] via NET/IB/0
+train-2node-0:207:207 [0] NCCL INFO Channel 63/0 : 0[0] -> 1[0] [send] via NET/IB/1
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4042000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4086000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb40ce000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1292 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1292 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1555fe ctsFifoLkey=0x1555fe
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1292 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1420 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1420 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x199a83 ctsFifoLkey=0x199a83
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1420 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb418a000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb41d2000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1293 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1294 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4266000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1292 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1420 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1421 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1422 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1295 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1295 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x15ec97 ctsFifoLkey=0x15ec97
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1295 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1296 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1297 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb437a000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb43be000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4403000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4444000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4489000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb44cd000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4515000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1295 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1423 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1423 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x19b39c ctsFifoLkey=0x19b39c
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1423 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1424 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1425 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1298 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1298 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x14dd89 ctsFifoLkey=0x14dd89
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1298 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1299 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1300 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1426 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1426 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x184d37 ctsFifoLkey=0x184d37
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1426 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1427 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1428 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1301 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1301 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x167f28 ctsFifoLkey=0x167f28
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1301 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb470e000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1423 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1298 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1426 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1301 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1302 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1303 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb479e000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb47df000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4824000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4865000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb48aa000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb48ee000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4933000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4977000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb49bf000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4a03000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4a4b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4a8f000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4ad7000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1429 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1429 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x19b9a2 ctsFifoLkey=0x19b9a2
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1429 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1430 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1431 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1304 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1304 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x17ca73 ctsFifoLkey=0x17ca73
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1304 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1305 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1306 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1432 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1432 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x199e86 ctsFifoLkey=0x199e86
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1432 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1433 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1434 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1307 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1307 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x162ed8 ctsFifoLkey=0x162ed8
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1307 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1308 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1309 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1435 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1435 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x17d5be ctsFifoLkey=0x17d5be
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1435 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1436 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1437 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1310 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1310 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1601a6 ctsFifoLkey=0x1601a6
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1310 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1311 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1312 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1438 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1438 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x17b39c ctsFifoLkey=0x17b39c
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1438 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4e58000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1429 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1304 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1432 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1307 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1435 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1310 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1438 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1439 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1440 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4ee8000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4f29000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4f6e000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb4faf000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb4ff4000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5035000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb507a000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb50bb000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5100000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5141000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5186000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb51ca000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5212000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5256000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb529e000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb52e2000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb532a000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb536e000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb53b6000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb53fa000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5442000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5486000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb54ce000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1313 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1313 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1336d8 ctsFifoLkey=0x1336d8
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1313 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1314 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1315 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1441 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1441 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x198770 ctsFifoLkey=0x198770
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1441 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1442 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1443 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1316 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1316 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x17a750 ctsFifoLkey=0x17a750
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1316 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1317 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1318 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1444 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1444 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x198b74 ctsFifoLkey=0x198b74
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1444 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1445 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1446 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1319 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1319 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x181dc6 ctsFifoLkey=0x181dc6
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1319 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1320 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1321 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1447 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1447 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x198e77 ctsFifoLkey=0x198e77
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1447 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1448 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1449 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1322 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1322 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1615c1 ctsFifoLkey=0x1615c1
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1322 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1323 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1324 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1450 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1450 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x19947d ctsFifoLkey=0x19947d
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1450 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1451 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1452 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1325 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1325 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x160ab7 ctsFifoLkey=0x160ab7
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1325 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1326 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1327 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1453 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1453 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x199780 ctsFifoLkey=0x199780
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1453 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1454 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1455 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1328 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1328 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x15f9a1 ctsFifoLkey=0x15f9a1
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1328 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1329 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1330 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1456 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1456 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x19b099 ctsFifoLkey=0x19b099
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1456 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5adb000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1313 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1441 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1316 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1444 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1319 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1447 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1322 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1450 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1325 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1453 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1328 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1456 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1457 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1458 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5b6b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5bac000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5bf1000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5c32000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5c77000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5cb8000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5cfd000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5d3e000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5d83000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5dc4000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5e09000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5e4a000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5e8f000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5ed0000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5f15000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5f56000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb5f9b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb5fdc000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb6021000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb6062000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb60aa000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb60ee000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb6133000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb6177000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb61bf000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb6203000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb624b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb628f000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb62d7000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb631b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb6363000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb63a7000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb63ef000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb6433000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb647b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb64bf000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb6507000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb654b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb6593000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb65d7000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb661f000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb6663000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb66ab000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb66ef000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb6737000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1331 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1331 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x14cc78 ctsFifoLkey=0x14cc78
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1331 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1332 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1333 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1459 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1459 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x18240e ctsFifoLkey=0x18240e
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1459 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1460 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1461 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1334 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1334 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x151bc7 ctsFifoLkey=0x151bc7
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1334 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1335 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1336 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1462 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1462 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x19583a ctsFifoLkey=0x19583a
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1462 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1463 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1464 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1337 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1337 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x156b0d ctsFifoLkey=0x156b0d
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1337 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1338 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1339 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1465 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1465 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x188a73 ctsFifoLkey=0x188a73
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1465 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1466 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1467 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1340 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1340 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x16b962 ctsFifoLkey=0x16b962
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1340 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1341 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1342 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1468 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1468 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x1802ed ctsFifoLkey=0x1802ed
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1468 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1469 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1470 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1343 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1343 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x14bb64 ctsFifoLkey=0x14bb64
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1343 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1344 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1345 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1471 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1471 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x17bea7 ctsFifoLkey=0x17bea7
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1471 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1472 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1473 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1346 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1346 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1602ae ctsFifoLkey=0x1602ae
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1346 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1347 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1348 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1474 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1474 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x187e66 ctsFifoLkey=0x187e66
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1474 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1475 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1476 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1349 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1349 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1507b0 ctsFifoLkey=0x1507b0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1349 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1350 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1351 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1477 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1477 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x18361f ctsFifoLkey=0x18361f
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1477 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1478 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1479 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1352 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1352 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x14f09d ctsFifoLkey=0x14f09d
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1352 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1353 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1354 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb6f16000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1331 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1459 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1334 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1462 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1337 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1465 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1340 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1468 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1343 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1471 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1346 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1474 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1349 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1477 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1352 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1480 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1480 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x180cf7 ctsFifoLkey=0x180cf7
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1480 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1355 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1355 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x13db87 ctsFifoLkey=0x13db87
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1355 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1481 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1481 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x163e29 ctsFifoLkey=0x163e29
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1481 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1356 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1356 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x15e591 ctsFifoLkey=0x15e591
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1356 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1482 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1482 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x18412b ctsFifoLkey=0x18412b
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1482 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1357 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1357 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1614bf ctsFifoLkey=0x1614bf
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1357 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1483 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1483 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x18674f ctsFifoLkey=0x18674f
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1483 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1358 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1358 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1643eb ctsFifoLkey=0x1643eb
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1358 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb70ce000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1480 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1484 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1485 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1355 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1359 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1360 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1481 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1486 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1487 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1356 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1361 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1362 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1482 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1488 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1489 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1357 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1363 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1364 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1483 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1490 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1491 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1358 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1365 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1366 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1492 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1492 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x19c2ab ctsFifoLkey=0x19c2ab
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1492 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb738b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1492 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1493 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1494 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb741b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb745c000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb74a1000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb74e2000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7527000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7568000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb75ad000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb75ee000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7636000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb767a000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1367 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1368 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1495 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1495 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x1915ff ctsFifoLkey=0x1915ff
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1495 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1496 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1497 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1369 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1369 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1523d0 ctsFifoLkey=0x1523d0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1369 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1370 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1371 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1498 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1498 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x168566 ctsFifoLkey=0x168566
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1498 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1499 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1500 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1372 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1372 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x15741d ctsFifoLkey=0x15741d
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1372 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1373 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1374 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7914000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1375 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1375 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x154bf6 ctsFifoLkey=0x154bf6
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1375 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1495 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1369 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1498 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1372 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1501 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1501 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x18d1bb ctsFifoLkey=0x18d1bb
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1501 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb79b8000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1375 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1502 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1503 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7a45000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1501 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7a86000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7acb000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7b0c000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7b51000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7b92000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7bd7000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7c1b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7c63000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7ca7000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7cef000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7d33000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7d7b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7dbf000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbb7e07000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbb7e4b000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1376 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1376 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x13ec98 ctsFifoLkey=0x13ec98
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1376 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1377 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1378 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1504 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1504 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x16cbb6 ctsFifoLkey=0x16cbb6
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1504 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1505 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1506 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1379 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1379 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x141ac3 ctsFifoLkey=0x141ac3
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1379 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1380 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1381 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1507 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1507 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x1701e2 ctsFifoLkey=0x1701e2
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1507 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1508 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1509 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1382 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1382 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x1432dd ctsFifoLkey=0x1432dd
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1382 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1383 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1384 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1510 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1510 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x174221 ctsFifoLkey=0x174221
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1510 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1511 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1512 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1385 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1385 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x145400 ctsFifoLkey=0x145400
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1385 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1386 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1387 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1513 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1513 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x174f37 ctsFifoLkey=0x174f37
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1513 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1514 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1515 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1376 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1504 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1379 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1507 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1382 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1510 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1385 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1513 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:207 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+2026-11-14 22:26:55 | INFO | nemo_automodel.components.loggers.log_utils | Setting logging level to 20
+2026-11-14 22:26:55 | INFO | nemo_automodel.shared.te_patches | Applied FusedAdam empty-shard monkey-patch.
+2026-11-14 22:26:55 | INFO | root | Experiment_details:
+2026-11-14 22:26:55 | INFO | root | Timestamp: '2026-11-14T22:26:55'
+2026-11-14 22:26:55 | INFO | root | User: team9@fb-hack.local
+2026-11-14 22:26:55 | INFO | root | Host: train-2node-0
+2026-11-14 22:26:55 | INFO | root | World size: 2
+2026-11-14 22:26:55 | INFO | root | Backend: nccl
+2026-11-14 22:26:55 | INFO | root | Recipe: TrainFinetuneRecipeForNextTokenPrediction
+2026-11-14 22:26:55 | INFO | root | Model name: /shared/nemotron-3-nano-30b-a3b-bf16
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 140
+  val_every_steps: 20
+  max_steps: 140
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /shared/nemotron-3-nano-30b-a3b-bf16
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: true
+  checkpoint_dir: results/runs/ddp-2n-140/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: ddp
+  dp_size: 2
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr: 0.0001
+  weight_decay: 0
+validation_dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/val.jsonl
+  seq_length: 3072
+  truncation: longest_first
+validation_dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+2026-11-14 22:26:55 | INFO | root | Library versions:
+2026-11-14 22:26:55 | INFO | root | - nemo_automodel: 0.7.0+efb2eb5df (/opt/Automodel/nemo_automodel/__init__.py)
+2026-11-14 22:26:55 | INFO | root | - transformers: 5.18.0 (/opt/venv/lib/python3.12/site-packages/transformers/__init__.py)
+2026-11-14 22:26:55 | INFO | root | - torch: 2.14.0a0+4fdf77b940.nv26.08 CUDA 13.4
+2026-11-14 22:26:55 | INFO | root | No clip_grad_norm.max_norm specified in config, using default value of 1.0
+2026-11-14 22:26:55 | WARNING | nemo_automodel.components.models.common.utils | rope_fusion is temporarily force-disabled globally (see #3027).
+2026-11-14 22:26:56 | INFO | nemo_automodel._transformers.model_init | Using custom model implementation for NemotronHForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+2026-11-14 22:27:12 | INFO | nemo_automodel._transformers.kernel_patches | Set global SDPA backends to [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-14 22:27:12 | INFO | nemo_automodel._transformers.kernel_patches | Patched model with SDPA method= [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-14 22:27:12 | INFO | nemo_automodel.components._peft.lora | Fused 23 LoRA SwiGLU/ReLU2 MLP module(s) for memory-efficient backward.
+2026-11-14 22:27:12 | INFO | nemo_automodel.components.distributed.parallelizer | Structurally discovered layer groups for NemotronHForCausalLM: ('language',)
+2026-11-14 22:27:12 | INFO | nemo_automodel.components.distributed.parallelizer | Activation checkpointing scope ('all',) selected 52/52 trainable layers; groups={'language': 52} selected_groups={'language': 52} skipped_frozen=0
+2026-11-14 22:27:12 | INFO | nemo_automodel.components.distributed.activation_checkpointing | Applied submodule activation checkpointing to 52 layers: {'mlp': 23, 'attention': 29, 'pre_norm': 0, 'post_norm': 0, 'mot': 0}
+/opt/Automodel/nemo_automodel/components/distributed/ddp.py:120: FutureWarning: `broadcast_buffers` is deprecated. Use `forward_sync_buffers` instead. IMPORTANT: unlike `broadcast_buffers=False`, `forward_sync_buffers=False` still syncs buffers at init. If you rely on buffers NOT being synced at init (e.g. rank-local buffers), keep using `broadcast_buffers=False` until `init_sync_buffers` is available.
+  return DDP(model, **ddp_kwargs)
+train-2node-0:207:207 [0] NCCL INFO Symmetric VA size=124GB
+2026-11-14 22:33:56 | INFO | nemo_automodel.components.utils.compile_utils | torch.compile is disabled
+train-2node-0:207:207 [0] NCCL INFO Channel 32/1 : 1[0] -> 0[0] [receive] via NET/IB/0/Shared
+train-2node-0:207:207 [0] NCCL INFO Channel 33/1 : 1[0] -> 0[0] [receive] via NET/IB/1/Shared
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbac298000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the recv communicator (comm=0xfffbac2dd000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbRecvCommInit: Receive work requests will be posted on-demand
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1388 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1389 pkey=0 pd=0xfffbb4041c70
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1516 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbReceiverQpsCreateToRts: Flush QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1517 pkey=0 pd=0xfffbb4085b50
+train-2node-0:207:207 [0] NCCL INFO Channel 32/1 : 0[0] -> 1[0] [send] via NET/IB/0/Shared
+train-2node-0:207:207 [0] NCCL INFO Channel 33/1 : 0[0] -> 1[0] [send] via NET/IB/1/Shared
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbac3b2000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbResiliencyInit: Resiliency is disabled on the send communicator (comm=0xfffbac3f3000)
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=0 devName=mlx5_0 ndevs=2 nmdevs=2 qp_num=1390 pkey=0 pd=0xfffbb4041c70 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 0 IbDev 0 Port 1 qp_num 1390 mtu 3 GID 3 (0/760B0A0AFFFF0000) ctsFifoRkey=0x157d29 ctsFifoLkey=0x157d29
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 0 Port 1 qp_num 1390 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsCreate: QP created: port=1 dev=1 devName=mlx5_2 ndevs=2 nmdevs=2 qp_num=1518 pkey=0 pd=0xfffbb4085b50 oooRq=0
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: NCCL Dev 1 IbDev 1 Port 1 qp_num 1518 mtu 3 GID 0 (80FE/25FA67FEFF46A73A) ctsFifoRkey=0x17715a ctsFifoLkey=0x17715a
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbConnectImpl: IbDev 1 Port 1 qp_num 1518 query_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 0 Port 1 qp_num 1390 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+train-2node-0:207:267 [0] NCCL INFO NET/IB: ncclIbSenderQpsToRts: Set ECE: IbDev 1 Port 1 qp_num 1518 set_ece={supported=1, vendor_id=0x15b3, options=0x30000002, comp_mask=0x0}
+[fastload] model-00001-of-00013.safetensors: 4.6 GiB copied in 5.2s (0.90 GiB/s)
+[fastload] model-00003-of-00013.safetensors: 4.6 GiB copied in 5.1s (0.91 GiB/s)
+[fastload] model-00004-of-00013.safetensors: 4.7 GiB copied in 5.5s (0.85 GiB/s)
+[fastload] model-00005-of-00013.safetensors: 4.6 GiB copied in 6.0s (0.78 GiB/s)
+[fastload] model-00006-of-00013.safetensors: 4.7 GiB copied in 5.9s (0.80 GiB/s)
+[fastload] model-00007-of-00013.safetensors: 4.6 GiB copied in 5.7s (0.82 GiB/s)
+[fastload] model-00008-of-00013.safetensors: 4.6 GiB copied in 6.3s (0.74 GiB/s)
+[fastload] model-00002-of-00013.safetensors: 4.6 GiB copied in 5.8s (0.81 GiB/s)
+[fastload] model-00009-of-00013.safetensors: 4.7 GiB copied in 4.7s (1.00 GiB/s)
+[fastload] model-00010-of-00013.safetensors: 4.6 GiB copied in 4.8s (0.96 GiB/s)
+[fastload] model-00011-of-00013.safetensors: 4.7 GiB copied in 5.0s (0.93 GiB/s)
+[fastload] model-00012-of-00013.safetensors: 4.7 GiB copied in 4.9s (0.95 GiB/s)
+[fastload] model-00013-of-00013.safetensors: 3.0 GiB copied in 3.4s (0.89 GiB/s)
+2026-11-14 22:35:28 | INFO | root | load_model: 58.82 GB loaded in 92.61s (0.64 GB/s overall | destinations 0.11s, storage read 92.36s, adapt 0.06s, install 0.07s)
+2026-11-14 22:35:29 | INFO | root | Model summary:
+2026-11-14 22:35:29 | INFO | root | --------------------------------
+2026-11-14 22:35:29 | INFO | root | Trainable parameters: 13,499,392
+2026-11-14 22:35:29 | INFO | root | Total parameters: 31,591,436,736
+2026-11-14 22:35:29 | INFO | root | Trainable parameters percentage: 0.04%
+2026-11-14 22:35:29 | INFO | root | Param L2 norm: 3990.6451
+2026-11-14 22:35:29 | INFO | root | --------------------------------
+2026-11-14 22:35:29 | INFO | root | Using model config to instantiate tokenizer
+2026-11-14 22:35:31 | WARNING | nemo_automodel._transformers.tokenization.nemo_auto_tokenizer | Tokenizer '/shared/nemotron-3-nano-30b-a3b-bf16' has pad_token_id=None; defaulting to 0. This can cause incorrect MoE auxiliary loss calculations if valid tokens share token ID 0. Set pad_token_id explicitly in your tokenizer config to avoid this.
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+2026-11-14 22:35:31 | INFO | root | Signal handler installed for SIGTERM
+2026-11-14 22:35:31 | INFO | root | Model Part 0:
+2026-11-14 22:35:31 | INFO | root | DistributedDataParallel(
+2026-11-14 22:35:31 | INFO | root |   (module): NemotronHForCausalLM(
+2026-11-14 22:35:31 | INFO | root |     (model): NemotronV3Model(
+2026-11-14 22:35:31 | INFO | root |       (embed_tokens): Embedding(131072, 2688)
+2026-11-14 22:35:31 | INFO | root |       (layers): ModuleDict(
+2026-11-14 22:35:31 | INFO | root |         (0): NemotronV3Block(
+2026-11-14 22:35:31 | INFO | root |           (norm): Float32RMSNorm()
+2026-11-14 22:35:31 | INFO | root |           (mixer): CheckpointWrapper(
+2026-11-14 22:35:31 | INFO | root |             (_checkpoint_wrapped_module): NemotronV3Mamba2Mixer(
+2026-11-14 22:35:31 | INFO | root |               (in_proj): PatchedLinearLoRA(
+2026-11-14 22:35:31 | INFO | root |                 in_features=2688, out_features=10304, bias=False
+2026-11-14 22:35:31 | INFO | root |                 (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-14 22:35:31 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=10304, bias=False)
+2026-11-14 22:35:31 | INFO | root |               )
+2026-11-14 22:35:31 | INFO | root |               (conv1d): Conv1d(6144, 6144, kernel_size=(4,), stride=(1,), padding=(3,), groups=6144)
+2026-11-14 22:35:31 | INFO | root |               (_fp32_params): NemotronV3MambaFP32Params()
+2026-11-14 22:35:31 | INFO | root |               (norm): NemotronV3MambaRMSNormGated()
+2026-11-14 22:35:31 | INFO | root |               (out_proj): Linear(in_features=4096, out_features=2688, bias=False)
+2026-11-14 22:35:31 | INFO | root |             )
+2026-11-14 22:35:31 | INFO | root |           )
+2026-11-14 22:35:31 | INFO | root |         )
+2026-11-14 22:35:31 | INFO | root |         (1): NemotronV3Block(
+2026-11-14 22:35:31 | INFO | root |           (norm): Float32RMSNorm()
+2026-11-14 22:35:31 | INFO | root |           (mixer): CheckpointWrapper(
+2026-11-14 22:35:31 | INFO | root |             (_checkpoint_wrapped_module): MoE(
+2026-11-14 22:35:31 | INFO | root |               (gate): Gate(
+2026-11-14 22:35:31 | INFO | root |                 (routing_core): _GateRoutingCore()
+2026-11-14 22:35:31 | INFO | root |               )
+2026-11-14 22:35:31 | INFO | root |               (experts): GroupedExperts()
+2026-11-14 22:35:31 | INFO | root |               (shared_experts): MLP(
+2026-11-14 22:35:31 | INFO | root |                 (up_proj): PatchedLinearLoRA(
+2026-11-14 22:35:31 | INFO | root |                   in_features=2688, out_features=3712, bias=False
+2026-11-14 22:35:31 | INFO | root |                   (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-14 22:35:31 | INFO | root |                   (lora_B): Linear(in_features=16, out_features=3712, bias=False)
+2026-11-14 22:35:31 | INFO | root |                 )
+2026-11-14 22:35:31 | INFO | root |                 (down_proj): PatchedLinearLoRA(
+2026-11-14 22:35:31 | INFO | root |                   in_features=3712, out_features=2688, bias=False
+2026-11-14 22:35:31 | INFO | root |                   (lora_A): Linear(in_features=3712, out_features=16, bias=False)
+2026-11-14 22:35:31 | INFO | root |                   (lora_B): Linear(in_features=16, out_features=2688, bias=False)
+2026-11-14 22:35:31 | INFO | root |                 )
+2026-11-14 22:35:31 | INFO | root | ...
+2026-11-14 22:35:31 | INFO | root | Optimizer:
+2026-11-14 22:35:31 | INFO | root | Adam (
+2026-11-14 22:35:31 | INFO | root | Parameter Group 0
+2026-11-14 22:35:31 | INFO | root |     amsgrad: False
+2026-11-14 22:35:31 | INFO | root |     betas: (0.9, 0.999)
+2026-11-14 22:35:31 | INFO | root |     capturable: False
+2026-11-14 22:35:31 | INFO | root |     decoupled_weight_decay: False
+2026-11-14 22:35:31 | INFO | root |     differentiable: False
+2026-11-14 22:35:31 | INFO | root |     eps: 1e-08
+2026-11-14 22:35:31 | INFO | root |     foreach: None
+2026-11-14 22:35:31 | INFO | root |     fused: None
+2026-11-14 22:35:31 | INFO | root |     lr: 0.0001
+2026-11-14 22:35:31 | INFO | root |     maximize: False
+2026-11-14 22:35:31 | INFO | root |     weight_decay: 0
+2026-11-14 22:35:31 | INFO | root | )
+2026-11-14 22:35:31 | INFO | root | LR scheduler: <unavailable>
+2026-11-14 22:35:31 | WARNING | nemo_automodel._transformers.mfu | Unable to determine the theoretical peak for the current device; MFU will be reported as 0%. Pass a supported device or peak_tflops directly, or set mfu.device or mfu.peak_tflops in recipe YAML.
+2026-11-14 22:35:31 | INFO | root | Step scheduler:
+2026-11-14 22:35:31 | INFO | root | - Gradient accumulation steps: 8
+2026-11-14 22:35:31 | INFO | root | - Checkpoint every steps: 140
+2026-11-14 22:35:31 | INFO | root | - Garbage collect every steps: None
+2026-11-14 22:35:31 | INFO | root | - Current Epoch: 0
+2026-11-14 22:35:31 | INFO | root | - Number of epochs: 10
+2026-11-14 22:35:31 | INFO | root | - Validation every steps: 20
+2026-11-14 22:35:31 | INFO | root | - Max train steps: 140
+2026-11-14 22:35:31 | INFO | root | - Checkpoint retention: disabled; keeping all checkpoints (checkpoint.max_recent_checkpoints=None)
+Training:   0%|          | 0/140 [00:00<?, ?step/s][fastload] mmap hook active in pid 791 for /shared/nemotron-3-nano-30b-a3b-bf16
+2026-11-14 22:38:00 | INFO | root | step 0 | epoch 0 | loss 1.1672 | grad_norm 2.1701 | lr 1.00e-04 | mem 61.87 GiB | tps 117.68(58.84/gpu) | num_label_tokens 1659
+Training:   0%|          | 0/140 [02:29<?, ?step/s, loss=1.1672, lr=1.00e-04, tps=118]Training:   1%|          | 1/140 [02:29<5:45:34, 149.17s/step, loss=1.1672, lr=1.00e-04, tps=118]2026-11-14 22:38:30 | INFO | root | step 1 | epoch 0 | loss 0.9800 | grad_norm 2.0082 | lr 1.00e-04 | mem 63.66 GiB | tps 673.84(336.92/gpu) | num_label_tokens 1672
+Training:   1%|          | 1/140 [02:58<5:45:34, 149.17s/step, loss=0.9800, lr=1.00e-04, tps=674]Training:   1%|▏         | 2/140 [02:58<3:00:47, 78.61s/step, loss=0.9800, lr=1.00e-04, tps=674] 2026-11-14 22:38:57 | INFO | root | step 2 | epoch 0 | loss 0.9238 | grad_norm 1.8955 | lr 1.00e-04 | mem 61.31 GiB | tps 638.12(319.06/gpu) | num_label_tokens 1614
+Training:   1%|▏         | 2/140 [03:25<3:00:47, 78.61s/step, loss=0.9238, lr=1.00e-04, tps=638]Training:   2%|▏         | 3/140 [03:25<2:06:06, 55.23s/step, loss=0.9238, lr=1.00e-04, tps=638]2026-11-14 22:39:14 | INFO | root | step 3 | epoch 0 | loss 0.7293 | grad_norm 1.5392 | lr 1.00e-04 | mem 63.25 GiB | tps 1080.89(540.44/gpu) | num_label_tokens 1740
+Training:   2%|▏         | 3/140 [03:42<2:06:06, 55.23s/step, loss=0.7293, lr=1.00e-04, tps=1081]Training:   3%|▎         | 4/140 [03:42<1:30:50, 40.08s/step, loss=0.7293, lr=1.00e-04, tps=1081]2026-11-14 22:39:31 | INFO | root | step 4 | epoch 0 | loss 0.7043 | grad_norm 1.4092 | lr 1.00e-04 | mem 61.86 GiB | tps 1100.21(550.11/gpu) | num_label_tokens 1647
+Training:   3%|▎         | 4/140 [03:59<1:30:50, 40.08s/step, loss=0.7043, lr=1.00e-04, tps=1100]Training:   4%|▎         | 5/140 [03:59<1:11:23, 31.73s/step, loss=0.7043, lr=1.00e-04, tps=1100]2026-11-14 22:39:48 | INFO | root | step 5 | epoch 0 | loss 0.6325 | grad_norm 1.2320 | lr 1.00e-04 | mem 61.30 GiB | tps 958.65(479.33/gpu) | num_label_tokens 1706
+Training:   4%|▎         | 5/140 [04:16<1:11:23, 31.73s/step, loss=0.6325, lr=1.00e-04, tps=959] Training:   4%|▍         | 6/140 [04:16<59:41, 26.73s/step, loss=0.6325, lr=1.00e-04, tps=959]  2026-11-14 22:40:05 | INFO | root | step 6 | epoch 0 | loss 0.5717 | grad_norm 1.0585 | lr 1.00e-04 | mem 62.36 GiB | tps 1106.49(553.24/gpu) | num_label_tokens 1747
+Training:   4%|▍         | 6/140 [04:33<59:41, 26.73s/step, loss=0.5717, lr=1.00e-04, tps=1106]Training:   5%|▌         | 7/140 [04:33<52:13, 23.56s/step, loss=0.5717, lr=1.00e-04, tps=1106]2026-11-14 22:40:21 | INFO | root | step 7 | epoch 0 | loss 0.5569 | grad_norm 1.0830 | lr 1.00e-04 | mem 62.33 GiB | tps 1170.14(585.07/gpu) | num_label_tokens 1684
+Training:   5%|▌         | 7/140 [04:50<52:13, 23.56s/step, loss=0.5569, lr=1.00e-04, tps=1170]Training:   6%|▌         | 8/140 [04:50<46:58, 21.35s/step, loss=0.5569, lr=1.00e-04, tps=1170]2026-11-14 22:40:38 | INFO | root | step 8 | epoch 0 | loss 0.4960 | grad_norm 1.0357 | lr 1.00e-04 | mem 62.55 GiB | tps 1089.39(544.69/gpu) | num_label_tokens 1863
+Training:   6%|▌         | 8/140 [05:06<46:58, 21.35s/step, loss=0.4960, lr=1.00e-04, tps=1089]Training:   6%|▋         | 9/140 [05:06<43:21, 19.86s/step, loss=0.4960, lr=1.00e-04, tps=1089]2026-11-14 22:40:55 | INFO | root | step 9 | epoch 0 | loss 0.4702 | grad_norm 1.0766 | lr 1.00e-04 | mem 62.18 GiB | tps 1076.18(538.09/gpu) | num_label_tokens 1803
+Training:   6%|▋         | 9/140 [05:23<43:21, 19.86s/step, loss=0.4702, lr=1.00e-04, tps=1076]Training:   7%|▋         | 10/140 [05:23<40:48, 18.84s/step, loss=0.4702, lr=1.00e-04, tps=1076]2026-11-14 22:41:11 | INFO | root | step 10 | epoch 0 | loss 0.4987 | grad_norm 1.1301 | lr 1.00e-04 | mem 61.48 GiB | tps 1097.50(548.75/gpu) | num_label_tokens 1554
+Training:   7%|▋         | 10/140 [05:39<40:48, 18.84s/step, loss=0.4987, lr=1.00e-04, tps=1097]Training:   8%|▊         | 11/140 [05:39<38:56, 18.11s/step, loss=0.4987, lr=1.00e-04, tps=1097]2026-11-14 22:41:28 | INFO | root | step 11 | epoch 0 | loss 0.4031 | grad_norm 1.0437 | lr 1.00e-04 | mem 62.79 GiB | tps 1107.02(553.51/gpu) | num_label_tokens 1711
+Training:   8%|▊         | 11/140 [05:56<38:56, 18.11s/step, loss=0.4031, lr=1.00e-04, tps=1107]Training:   9%|▊         | 12/140 [05:56<37:40, 17.66s/step, loss=0.4031, lr=1.00e-04, tps=1107]2026-11-14 22:41:44 | INFO | root | step 12 | epoch 0 | loss 0.4320 | grad_norm 1.0021 | lr 1.00e-04 | mem 61.58 GiB | tps 1093.10(546.55/gpu) | num_label_tokens 1714
+Training:   9%|▊         | 12/140 [06:12<37:40, 17.66s/step, loss=0.4320, lr=1.00e-04, tps=1093]Training:   9%|▉         | 13/140 [06:12<36:24, 17.20s/step, loss=0.4320, lr=1.00e-04, tps=1093]2026-11-14 22:42:00 | INFO | root | step 13 | epoch 0 | loss 0.4274 | grad_norm 1.0546 | lr 1.00e-04 | mem 62.04 GiB | tps 1074.24(537.12/gpu) | num_label_tokens 1660
+Training:   9%|▉         | 13/140 [06:28<36:24, 17.20s/step, loss=0.4274, lr=1.00e-04, tps=1074]Training:  10%|█         | 14/140 [06:28<35:30, 16.91s/step, loss=0.4274, lr=1.00e-04, tps=1074]2026-11-14 22:42:17 | INFO | root | step 14 | epoch 0 | loss 0.3708 | grad_norm 0.9084 | lr 1.00e-04 | mem 61.27 GiB | tps 1064.91(532.45/gpu) | num_label_tokens 1786
+Training:  10%|█         | 14/140 [06:45<35:30, 16.91s/step, loss=0.3708, lr=1.00e-04, tps=1065]Training:  11%|█         | 15/140 [06:45<34:56, 16.77s/step, loss=0.3708, lr=1.00e-04, tps=1065]2026-11-14 22:42:33 | INFO | root | step 15 | epoch 0 | loss 0.3931 | grad_norm 0.9240 | lr 1.00e-04 | mem 61.78 GiB | tps 1128.06(564.03/gpu) | num_label_tokens 1669
+Training:  11%|█         | 15/140 [07:01<34:56, 16.77s/step, loss=0.3931, lr=1.00e-04, tps=1128]Training:  11%|█▏        | 16/140 [07:01<34:20, 16.61s/step, loss=0.3931, lr=1.00e-04, tps=1128]2026-11-14 22:42:49 | INFO | root | step 16 | epoch 0 | loss 0.3543 | grad_norm 0.8025 | lr 1.00e-04 | mem 63.22 GiB | tps 1211.86(605.93/gpu) | num_label_tokens 1956
+Training:  11%|█▏        | 16/140 [07:17<34:20, 16.61s/step, loss=0.3543, lr=1.00e-04, tps=1212]Training:  12%|█▏        | 17/140 [07:17<33:53, 16.53s/step, loss=0.3543, lr=1.00e-04, tps=1212]2026-11-14 22:43:05 | INFO | root | step 17 | epoch 0 | loss 0.3891 | grad_norm 0.9311 | lr 1.00e-04 | mem 62.23 GiB | tps 1082.75(541.38/gpu) | num_label_tokens 1849
+Training:  12%|█▏        | 17/140 [07:34<33:53, 16.53s/step, loss=0.3891, lr=1.00e-04, tps=1083]Training:  13%|█▎        | 18/140 [07:34<33:26, 16.44s/step, loss=0.3891, lr=1.00e-04, tps=1083]2026-11-14 22:43:21 | INFO | root | step 18 | epoch 0 | loss 0.3377 | grad_norm 0.8542 | lr 1.00e-04 | mem 61.30 GiB | tps 1080.81(540.41/gpu) | num_label_tokens 1741
+Training:  13%|█▎        | 18/140 [07:50<33:26, 16.44s/step, loss=0.3377, lr=1.00e-04, tps=1081]Training:  14%|█▎        | 19/140 [07:50<32:58, 16.35s/step, loss=0.3377, lr=1.00e-04, tps=1081]2026-11-14 22:43:38 | INFO | root | step 19 | epoch 0 | loss 0.3359 | grad_norm 0.9103 | lr 1.00e-04 | mem 61.64 GiB | tps 1106.91(553.46/gpu) | num_label_tokens 1739
+Training:  14%|█▎        | 19/140 [08:06<32:58, 16.35s/step, loss=0.3359, lr=1.00e-04, tps=1107]Training:  14%|█▍        | 20/140 [08:06<32:51, 16.43s/step, loss=0.3359, lr=1.00e-04, tps=1107]2026-11-14 22:44:18 | INFO | root | [val] name "default" | step 19 | epoch 0 | loss 0.3111 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 22:44:34 | INFO | root | step 20 | epoch 0 | loss 0.3398 | grad_norm 0.9399 | lr 1.00e-04 | mem 62.59 GiB | tps 327.25(163.63/gpu) | num_label_tokens 1769
+Training:  14%|█▍        | 20/140 [09:02<32:51, 16.43s/step, loss=0.3398, lr=1.00e-04, tps=327] Training:  15%|█▌        | 21/140 [09:02<56:09, 28.32s/step, loss=0.3398, lr=1.00e-04, tps=327]2026-11-14 22:44:51 | INFO | root | step 21 | epoch 0 | loss 0.3156 | grad_norm 0.9028 | lr 1.00e-04 | mem 62.16 GiB | tps 1108.99(554.49/gpu) | num_label_tokens 1725
+Training:  15%|█▌        | 21/140 [09:19<56:09, 28.32s/step, loss=0.3156, lr=1.00e-04, tps=1109]Training:  16%|█▌        | 22/140 [09:19<48:48, 24.82s/step, loss=0.3156, lr=1.00e-04, tps=1109]2026-11-14 22:45:08 | INFO | root | step 22 | epoch 0 | loss 0.2972 | grad_norm 0.8270 | lr 1.00e-04 | mem 62.10 GiB | tps 1112.06(556.03/gpu) | num_label_tokens 1848
+Training:  16%|█▌        | 22/140 [09:36<48:48, 24.82s/step, loss=0.2972, lr=1.00e-04, tps=1112]Training:  16%|█▋        | 23/140 [09:36<43:52, 22.50s/step, loss=0.2972, lr=1.00e-04, tps=1112]2026-11-14 22:45:24 | INFO | root | step 23 | epoch 0 | loss 0.3004 | grad_norm 0.8046 | lr 1.00e-04 | mem 62.62 GiB | tps 1088.01(544.01/gpu) | num_label_tokens 1713
+Training:  16%|█▋        | 23/140 [09:53<43:52, 22.50s/step, loss=0.3004, lr=1.00e-04, tps=1088]Training:  17%|█▋        | 24/140 [09:53<39:58, 20.67s/step, loss=0.3004, lr=1.00e-04, tps=1088]2026-11-14 22:45:41 | INFO | root | step 24 | epoch 0 | loss 0.2674 | grad_norm 0.8037 | lr 1.00e-04 | mem 62.19 GiB | tps 1154.27(577.14/gpu) | num_label_tokens 1734
+Training:  17%|█▋        | 24/140 [10:09<39:58, 20.67s/step, loss=0.2674, lr=1.00e-04, tps=1154]Training:  18%|█▊        | 25/140 [10:09<37:22, 19.50s/step, loss=0.2674, lr=1.00e-04, tps=1154]2026-11-14 22:45:58 | INFO | root | step 25 | epoch 0 | loss 0.3052 | grad_norm 0.7507 | lr 1.00e-04 | mem 62.29 GiB | tps 1128.99(564.49/gpu) | num_label_tokens 1662
+Training:  18%|█▊        | 25/140 [10:26<37:22, 19.50s/step, loss=0.3052, lr=1.00e-04, tps=1129]Training:  19%|█▊        | 26/140 [10:26<35:19, 18.59s/step, loss=0.3052, lr=1.00e-04, tps=1129]2026-11-14 22:46:14 | INFO | root | step 26 | epoch 0 | loss 0.2333 | grad_norm 0.6636 | lr 1.00e-04 | mem 61.21 GiB | tps 1057.37(528.69/gpu) | num_label_tokens 1722
+Training:  19%|█▊        | 26/140 [10:42<35:19, 18.59s/step, loss=0.2333, lr=1.00e-04, tps=1057]Training:  19%|█▉        | 27/140 [10:42<33:33, 17.82s/step, loss=0.2333, lr=1.00e-04, tps=1057]2026-11-14 22:46:30 | INFO | root | step 27 | epoch 0 | loss 0.2831 | grad_norm 0.7357 | lr 1.00e-04 | mem 62.12 GiB | tps 1095.52(547.76/gpu) | num_label_tokens 1726
+Training:  19%|█▉        | 27/140 [10:58<33:33, 17.82s/step, loss=0.2831, lr=1.00e-04, tps=1096]Training:  20%|██        | 28/140 [10:58<32:13, 17.26s/step, loss=0.2831, lr=1.00e-04, tps=1096]2026-11-14 22:46:46 | INFO | root | step 28 | epoch 0 | loss 0.2581 | grad_norm 0.6997 | lr 1.00e-04 | mem 61.73 GiB | tps 1059.06(529.53/gpu) | num_label_tokens 1697
+Training:  20%|██        | 28/140 [11:14<32:13, 17.26s/step, loss=0.2581, lr=1.00e-04, tps=1059]Training:  21%|██        | 29/140 [11:14<31:24, 16.97s/step, loss=0.2581, lr=1.00e-04, tps=1059]2026-11-14 22:47:02 | INFO | root | step 29 | epoch 0 | loss 0.2733 | grad_norm 0.7552 | lr 1.00e-04 | mem 62.50 GiB | tps 1129.75(564.88/gpu) | num_label_tokens 1571
+Training:  21%|██        | 29/140 [11:31<31:24, 16.97s/step, loss=0.2733, lr=1.00e-04, tps=1130]Training:  21%|██▏       | 30/140 [11:31<30:54, 16.86s/step, loss=0.2733, lr=1.00e-04, tps=1130]2026-11-14 22:47:19 | INFO | root | step 30 | epoch 0 | loss 0.2630 | grad_norm 0.7409 | lr 1.00e-04 | mem 61.83 GiB | tps 1119.19(559.59/gpu) | num_label_tokens 1842
+Training:  21%|██▏       | 30/140 [11:47<30:54, 16.86s/step, loss=0.2630, lr=1.00e-04, tps=1119]Training:  22%|██▏       | 31/140 [11:47<30:21, 16.71s/step, loss=0.2630, lr=1.00e-04, tps=1119]2026-11-14 22:47:35 | INFO | root | step 31 | epoch 0 | loss 0.2773 | grad_norm 0.7999 | lr 1.00e-04 | mem 61.60 GiB | tps 1086.72(543.36/gpu) | num_label_tokens 1680
+Training:  22%|██▏       | 31/140 [12:03<30:21, 16.71s/step, loss=0.2773, lr=1.00e-04, tps=1087]Training:  23%|██▎       | 32/140 [12:03<29:52, 16.59s/step, loss=0.2773, lr=1.00e-04, tps=1087]2026-11-14 22:47:51 | INFO | root | step 32 | epoch 0 | loss 0.2330 | grad_norm 0.6952 | lr 1.00e-04 | mem 61.49 GiB | tps 1110.30(555.15/gpu) | num_label_tokens 1768
+Training:  23%|██▎       | 32/140 [12:20<29:52, 16.59s/step, loss=0.2330, lr=1.00e-04, tps=1110]Training:  24%|██▎       | 33/140 [12:20<29:26, 16.51s/step, loss=0.2330, lr=1.00e-04, tps=1110]2026-11-14 22:48:08 | INFO | root | step 33 | epoch 0 | loss 0.2670 | grad_norm 0.7118 | lr 1.00e-04 | mem 61.68 GiB | tps 1098.48(549.24/gpu) | num_label_tokens 1721
+Training:  24%|██▎       | 33/140 [12:36<29:26, 16.51s/step, loss=0.2670, lr=1.00e-04, tps=1098]Training:  24%|██▍       | 34/140 [12:36<29:05, 16.47s/step, loss=0.2670, lr=1.00e-04, tps=1098]2026-11-14 22:48:24 | INFO | root | step 34 | epoch 0 | loss 0.2528 | grad_norm 0.6956 | lr 1.00e-04 | mem 61.92 GiB | tps 1142.56(571.28/gpu) | num_label_tokens 1816
+Training:  24%|██▍       | 34/140 [12:52<29:05, 16.47s/step, loss=0.2528, lr=1.00e-04, tps=1143]Training:  25%|██▌       | 35/140 [12:52<28:44, 16.42s/step, loss=0.2528, lr=1.00e-04, tps=1143]2026-11-14 22:48:41 | INFO | root | step 35 | epoch 0 | loss 0.2473 | grad_norm 0.7352 | lr 1.00e-04 | mem 62.46 GiB | tps 1113.74(556.87/gpu) | num_label_tokens 1852
+Training:  25%|██▌       | 35/140 [13:09<28:44, 16.42s/step, loss=0.2473, lr=1.00e-04, tps=1114]Training:  26%|██▌       | 36/140 [13:09<28:34, 16.48s/step, loss=0.2473, lr=1.00e-04, tps=1114]2026-11-14 22:48:57 | INFO | root | step 36 | epoch 0 | loss 0.3095 | grad_norm 0.8659 | lr 1.00e-04 | mem 62.14 GiB | tps 1039.01(519.50/gpu) | num_label_tokens 1663
+Training:  26%|██▌       | 36/140 [13:25<28:34, 16.48s/step, loss=0.3095, lr=1.00e-04, tps=1039]Training:  26%|██▋       | 37/140 [13:25<28:13, 16.44s/step, loss=0.3095, lr=1.00e-04, tps=1039]2026-11-14 22:49:13 | INFO | root | step 37 | epoch 0 | loss 0.2440 | grad_norm 0.6762 | lr 1.00e-04 | mem 61.92 GiB | tps 1112.35(556.18/gpu) | num_label_tokens 1945
+Training:  26%|██▋       | 37/140 [13:41<28:13, 16.44s/step, loss=0.2440, lr=1.00e-04, tps=1112]Training:  27%|██▋       | 38/140 [13:41<27:38, 16.26s/step, loss=0.2440, lr=1.00e-04, tps=1112]2026-11-14 22:49:29 | INFO | root | step 38 | epoch 0 | loss 0.2502 | grad_norm 0.7518 | lr 1.00e-04 | mem 61.45 GiB | tps 1084.49(542.24/gpu) | num_label_tokens 1641
+Training:  27%|██▋       | 38/140 [13:58<27:38, 16.26s/step, loss=0.2502, lr=1.00e-04, tps=1084]Training:  28%|██▊       | 39/140 [13:58<27:29, 16.33s/step, loss=0.2502, lr=1.00e-04, tps=1084]2026-11-14 22:49:46 | INFO | root | step 39 | epoch 0 | loss 0.2341 | grad_norm 0.6799 | lr 1.00e-04 | mem 61.98 GiB | tps 1108.96(554.48/gpu) | num_label_tokens 1878
+Training:  28%|██▊       | 39/140 [14:14<27:29, 16.33s/step, loss=0.2341, lr=1.00e-04, tps=1109]Training:  29%|██▊       | 40/140 [14:14<27:27, 16.47s/step, loss=0.2341, lr=1.00e-04, tps=1109]2026-11-14 22:50:22 | INFO | root | [val] name "default" | step 39 | epoch 0 | loss 0.2484 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 22:50:38 | INFO | root | step 40 | epoch 0 | loss 0.3008 | grad_norm 0.7786 | lr 1.00e-04 | mem 62.59 GiB | tps 335.15(167.58/gpu) | num_label_tokens 1760
+Training:  29%|██▊       | 40/140 [15:07<27:27, 16.47s/step, loss=0.3008, lr=1.00e-04, tps=335] Training:  29%|██▉       | 41/140 [15:07<44:53, 27.20s/step, loss=0.3008, lr=1.00e-04, tps=335]2026-11-14 22:50:54 | INFO | root | step 41 | epoch 0 | loss 0.2955 | grad_norm 0.7414 | lr 1.00e-04 | mem 61.66 GiB | tps 1120.80(560.40/gpu) | num_label_tokens 1684
+Training:  29%|██▉       | 41/140 [15:22<44:53, 27.20s/step, loss=0.2955, lr=1.00e-04, tps=1121]Training:  30%|███       | 42/140 [15:22<38:33, 23.61s/step, loss=0.2955, lr=1.00e-04, tps=1121]2026-11-14 22:51:10 | INFO | root | step 42 | epoch 0 | loss 0.2565 | grad_norm 0.8299 | lr 1.00e-04 | mem 61.38 GiB | tps 1075.76(537.88/gpu) | num_label_tokens 1737
+Training:  30%|███       | 42/140 [15:38<38:33, 23.61s/step, loss=0.2565, lr=1.00e-04, tps=1076]Training:  31%|███       | 43/140 [15:38<34:44, 21.49s/step, loss=0.2565, lr=1.00e-04, tps=1076]2026-11-14 22:51:26 | INFO | root | step 43 | epoch 0 | loss 0.2497 | grad_norm 0.7395 | lr 1.00e-04 | mem 62.26 GiB | tps 1078.19(539.09/gpu) | num_label_tokens 1793
+Training:  31%|███       | 43/140 [15:54<34:44, 21.49s/step, loss=0.2497, lr=1.00e-04, tps=1078]Training:  31%|███▏      | 44/140 [15:54<31:33, 19.73s/step, loss=0.2497, lr=1.00e-04, tps=1078]2026-11-14 22:51:42 | INFO | root | step 44 | epoch 0 | loss 0.2567 | grad_norm 0.7635 | lr 1.00e-04 | mem 61.98 GiB | tps 1161.80(580.90/gpu) | num_label_tokens 1620
+Training:  31%|███▏      | 44/140 [16:10<31:33, 19.73s/step, loss=0.2567, lr=1.00e-04, tps=1162]Training:  32%|███▏      | 45/140 [16:10<29:34, 18.68s/step, loss=0.2567, lr=1.00e-04, tps=1162]2026-11-14 22:51:50 | INFO | root | step 45 | epoch 0 | loss 0.2556 | grad_norm 1.0053 | lr 1.00e-04 | mem 61.45 GiB | tps 1147.70(573.85/gpu) | num_label_tokens 880
+Training:  32%|███▏      | 45/140 [16:18<29:34, 18.68s/step, loss=0.2556, lr=1.00e-04, tps=1148]Training:  33%|███▎      | 46/140 [16:18<24:08, 15.41s/step, loss=0.2556, lr=1.00e-04, tps=1148]2026-11-14 22:52:26 | INFO | root | [val] name "default" | step 45 | epoch 0 | loss 0.2415 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 22:52:26 | INFO | nemo_automodel.recipes.base_recipe | Saving checkpoint to results/runs/ddp-2n-140/ckpt/epoch_0_step_45
+/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+2026-11-14 22:52:27 | INFO | nemo_automodel.components.checkpoint.lifecycle | Updated LOWEST_VAL checkpoint symlink to epoch_0_step_45 (val_loss=0.2415)
+2026-11-14 22:52:44 | INFO | root | step 46 | epoch 1 | loss 0.2118 | grad_norm 0.6445 | lr 1.00e-04 | mem 62.62 GiB | tps 338.63(169.32/gpu) | num_label_tokens 1774
+Training:  33%|███▎      | 46/140 [17:12<24:08, 15.41s/step, loss=0.2118, lr=1.00e-04, tps=339] Training:  34%|███▎      | 47/140 [17:12<41:47, 26.97s/step, loss=0.2118, lr=1.00e-04, tps=339]2026-11-14 22:53:00 | INFO | root | step 47 | epoch 1 | loss 0.2306 | grad_norm 0.7423 | lr 1.00e-04 | mem 62.28 GiB | tps 1215.86(607.93/gpu) | num_label_tokens 1750
+Training:  34%|███▎      | 47/140 [17:28<41:47, 26.97s/step, loss=0.2306, lr=1.00e-04, tps=1216]Training:  34%|███▍      | 48/140 [17:28<36:14, 23.64s/step, loss=0.2306, lr=1.00e-04, tps=1216]2026-11-14 22:53:15 | INFO | root | step 48 | epoch 1 | loss 0.1794 | grad_norm 0.6568 | lr 1.00e-04 | mem 62.19 GiB | tps 1073.25(536.62/gpu) | num_label_tokens 1689
+Training:  34%|███▍      | 48/140 [17:43<36:14, 23.64s/step, loss=0.1794, lr=1.00e-04, tps=1073]Training:  35%|███▌      | 49/140 [17:43<32:02, 21.13s/step, loss=0.1794, lr=1.00e-04, tps=1073]2026-11-14 22:53:31 | INFO | root | step 49 | epoch 1 | loss 0.2304 | grad_norm 0.7168 | lr 1.00e-04 | mem 62.07 GiB | tps 1139.80(569.90/gpu) | num_label_tokens 1680
+Training:  35%|███▌      | 49/140 [17:59<32:02, 21.13s/step, loss=0.2304, lr=1.00e-04, tps=1140]Training:  36%|███▌      | 50/140 [17:59<29:15, 19.50s/step, loss=0.2304, lr=1.00e-04, tps=1140]2026-11-14 22:53:47 | INFO | root | step 50 | epoch 1 | loss 0.1932 | grad_norm 0.6504 | lr 1.00e-04 | mem 62.14 GiB | tps 1164.93(582.47/gpu) | num_label_tokens 1676
+Training:  36%|███▌      | 50/140 [18:15<29:15, 19.50s/step, loss=0.1932, lr=1.00e-04, tps=1165]Training:  36%|███▋      | 51/140 [18:15<27:33, 18.58s/step, loss=0.1932, lr=1.00e-04, tps=1165]2026-11-14 22:54:03 | INFO | root | step 51 | epoch 1 | loss 0.2140 | grad_norm 0.6192 | lr 1.00e-04 | mem 61.56 GiB | tps 1154.60(577.30/gpu) | num_label_tokens 1847
+Training:  36%|███▋      | 51/140 [18:31<27:33, 18.58s/step, loss=0.2140, lr=1.00e-04, tps=1155]Training:  37%|███▋      | 52/140 [18:31<25:53, 17.65s/step, loss=0.2140, lr=1.00e-04, tps=1155]2026-11-14 22:54:19 | INFO | root | step 52 | epoch 1 | loss 0.2052 | grad_norm 0.7560 | lr 1.00e-04 | mem 62.20 GiB | tps 1128.47(564.24/gpu) | num_label_tokens 1678
+Training:  37%|███▋      | 52/140 [18:47<25:53, 17.65s/step, loss=0.2052, lr=1.00e-04, tps=1128]Training:  38%|███▊      | 53/140 [18:47<25:02, 17.27s/step, loss=0.2052, lr=1.00e-04, tps=1128]2026-11-14 22:54:36 | INFO | root | step 53 | epoch 1 | loss 0.2137 | grad_norm 0.7164 | lr 1.00e-04 | mem 62.33 GiB | tps 1216.57(608.28/gpu) | num_label_tokens 1679
+Training:  38%|███▊      | 53/140 [19:04<25:02, 17.27s/step, loss=0.2137, lr=1.00e-04, tps=1217]Training:  39%|███▊      | 54/140 [19:04<24:29, 17.09s/step, loss=0.2137, lr=1.00e-04, tps=1217]2026-11-14 22:54:52 | INFO | root | step 54 | epoch 1 | loss 0.2188 | grad_norm 0.7467 | lr 1.00e-04 | mem 61.90 GiB | tps 1023.47(511.74/gpu) | num_label_tokens 1778
+Training:  39%|███▊      | 54/140 [19:21<24:29, 17.09s/step, loss=0.2188, lr=1.00e-04, tps=1023]Training:  39%|███▉      | 55/140 [19:21<24:05, 17.00s/step, loss=0.2188, lr=1.00e-04, tps=1023]2026-11-14 22:55:08 | INFO | root | step 55 | epoch 1 | loss 0.1784 | grad_norm 0.6498 | lr 1.00e-04 | mem 61.56 GiB | tps 1163.97(581.98/gpu) | num_label_tokens 1682
+Training:  39%|███▉      | 55/140 [19:36<24:05, 17.00s/step, loss=0.1784, lr=1.00e-04, tps=1164]Training:  40%|████      | 56/140 [19:36<23:07, 16.52s/step, loss=0.1784, lr=1.00e-04, tps=1164]2026-11-14 22:55:24 | INFO | root | step 56 | epoch 1 | loss 0.2372 | grad_norm 0.8192 | lr 1.00e-04 | mem 61.78 GiB | tps 1131.50(565.75/gpu) | num_label_tokens 1640
+Training:  40%|████      | 56/140 [19:52<23:07, 16.52s/step, loss=0.2372, lr=1.00e-04, tps=1131]Training:  41%|████      | 57/140 [19:52<22:37, 16.35s/step, loss=0.2372, lr=1.00e-04, tps=1131]2026-11-14 22:55:39 | INFO | root | step 57 | epoch 1 | loss 0.2065 | grad_norm 0.7070 | lr 1.00e-04 | mem 62.07 GiB | tps 1106.19(553.10/gpu) | num_label_tokens 1790
+Training:  41%|████      | 57/140 [20:08<22:37, 16.35s/step, loss=0.2065, lr=1.00e-04, tps=1106]Training:  41%|████▏     | 58/140 [20:08<22:05, 16.17s/step, loss=0.2065, lr=1.00e-04, tps=1106]2026-11-14 22:55:55 | INFO | root | step 58 | epoch 1 | loss 0.2016 | grad_norm 0.6707 | lr 1.00e-04 | mem 62.09 GiB | tps 1131.89(565.95/gpu) | num_label_tokens 1784
+Training:  41%|████▏     | 58/140 [20:23<22:05, 16.17s/step, loss=0.2016, lr=1.00e-04, tps=1132]Training:  42%|████▏     | 59/140 [20:23<21:38, 16.03s/step, loss=0.2016, lr=1.00e-04, tps=1132]2026-11-14 22:56:11 | INFO | root | step 59 | epoch 1 | loss 0.2214 | grad_norm 0.7318 | lr 1.00e-04 | mem 62.14 GiB | tps 1168.36(584.18/gpu) | num_label_tokens 1723
+Training:  42%|████▏     | 59/140 [20:39<21:38, 16.03s/step, loss=0.2214, lr=1.00e-04, tps=1168]Training:  43%|████▎     | 60/140 [20:39<21:13, 15.92s/step, loss=0.2214, lr=1.00e-04, tps=1168]2026-11-14 22:56:47 | INFO | root | [val] name "default" | step 59 | epoch 1 | loss 0.2380 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 22:57:03 | INFO | root | step 60 | epoch 1 | loss 0.2441 | grad_norm 0.7129 | lr 1.00e-04 | mem 62.59 GiB | tps 376.41(188.20/gpu) | num_label_tokens 1842
+Training:  43%|████▎     | 60/140 [21:32<21:13, 15.92s/step, loss=0.2441, lr=1.00e-04, tps=376] Training:  44%|████▎     | 61/140 [21:32<35:27, 26.93s/step, loss=0.2441, lr=1.00e-04, tps=376]2026-11-14 22:57:19 | INFO | root | step 61 | epoch 1 | loss 0.1988 | grad_norm 0.6708 | lr 1.00e-04 | mem 61.57 GiB | tps 1139.42(569.71/gpu) | num_label_tokens 1656
+Training:  44%|████▎     | 61/140 [21:47<35:27, 26.93s/step, loss=0.1988, lr=1.00e-04, tps=1139]Training:  44%|████▍     | 62/140 [21:47<30:32, 23.50s/step, loss=0.1988, lr=1.00e-04, tps=1139]2026-11-14 22:57:35 | INFO | root | step 62 | epoch 1 | loss 0.2056 | grad_norm 0.6414 | lr 1.00e-04 | mem 61.83 GiB | tps 1118.83(559.42/gpu) | num_label_tokens 1834
+Training:  44%|████▍     | 62/140 [22:03<30:32, 23.50s/step, loss=0.2056, lr=1.00e-04, tps=1119]Training:  45%|████▌     | 63/140 [22:03<27:21, 21.32s/step, loss=0.2056, lr=1.00e-04, tps=1119]2026-11-14 22:57:51 | INFO | root | step 63 | epoch 1 | loss 0.2089 | grad_norm 0.8249 | lr 1.00e-04 | mem 63.25 GiB | tps 1122.17(561.08/gpu) | num_label_tokens 1807
+Training:  45%|████▌     | 63/140 [22:19<27:21, 21.32s/step, loss=0.2089, lr=1.00e-04, tps=1122]Training:  46%|████▌     | 64/140 [22:19<24:54, 19.66s/step, loss=0.2089, lr=1.00e-04, tps=1122]2026-11-14 22:58:07 | INFO | root | step 64 | epoch 1 | loss 0.2291 | grad_norm 0.7344 | lr 1.00e-04 | mem 61.78 GiB | tps 1092.92(546.46/gpu) | num_label_tokens 1757
+Training:  46%|████▌     | 64/140 [22:35<24:54, 19.66s/step, loss=0.2291, lr=1.00e-04, tps=1093]Training:  46%|████▋     | 65/140 [22:35<23:01, 18.43s/step, loss=0.2291, lr=1.00e-04, tps=1093]2026-11-14 22:58:22 | INFO | root | step 65 | epoch 1 | loss 0.1854 | grad_norm 0.7860 | lr 1.00e-04 | mem 62.04 GiB | tps 1194.85(597.43/gpu) | num_label_tokens 1676
+Training:  46%|████▋     | 65/140 [22:50<23:01, 18.43s/step, loss=0.1854, lr=1.00e-04, tps=1195]Training:  47%|████▋     | 66/140 [22:50<21:36, 17.52s/step, loss=0.1854, lr=1.00e-04, tps=1195]2026-11-14 22:58:37 | INFO | root | step 66 | epoch 1 | loss 0.2679 | grad_norm 0.7891 | lr 1.00e-04 | mem 61.50 GiB | tps 1118.79(559.40/gpu) | num_label_tokens 1712
+Training:  47%|████▋     | 66/140 [23:06<21:36, 17.52s/step, loss=0.2679, lr=1.00e-04, tps=1119]Training:  48%|████▊     | 67/140 [23:06<20:32, 16.88s/step, loss=0.2679, lr=1.00e-04, tps=1119]2026-11-14 22:58:54 | INFO | root | step 67 | epoch 1 | loss 0.2115 | grad_norm 0.7878 | lr 1.00e-04 | mem 62.50 GiB | tps 1097.71(548.86/gpu) | num_label_tokens 1608
+Training:  48%|████▊     | 67/140 [23:22<20:32, 16.88s/step, loss=0.2115, lr=1.00e-04, tps=1098]Training:  49%|████▊     | 68/140 [23:22<20:06, 16.75s/step, loss=0.2115, lr=1.00e-04, tps=1098]2026-11-14 22:59:09 | INFO | root | step 68 | epoch 1 | loss 0.2010 | grad_norm 0.7636 | lr 1.00e-04 | mem 63.22 GiB | tps 1181.45(590.73/gpu) | num_label_tokens 1690
+Training:  49%|████▊     | 68/140 [23:38<20:06, 16.75s/step, loss=0.2010, lr=1.00e-04, tps=1181]Training:  49%|████▉     | 69/140 [23:38<19:25, 16.42s/step, loss=0.2010, lr=1.00e-04, tps=1181]2026-11-14 22:59:26 | INFO | root | step 69 | epoch 1 | loss 0.1954 | grad_norm 0.7165 | lr 1.00e-04 | mem 61.92 GiB | tps 1134.99(567.49/gpu) | num_label_tokens 1848
+Training:  49%|████▉     | 69/140 [23:54<19:25, 16.42s/step, loss=0.1954, lr=1.00e-04, tps=1135]Training:  50%|█████     | 70/140 [23:54<19:04, 16.34s/step, loss=0.1954, lr=1.00e-04, tps=1135]2026-11-14 22:59:41 | INFO | root | step 70 | epoch 1 | loss 0.1956 | grad_norm 0.6927 | lr 1.00e-04 | mem 62.12 GiB | tps 1205.50(602.75/gpu) | num_label_tokens 1818
+Training:  50%|█████     | 70/140 [24:09<19:04, 16.34s/step, loss=0.1956, lr=1.00e-04, tps=1205]Training:  51%|█████     | 71/140 [24:09<18:32, 16.12s/step, loss=0.1956, lr=1.00e-04, tps=1205]2026-11-14 22:59:57 | INFO | root | step 71 | epoch 1 | loss 0.2040 | grad_norm 0.8200 | lr 1.00e-04 | mem 61.72 GiB | tps 1079.77(539.89/gpu) | num_label_tokens 1663
+Training:  51%|█████     | 71/140 [24:26<18:32, 16.12s/step, loss=0.2040, lr=1.00e-04, tps=1080]Training:  51%|█████▏    | 72/140 [24:26<18:15, 16.11s/step, loss=0.2040, lr=1.00e-04, tps=1080]2026-11-14 23:00:14 | INFO | root | step 72 | epoch 1 | loss 0.1935 | grad_norm 0.8280 | lr 1.00e-04 | mem 61.44 GiB | tps 968.99(484.50/gpu) | num_label_tokens 1783
+Training:  51%|█████▏    | 72/140 [24:43<18:15, 16.11s/step, loss=0.1935, lr=1.00e-04, tps=969] Training:  52%|█████▏    | 73/140 [24:43<18:15, 16.36s/step, loss=0.1935, lr=1.00e-04, tps=969]2026-11-14 23:00:30 | INFO | root | step 73 | epoch 1 | loss 0.1991 | grad_norm 0.8222 | lr 1.00e-04 | mem 61.39 GiB | tps 1151.37(575.69/gpu) | num_label_tokens 1696
+Training:  52%|█████▏    | 73/140 [24:58<18:15, 16.36s/step, loss=0.1991, lr=1.00e-04, tps=1151]Training:  53%|█████▎    | 74/140 [24:58<17:46, 16.16s/step, loss=0.1991, lr=1.00e-04, tps=1151]2026-11-14 23:00:46 | INFO | root | step 74 | epoch 1 | loss 0.1757 | grad_norm 0.7385 | lr 1.00e-04 | mem 62.82 GiB | tps 1189.35(594.68/gpu) | num_label_tokens 1783
+Training:  53%|█████▎    | 74/140 [25:14<17:46, 16.16s/step, loss=0.1757, lr=1.00e-04, tps=1189]Training:  54%|█████▎    | 75/140 [25:14<17:33, 16.20s/step, loss=0.1757, lr=1.00e-04, tps=1189]2026-11-14 23:01:03 | INFO | root | step 75 | epoch 1 | loss 0.1753 | grad_norm 0.7102 | lr 1.00e-04 | mem 61.92 GiB | tps 1025.85(512.92/gpu) | num_label_tokens 1820
+Training:  54%|█████▎    | 75/140 [25:31<17:33, 16.20s/step, loss=0.1753, lr=1.00e-04, tps=1026]Training:  54%|█████▍    | 76/140 [25:31<17:30, 16.41s/step, loss=0.1753, lr=1.00e-04, tps=1026]2026-11-14 23:01:20 | INFO | root | step 76 | epoch 1 | loss 0.1794 | grad_norm 0.7646 | lr 1.00e-04 | mem 62.07 GiB | tps 1129.89(564.95/gpu) | num_label_tokens 1604
+Training:  54%|█████▍    | 76/140 [25:48<17:30, 16.41s/step, loss=0.1794, lr=1.00e-04, tps=1130]Training:  55%|█████▌    | 77/140 [25:48<17:13, 16.41s/step, loss=0.1794, lr=1.00e-04, tps=1130]2026-11-14 23:01:37 | INFO | root | step 77 | epoch 1 | loss 0.1873 | grad_norm 0.7206 | lr 1.00e-04 | mem 62.26 GiB | tps 1064.64(532.32/gpu) | num_label_tokens 1785
+Training:  55%|█████▌    | 77/140 [26:05<17:13, 16.41s/step, loss=0.1873, lr=1.00e-04, tps=1065]Training:  56%|█████▌    | 78/140 [26:05<17:12, 16.65s/step, loss=0.1873, lr=1.00e-04, tps=1065]2026-11-14 23:01:53 | INFO | root | step 78 | epoch 1 | loss 0.2215 | grad_norm 0.7753 | lr 1.00e-04 | mem 61.27 GiB | tps 1112.16(556.08/gpu) | num_label_tokens 1695
+Training:  56%|█████▌    | 78/140 [26:21<17:12, 16.65s/step, loss=0.2215, lr=1.00e-04, tps=1112]Training:  56%|█████▋    | 79/140 [26:21<16:41, 16.42s/step, loss=0.2215, lr=1.00e-04, tps=1112]2026-11-14 23:02:09 | INFO | root | step 79 | epoch 1 | loss 0.1792 | grad_norm 0.7323 | lr 1.00e-04 | mem 61.63 GiB | tps 1112.31(556.16/gpu) | num_label_tokens 1763
+Training:  56%|█████▋    | 79/140 [26:37<16:41, 16.42s/step, loss=0.1792, lr=1.00e-04, tps=1112]Training:  57%|█████▋    | 80/140 [26:37<16:18, 16.30s/step, loss=0.1792, lr=1.00e-04, tps=1112]2026-11-14 23:02:46 | INFO | root | [val] name "default" | step 79 | epoch 1 | loss 0.2369 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 23:03:02 | INFO | root | step 80 | epoch 1 | loss 0.2029 | grad_norm 0.8099 | lr 1.00e-04 | mem 62.59 GiB | tps 327.31(163.66/gpu) | num_label_tokens 1711
+Training:  57%|█████▋    | 80/140 [27:30<16:18, 16.30s/step, loss=0.2029, lr=1.00e-04, tps=327] Training:  58%|█████▊    | 81/140 [27:30<26:51, 27.31s/step, loss=0.2029, lr=1.00e-04, tps=327]2026-11-14 23:03:18 | INFO | root | step 81 | epoch 1 | loss 0.1857 | grad_norm 0.7882 | lr 1.00e-04 | mem 62.22 GiB | tps 1247.81(623.91/gpu) | num_label_tokens 1813
+Training:  58%|█████▊    | 81/140 [27:46<26:51, 27.31s/step, loss=0.1857, lr=1.00e-04, tps=1248]Training:  59%|█████▊    | 82/140 [27:46<23:12, 24.00s/step, loss=0.1857, lr=1.00e-04, tps=1248]2026-11-14 23:03:34 | INFO | root | step 82 | epoch 1 | loss 0.1859 | grad_norm 0.7155 | lr 1.00e-04 | mem 62.18 GiB | tps 1125.17(562.58/gpu) | num_label_tokens 1754
+Training:  59%|█████▊    | 82/140 [28:03<23:12, 24.00s/step, loss=0.1859, lr=1.00e-04, tps=1125]Training:  59%|█████▉    | 83/140 [28:03<20:40, 21.77s/step, loss=0.1859, lr=1.00e-04, tps=1125]2026-11-14 23:03:51 | INFO | root | step 83 | epoch 1 | loss 0.1822 | grad_norm 0.7525 | lr 1.00e-04 | mem 61.84 GiB | tps 1110.54(555.27/gpu) | num_label_tokens 1684
+Training:  59%|█████▉    | 83/140 [28:19<20:40, 21.77s/step, loss=0.1822, lr=1.00e-04, tps=1111]Training:  60%|██████    | 84/140 [28:19<18:45, 20.10s/step, loss=0.1822, lr=1.00e-04, tps=1111]2026-11-14 23:04:07 | INFO | root | step 84 | epoch 1 | loss 0.1925 | grad_norm 0.7561 | lr 1.00e-04 | mem 62.24 GiB | tps 1052.11(526.05/gpu) | num_label_tokens 1746
+Training:  60%|██████    | 84/140 [28:35<18:45, 20.10s/step, loss=0.1925, lr=1.00e-04, tps=1052]Training:  61%|██████    | 85/140 [28:35<17:19, 18.89s/step, loss=0.1925, lr=1.00e-04, tps=1052]2026-11-14 23:04:23 | INFO | root | step 85 | epoch 1 | loss 0.2011 | grad_norm 0.7792 | lr 1.00e-04 | mem 61.90 GiB | tps 1119.81(559.90/gpu) | num_label_tokens 1786
+Training:  61%|██████    | 85/140 [28:51<17:19, 18.89s/step, loss=0.2011, lr=1.00e-04, tps=1120]Training:  61%|██████▏   | 86/140 [28:51<16:14, 18.04s/step, loss=0.2011, lr=1.00e-04, tps=1120]2026-11-14 23:04:39 | INFO | root | step 86 | epoch 1 | loss 0.2168 | grad_norm 0.9114 | lr 1.00e-04 | mem 61.49 GiB | tps 1108.24(554.12/gpu) | num_label_tokens 1684
+Training:  61%|██████▏   | 86/140 [29:07<16:14, 18.04s/step, loss=0.2168, lr=1.00e-04, tps=1108]Training:  62%|██████▏   | 87/140 [29:07<15:27, 17.50s/step, loss=0.2168, lr=1.00e-04, tps=1108]2026-11-14 23:04:55 | INFO | root | step 87 | epoch 1 | loss 0.2235 | grad_norm 0.8091 | lr 1.00e-04 | mem 63.66 GiB | tps 1135.42(567.71/gpu) | num_label_tokens 1766
+Training:  62%|██████▏   | 87/140 [29:24<15:27, 17.50s/step, loss=0.2235, lr=1.00e-04, tps=1135]Training:  63%|██████▎   | 88/140 [29:24<14:52, 17.16s/step, loss=0.2235, lr=1.00e-04, tps=1135]2026-11-14 23:05:11 | INFO | root | step 88 | epoch 1 | loss 0.2002 | grad_norm 0.7953 | lr 1.00e-04 | mem 62.05 GiB | tps 1158.64(579.32/gpu) | num_label_tokens 1714
+Training:  63%|██████▎   | 88/140 [29:39<14:52, 17.16s/step, loss=0.2002, lr=1.00e-04, tps=1159]Training:  64%|██████▎   | 89/140 [29:39<14:10, 16.67s/step, loss=0.2002, lr=1.00e-04, tps=1159]2026-11-14 23:05:27 | INFO | root | step 89 | epoch 1 | loss 0.2167 | grad_norm 0.8370 | lr 1.00e-04 | mem 61.37 GiB | tps 1102.48(551.24/gpu) | num_label_tokens 1641
+Training:  64%|██████▎   | 89/140 [29:56<14:10, 16.67s/step, loss=0.2167, lr=1.00e-04, tps=1102]Training:  64%|██████▍   | 90/140 [29:56<13:48, 16.57s/step, loss=0.2167, lr=1.00e-04, tps=1102]2026-11-14 23:05:43 | INFO | root | step 90 | epoch 1 | loss 0.1890 | grad_norm 0.7498 | lr 1.00e-04 | mem 61.51 GiB | tps 1011.67(505.83/gpu) | num_label_tokens 1766
+Training:  64%|██████▍   | 90/140 [30:11<13:48, 16.57s/step, loss=0.1890, lr=1.00e-04, tps=1012]Training:  65%|██████▌   | 91/140 [30:11<13:14, 16.21s/step, loss=0.1890, lr=1.00e-04, tps=1012]2026-11-14 23:05:51 | INFO | root | step 91 | epoch 1 | loss 0.2084 | grad_norm 1.1898 | lr 1.00e-04 | mem 61.79 GiB | tps 1255.16(627.58/gpu) | num_label_tokens 886
+Training:  65%|██████▌   | 91/140 [30:19<13:14, 16.21s/step, loss=0.2084, lr=1.00e-04, tps=1255]Training:  66%|██████▌   | 92/140 [30:19<10:58, 13.73s/step, loss=0.2084, lr=1.00e-04, tps=1255]2026-11-14 23:06:27 | INFO | root | [val] name "default" | step 91 | epoch 1 | loss 0.2332 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 23:06:27 | INFO | nemo_automodel.recipes.base_recipe | Saving checkpoint to results/runs/ddp-2n-140/ckpt/epoch_1_step_91
+2026-11-14 23:06:28 | INFO | nemo_automodel.components.checkpoint.lifecycle | Updated LOWEST_VAL checkpoint symlink to epoch_1_step_91 (val_loss=0.2332)
+2026-11-14 23:06:43 | INFO | root | step 92 | epoch 2 | loss 0.1599 | grad_norm 0.6995 | lr 1.00e-04 | mem 62.59 GiB | tps 329.67(164.83/gpu) | num_label_tokens 1718
+Training:  66%|██████▌   | 92/140 [31:12<10:58, 13.73s/step, loss=0.1599, lr=1.00e-04, tps=330] Training:  66%|██████▋   | 93/140 [31:12<19:55, 25.43s/step, loss=0.1599, lr=1.00e-04, tps=330]2026-11-14 23:06:59 | INFO | root | step 93 | epoch 2 | loss 0.1430 | grad_norm 0.6450 | lr 1.00e-04 | mem 61.30 GiB | tps 1114.69(557.35/gpu) | num_label_tokens 1814
+Training:  66%|██████▋   | 93/140 [31:27<19:55, 25.43s/step, loss=0.1430, lr=1.00e-04, tps=1115]Training:  67%|██████▋   | 94/140 [31:27<17:10, 22.41s/step, loss=0.1430, lr=1.00e-04, tps=1115]2026-11-14 23:07:14 | INFO | root | step 94 | epoch 2 | loss 0.1450 | grad_norm 0.6447 | lr 1.00e-04 | mem 61.97 GiB | tps 1174.49(587.25/gpu) | num_label_tokens 1752
+Training:  67%|██████▋   | 94/140 [31:42<17:10, 22.41s/step, loss=0.1450, lr=1.00e-04, tps=1174]Training:  68%|██████▊   | 95/140 [31:42<15:11, 20.25s/step, loss=0.1450, lr=1.00e-04, tps=1174]2026-11-14 23:07:30 | INFO | root | step 95 | epoch 2 | loss 0.1474 | grad_norm 0.7008 | lr 1.00e-04 | mem 62.52 GiB | tps 1134.71(567.35/gpu) | num_label_tokens 1826
+Training:  68%|██████▊   | 95/140 [31:58<15:11, 20.25s/step, loss=0.1474, lr=1.00e-04, tps=1135]Training:  69%|██████▊   | 96/140 [31:58<13:51, 18.89s/step, loss=0.1474, lr=1.00e-04, tps=1135]2026-11-14 23:07:45 | INFO | root | step 96 | epoch 2 | loss 0.1483 | grad_norm 0.6768 | lr 1.00e-04 | mem 62.19 GiB | tps 1174.68(587.34/gpu) | num_label_tokens 1666
+Training:  69%|██████▊   | 96/140 [32:13<13:51, 18.89s/step, loss=0.1483, lr=1.00e-04, tps=1175]Training:  69%|██████▉   | 97/140 [32:13<12:46, 17.82s/step, loss=0.1483, lr=1.00e-04, tps=1175]2026-11-14 23:08:01 | INFO | root | step 97 | epoch 2 | loss 0.1822 | grad_norm 0.7156 | lr 1.00e-04 | mem 61.90 GiB | tps 1234.93(617.47/gpu) | num_label_tokens 1682
+Training:  69%|██████▉   | 97/140 [32:29<12:46, 17.82s/step, loss=0.1822, lr=1.00e-04, tps=1235]Training:  70%|███████   | 98/140 [32:29<12:04, 17.24s/step, loss=0.1822, lr=1.00e-04, tps=1235]2026-11-14 23:08:16 | INFO | root | step 98 | epoch 2 | loss 0.1523 | grad_norm 0.6711 | lr 1.00e-04 | mem 61.68 GiB | tps 1179.93(589.96/gpu) | num_label_tokens 1729
+Training:  70%|███████   | 98/140 [32:44<12:04, 17.24s/step, loss=0.1523, lr=1.00e-04, tps=1180]Training:  71%|███████   | 99/140 [32:44<11:22, 16.65s/step, loss=0.1523, lr=1.00e-04, tps=1180]2026-11-14 23:08:32 | INFO | root | step 99 | epoch 2 | loss 0.1307 | grad_norm 0.6781 | lr 1.00e-04 | mem 62.21 GiB | tps 1190.17(595.08/gpu) | num_label_tokens 1795
+Training:  71%|███████   | 99/140 [33:00<11:22, 16.65s/step, loss=0.1307, lr=1.00e-04, tps=1190]Training:  71%|███████▏  | 100/140 [33:00<10:52, 16.32s/step, loss=0.1307, lr=1.00e-04, tps=1190]2026-11-14 23:09:09 | INFO | root | [val] name "default" | step 99 | epoch 2 | loss 0.2356 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 23:09:26 | INFO | root | step 100 | epoch 2 | loss 0.1710 | grad_norm 0.7591 | lr 1.00e-04 | mem 62.59 GiB | tps 330.91(165.46/gpu) | num_label_tokens 1673
+Training:  71%|███████▏  | 100/140 [33:54<10:52, 16.32s/step, loss=0.1710, lr=1.00e-04, tps=331] Training:  72%|███████▏  | 101/140 [33:54<18:02, 27.76s/step, loss=0.1710, lr=1.00e-04, tps=331]2026-11-14 23:09:42 | INFO | root | step 101 | epoch 2 | loss 0.1293 | grad_norm 0.6618 | lr 1.00e-04 | mem 62.04 GiB | tps 1223.74(611.87/gpu) | num_label_tokens 1715
+Training:  72%|███████▏  | 101/140 [34:10<18:02, 27.76s/step, loss=0.1293, lr=1.00e-04, tps=1224]Training:  73%|███████▎  | 102/140 [34:10<15:17, 24.14s/step, loss=0.1293, lr=1.00e-04, tps=1224]2026-11-14 23:09:57 | INFO | root | step 102 | epoch 2 | loss 0.1612 | grad_norm 0.7827 | lr 1.00e-04 | mem 61.84 GiB | tps 1087.89(543.95/gpu) | num_label_tokens 1703
+Training:  73%|███████▎  | 102/140 [34:26<15:17, 24.14s/step, loss=0.1612, lr=1.00e-04, tps=1088]Training:  74%|███████▎  | 103/140 [34:26<13:19, 21.61s/step, loss=0.1612, lr=1.00e-04, tps=1088]2026-11-14 23:10:14 | INFO | root | step 103 | epoch 2 | loss 0.1414 | grad_norm 0.7623 | lr 1.00e-04 | mem 62.33 GiB | tps 1102.55(551.27/gpu) | num_label_tokens 1786
+Training:  74%|███████▎  | 103/140 [34:43<13:19, 21.61s/step, loss=0.1414, lr=1.00e-04, tps=1103]Training:  74%|███████▍  | 104/140 [34:43<12:06, 20.18s/step, loss=0.1414, lr=1.00e-04, tps=1103]2026-11-14 23:10:29 | INFO | root | step 104 | epoch 2 | loss 0.1427 | grad_norm 0.7563 | lr 1.00e-04 | mem 61.50 GiB | tps 1123.91(561.96/gpu) | num_label_tokens 1798
+Training:  74%|███████▍  | 104/140 [34:58<12:06, 20.18s/step, loss=0.1427, lr=1.00e-04, tps=1124]Training:  75%|███████▌  | 105/140 [34:58<10:53, 18.66s/step, loss=0.1427, lr=1.00e-04, tps=1124]2026-11-14 23:10:47 | INFO | root | step 105 | epoch 2 | loss 0.1550 | grad_norm 0.8789 | lr 1.00e-04 | mem 61.80 GiB | tps 1051.81(525.91/gpu) | num_label_tokens 1694
+Training:  75%|███████▌  | 105/140 [35:15<10:53, 18.66s/step, loss=0.1550, lr=1.00e-04, tps=1052]Training:  76%|███████▌  | 106/140 [35:15<10:23, 18.35s/step, loss=0.1550, lr=1.00e-04, tps=1052]2026-11-14 23:11:03 | INFO | root | step 106 | epoch 2 | loss 0.1510 | grad_norm 0.7692 | lr 1.00e-04 | mem 61.84 GiB | tps 1082.93(541.46/gpu) | num_label_tokens 1734
+Training:  76%|███████▌  | 106/140 [35:31<10:23, 18.35s/step, loss=0.1510, lr=1.00e-04, tps=1083]Training:  76%|███████▋  | 107/140 [35:31<09:39, 17.56s/step, loss=0.1510, lr=1.00e-04, tps=1083]2026-11-14 23:11:19 | INFO | root | step 107 | epoch 2 | loss 0.1405 | grad_norm 0.7721 | lr 1.00e-04 | mem 62.04 GiB | tps 1187.42(593.71/gpu) | num_label_tokens 1714
+Training:  76%|███████▋  | 107/140 [35:47<09:39, 17.56s/step, loss=0.1405, lr=1.00e-04, tps=1187]Training:  77%|███████▋  | 108/140 [35:47<09:09, 17.18s/step, loss=0.1405, lr=1.00e-04, tps=1187]2026-11-14 23:11:34 | INFO | root | step 108 | epoch 2 | loss 0.1685 | grad_norm 0.8447 | lr 1.00e-04 | mem 62.33 GiB | tps 1156.58(578.29/gpu) | num_label_tokens 1755
+Training:  77%|███████▋  | 108/140 [36:03<09:09, 17.18s/step, loss=0.1685, lr=1.00e-04, tps=1157]Training:  78%|███████▊  | 109/140 [36:03<08:33, 16.58s/step, loss=0.1685, lr=1.00e-04, tps=1157]2026-11-14 23:11:51 | INFO | root | step 109 | epoch 2 | loss 0.1433 | grad_norm 0.9691 | lr 1.00e-04 | mem 62.11 GiB | tps 1095.40(547.70/gpu) | num_label_tokens 1765
+Training:  78%|███████▊  | 109/140 [36:19<08:33, 16.58s/step, loss=0.1433, lr=1.00e-04, tps=1095]Training:  79%|███████▊  | 110/140 [36:19<08:18, 16.62s/step, loss=0.1433, lr=1.00e-04, tps=1095]2026-11-14 23:12:06 | INFO | root | step 110 | epoch 2 | loss 0.1612 | grad_norm 0.9090 | lr 1.00e-04 | mem 61.34 GiB | tps 1130.51(565.25/gpu) | num_label_tokens 1703
+Training:  79%|███████▊  | 110/140 [36:35<08:18, 16.62s/step, loss=0.1612, lr=1.00e-04, tps=1131]Training:  79%|███████▉  | 111/140 [36:35<07:50, 16.21s/step, loss=0.1612, lr=1.00e-04, tps=1131]2026-11-14 23:12:22 | INFO | root | step 111 | epoch 2 | loss 0.1434 | grad_norm 0.8625 | lr 1.00e-04 | mem 62.26 GiB | tps 1127.93(563.96/gpu) | num_label_tokens 1643
+Training:  79%|███████▉  | 111/140 [36:50<07:50, 16.21s/step, loss=0.1434, lr=1.00e-04, tps=1128]Training:  80%|████████  | 112/140 [36:50<07:31, 16.13s/step, loss=0.1434, lr=1.00e-04, tps=1128]2026-11-14 23:12:38 | INFO | root | step 112 | epoch 2 | loss 0.1343 | grad_norm 0.7819 | lr 1.00e-04 | mem 61.84 GiB | tps 1193.41(596.71/gpu) | num_label_tokens 1836
+Training:  80%|████████  | 112/140 [37:06<07:31, 16.13s/step, loss=0.1343, lr=1.00e-04, tps=1193]Training:  81%|████████  | 113/140 [37:06<07:12, 16.02s/step, loss=0.1343, lr=1.00e-04, tps=1193]2026-11-14 23:12:54 | INFO | root | step 113 | epoch 2 | loss 0.1436 | grad_norm 0.8121 | lr 1.00e-04 | mem 61.55 GiB | tps 1095.19(547.59/gpu) | num_label_tokens 1696
+Training:  81%|████████  | 113/140 [37:22<07:12, 16.02s/step, loss=0.1436, lr=1.00e-04, tps=1095]Training:  81%|████████▏ | 114/140 [37:22<06:54, 15.96s/step, loss=0.1436, lr=1.00e-04, tps=1095]2026-11-14 23:13:10 | INFO | root | step 114 | epoch 2 | loss 0.1459 | grad_norm 0.8355 | lr 1.00e-04 | mem 61.82 GiB | tps 1129.31(564.66/gpu) | num_label_tokens 1746
+Training:  81%|████████▏ | 114/140 [37:39<06:54, 15.96s/step, loss=0.1459, lr=1.00e-04, tps=1129]Training:  82%|████████▏ | 115/140 [37:39<06:44, 16.19s/step, loss=0.1459, lr=1.00e-04, tps=1129]2026-11-14 23:13:27 | INFO | root | step 115 | epoch 2 | loss 0.1456 | grad_norm 0.8423 | lr 1.00e-04 | mem 61.41 GiB | tps 1143.12(571.56/gpu) | num_label_tokens 1783
+Training:  82%|████████▏ | 115/140 [37:56<06:44, 16.19s/step, loss=0.1456, lr=1.00e-04, tps=1143]Training:  83%|████████▎ | 116/140 [37:56<06:33, 16.41s/step, loss=0.1456, lr=1.00e-04, tps=1143]2026-11-14 23:13:43 | INFO | root | step 116 | epoch 2 | loss 0.1397 | grad_norm 0.8507 | lr 1.00e-04 | mem 62.82 GiB | tps 1211.33(605.67/gpu) | num_label_tokens 1625
+Training:  83%|████████▎ | 116/140 [38:11<06:33, 16.41s/step, loss=0.1397, lr=1.00e-04, tps=1211]Training:  84%|████████▎ | 117/140 [38:11<06:11, 16.16s/step, loss=0.1397, lr=1.00e-04, tps=1211]2026-11-14 23:13:59 | INFO | root | step 117 | epoch 2 | loss 0.1368 | grad_norm 0.8511 | lr 1.00e-04 | mem 62.08 GiB | tps 1097.73(548.86/gpu) | num_label_tokens 1751
+Training:  84%|████████▎ | 117/140 [38:28<06:11, 16.16s/step, loss=0.1368, lr=1.00e-04, tps=1098]Training:  84%|████████▍ | 118/140 [38:28<05:56, 16.18s/step, loss=0.1368, lr=1.00e-04, tps=1098]2026-11-14 23:14:14 | INFO | root | step 118 | epoch 2 | loss 0.1415 | grad_norm 0.8115 | lr 1.00e-04 | mem 61.30 GiB | tps 1131.93(565.96/gpu) | num_label_tokens 1801
+Training:  84%|████████▍ | 118/140 [38:43<05:56, 16.18s/step, loss=0.1415, lr=1.00e-04, tps=1132]Training:  85%|████████▌ | 119/140 [38:43<05:32, 15.85s/step, loss=0.1415, lr=1.00e-04, tps=1132]2026-11-14 23:14:33 | INFO | root | step 119 | epoch 2 | loss 0.1581 | grad_norm 0.8496 | lr 1.00e-04 | mem 62.26 GiB | tps 1001.17(500.59/gpu) | num_label_tokens 1695
+Training:  85%|████████▌ | 119/140 [39:01<05:32, 15.85s/step, loss=0.1581, lr=1.00e-04, tps=1001]Training:  86%|████████▌ | 120/140 [39:01<05:32, 16.65s/step, loss=0.1581, lr=1.00e-04, tps=1001]2026-11-14 23:15:09 | INFO | root | [val] name "default" | step 119 | epoch 2 | loss 0.2435 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 23:15:24 | INFO | root | step 120 | epoch 2 | loss 0.1535 | grad_norm 0.8623 | lr 1.00e-04 | mem 62.59 GiB | tps 315.72(157.86/gpu) | num_label_tokens 1759
+Training:  86%|████████▌ | 120/140 [39:53<05:32, 16.65s/step, loss=0.1535, lr=1.00e-04, tps=316] Training:  86%|████████▋ | 121/140 [39:53<08:34, 27.10s/step, loss=0.1535, lr=1.00e-04, tps=316]2026-11-14 23:15:40 | INFO | root | step 121 | epoch 2 | loss 0.1510 | grad_norm 0.8745 | lr 1.00e-04 | mem 61.58 GiB | tps 1141.56(570.78/gpu) | num_label_tokens 1811
+Training:  86%|████████▋ | 121/140 [40:08<08:34, 27.10s/step, loss=0.1510, lr=1.00e-04, tps=1142]Training:  87%|████████▋ | 122/140 [40:08<07:06, 23.68s/step, loss=0.1510, lr=1.00e-04, tps=1142]2026-11-14 23:15:56 | INFO | root | step 122 | epoch 2 | loss 0.1589 | grad_norm 0.8957 | lr 1.00e-04 | mem 61.97 GiB | tps 1161.00(580.50/gpu) | num_label_tokens 1596
+Training:  87%|████████▋ | 122/140 [40:24<07:06, 23.68s/step, loss=0.1589, lr=1.00e-04, tps=1161]Training:  88%|████████▊ | 123/140 [40:24<06:02, 21.30s/step, loss=0.1589, lr=1.00e-04, tps=1161]2026-11-14 23:16:11 | INFO | root | step 123 | epoch 2 | loss 0.1739 | grad_norm 0.9690 | lr 1.00e-04 | mem 61.83 GiB | tps 1091.32(545.66/gpu) | num_label_tokens 1742
+Training:  88%|████████▊ | 123/140 [40:40<06:02, 21.30s/step, loss=0.1739, lr=1.00e-04, tps=1091]Training:  89%|████████▊ | 124/140 [40:40<05:13, 19.60s/step, loss=0.1739, lr=1.00e-04, tps=1091]2026-11-14 23:16:27 | INFO | root | step 124 | epoch 2 | loss 0.1184 | grad_norm 0.7569 | lr 1.00e-04 | mem 62.27 GiB | tps 1190.86(595.43/gpu) | num_label_tokens 1739
+Training:  89%|████████▊ | 124/140 [40:56<05:13, 19.60s/step, loss=0.1184, lr=1.00e-04, tps=1191]Training:  89%|████████▉ | 125/140 [40:56<04:37, 18.51s/step, loss=0.1184, lr=1.00e-04, tps=1191]2026-11-14 23:16:43 | INFO | root | step 125 | epoch 2 | loss 0.1747 | grad_norm 0.9305 | lr 1.00e-04 | mem 62.14 GiB | tps 1204.60(602.30/gpu) | num_label_tokens 1770
+Training:  89%|████████▉ | 125/140 [41:12<04:37, 18.51s/step, loss=0.1747, lr=1.00e-04, tps=1205]Training:  90%|█████████ | 126/140 [41:12<04:08, 17.75s/step, loss=0.1747, lr=1.00e-04, tps=1205]2026-11-14 23:16:59 | INFO | root | step 126 | epoch 2 | loss 0.1588 | grad_norm 0.8087 | lr 1.00e-04 | mem 62.01 GiB | tps 1170.69(585.34/gpu) | num_label_tokens 1818
+Training:  90%|█████████ | 126/140 [41:27<04:08, 17.75s/step, loss=0.1588, lr=1.00e-04, tps=1171]Training:  91%|█████████ | 127/140 [41:27<03:41, 17.04s/step, loss=0.1588, lr=1.00e-04, tps=1171]2026-11-14 23:17:14 | INFO | root | step 127 | epoch 2 | loss 0.1467 | grad_norm 0.8729 | lr 1.00e-04 | mem 62.59 GiB | tps 1117.61(558.81/gpu) | num_label_tokens 1617
+Training:  91%|█████████ | 127/140 [41:43<03:41, 17.04s/step, loss=0.1467, lr=1.00e-04, tps=1118]Training:  91%|█████████▏| 128/140 [41:43<03:19, 16.59s/step, loss=0.1467, lr=1.00e-04, tps=1118]2026-11-14 23:17:30 | INFO | root | step 128 | epoch 2 | loss 0.1551 | grad_norm 0.9410 | lr 1.00e-04 | mem 62.24 GiB | tps 1149.23(574.62/gpu) | num_label_tokens 1662
+Training:  91%|█████████▏| 128/140 [41:59<03:19, 16.59s/step, loss=0.1551, lr=1.00e-04, tps=1149]Training:  92%|█████████▏| 129/140 [41:59<03:01, 16.47s/step, loss=0.1551, lr=1.00e-04, tps=1149]2026-11-14 23:17:46 | INFO | root | step 129 | epoch 2 | loss 0.1163 | grad_norm 0.7515 | lr 1.00e-04 | mem 61.51 GiB | tps 1133.05(566.52/gpu) | num_label_tokens 1802
+Training:  92%|█████████▏| 129/140 [42:14<03:01, 16.47s/step, loss=0.1163, lr=1.00e-04, tps=1133]Training:  93%|█████████▎| 130/140 [42:14<02:42, 16.21s/step, loss=0.1163, lr=1.00e-04, tps=1133]2026-11-14 23:18:02 | INFO | root | step 130 | epoch 2 | loss 0.1131 | grad_norm 0.7555 | lr 1.00e-04 | mem 61.72 GiB | tps 1164.05(582.03/gpu) | num_label_tokens 1875
+Training:  93%|█████████▎| 130/140 [42:30<02:42, 16.21s/step, loss=0.1131, lr=1.00e-04, tps=1164]Training:  94%|█████████▎| 131/140 [42:30<02:24, 16.00s/step, loss=0.1131, lr=1.00e-04, tps=1164]2026-11-14 23:18:17 | INFO | root | step 131 | epoch 2 | loss 0.1590 | grad_norm 0.8959 | lr 1.00e-04 | mem 62.18 GiB | tps 1214.05(607.02/gpu) | num_label_tokens 1791
+Training:  94%|█████████▎| 131/140 [42:45<02:24, 16.00s/step, loss=0.1590, lr=1.00e-04, tps=1214]Training:  94%|█████████▍| 132/140 [42:45<02:06, 15.80s/step, loss=0.1590, lr=1.00e-04, tps=1214]2026-11-14 23:18:32 | INFO | root | step 132 | epoch 2 | loss 0.1311 | grad_norm 0.8103 | lr 1.00e-04 | mem 61.37 GiB | tps 1078.11(539.06/gpu) | num_label_tokens 1793
+Training:  94%|█████████▍| 132/140 [43:01<02:06, 15.80s/step, loss=0.1311, lr=1.00e-04, tps=1078]Training:  95%|█████████▌| 133/140 [43:01<01:49, 15.67s/step, loss=0.1311, lr=1.00e-04, tps=1078]2026-11-14 23:18:48 | INFO | root | step 133 | epoch 2 | loss 0.1583 | grad_norm 0.9991 | lr 1.00e-04 | mem 61.70 GiB | tps 1158.57(579.29/gpu) | num_label_tokens 1591
+Training:  95%|█████████▌| 133/140 [43:16<01:49, 15.67s/step, loss=0.1583, lr=1.00e-04, tps=1159]Training:  96%|█████████▌| 134/140 [43:16<01:34, 15.71s/step, loss=0.1583, lr=1.00e-04, tps=1159]2026-11-14 23:19:05 | INFO | root | step 134 | epoch 2 | loss 0.1295 | grad_norm 0.7929 | lr 1.00e-04 | mem 62.08 GiB | tps 1068.04(534.02/gpu) | num_label_tokens 1688
+Training:  96%|█████████▌| 134/140 [43:33<01:34, 15.71s/step, loss=0.1295, lr=1.00e-04, tps=1068]Training:  96%|█████████▋| 135/140 [43:33<01:20, 16.02s/step, loss=0.1295, lr=1.00e-04, tps=1068]2026-11-14 23:19:20 | INFO | root | step 135 | epoch 2 | loss 0.1513 | grad_norm 0.9165 | lr 1.00e-04 | mem 61.64 GiB | tps 1130.99(565.50/gpu) | num_label_tokens 1801
+Training:  96%|█████████▋| 135/140 [43:48<01:20, 16.02s/step, loss=0.1513, lr=1.00e-04, tps=1131]Training:  97%|█████████▋| 136/140 [43:48<01:02, 15.70s/step, loss=0.1513, lr=1.00e-04, tps=1131]2026-11-14 23:19:36 | INFO | root | step 136 | epoch 2 | loss 0.1470 | grad_norm 0.8267 | lr 1.00e-04 | mem 61.92 GiB | tps 1183.37(591.69/gpu) | num_label_tokens 1671
+Training:  97%|█████████▋| 136/140 [44:04<01:02, 15.70s/step, loss=0.1470, lr=1.00e-04, tps=1183]Training:  98%|█████████▊| 137/140 [44:04<00:47, 15.91s/step, loss=0.1470, lr=1.00e-04, tps=1183]2026-11-14 23:19:45 | INFO | root | step 137 | epoch 2 | loss 0.1486 | grad_norm 1.2764 | lr 1.00e-04 | mem 61.54 GiB | tps 1184.96(592.48/gpu) | num_label_tokens 837
+Training:  98%|█████████▊| 137/140 [44:13<00:47, 15.91s/step, loss=0.1486, lr=1.00e-04, tps=1185]Training:  99%|█████████▊| 138/140 [44:13<00:27, 13.71s/step, loss=0.1486, lr=1.00e-04, tps=1185]2026-11-14 23:20:21 | INFO | root | [val] name "default" | step 137 | epoch 2 | loss 0.2464 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 23:20:21 | INFO | nemo_automodel.recipes.base_recipe | Saving checkpoint to results/runs/ddp-2n-140/ckpt/epoch_2_step_137
+2026-11-14 23:20:39 | INFO | root | step 138 | epoch 3 | loss 0.0880 | grad_norm 0.6125 | lr 1.00e-04 | mem 63.22 GiB | tps 354.57(177.29/gpu) | num_label_tokens 1764
+Training:  99%|█████████▊| 138/140 [45:07<00:27, 13.71s/step, loss=0.0880, lr=1.00e-04, tps=355] Training:  99%|█████████▉| 139/140 [45:07<00:25, 25.81s/step, loss=0.0880, lr=1.00e-04, tps=355]2026-11-14 23:20:55 | INFO | root | step 139 | epoch 3 | loss 0.0977 | grad_norm 0.7554 | lr 1.00e-04 | mem 61.71 GiB | tps 1192.23(596.11/gpu) | num_label_tokens 1576
+Training:  99%|█████████▉| 139/140 [45:23<00:25, 25.81s/step, loss=0.0977, lr=1.00e-04, tps=1192]Training: 100%|██████████| 140/140 [45:23<00:00, 22.80s/step, loss=0.0977, lr=1.00e-04, tps=1192]2026-11-14 23:21:31 | INFO | root | [val] name "default" | step 139 | epoch 3 | loss 0.2492 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 23:21:31 | INFO | nemo_automodel.recipes.base_recipe | Saving checkpoint to results/runs/ddp-2n-140/ckpt/epoch_3_step_139
+Training: 100%|██████████| 140/140 [46:00<00:00, 19.72s/step, loss=0.0977, lr=1.00e-04, tps=1192]

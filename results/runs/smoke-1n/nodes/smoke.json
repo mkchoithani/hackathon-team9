@@ -1,0 +1,39 @@
+{
+  "time_utc": "2026-11-14T20:31:45Z",
+  "hostname": "smoke",
+  "fqdn": "CIQ-CHI-SPARK18",
+  "arch": "aarch64",
+  "python": "3.12.3",
+  "ip_addrs": "",
+  "nvidia_smi": "NVIDIA GB10, 580.173.02",
+  "mem_total_kib": "127539384",
+  "git_commit": "afbe423a1d606a80ecf2314e23b2b1eb7900df4a",
+  "git_dirty": true,
+  "config": "configs/smoke-1n.yaml",
+  "config_sha256": "c9d2d744460564e3665d92f617b4db71fae03d88b1a637da0d37b9d04f244051",
+  "env": {
+    "NCCL_NET_PLUGIN": "spcx",
+    "NCCL_VERSION": "2.30.7+cuda13.3",
+    "NCCL_SOCKET_IFNAME": "^lo,fb0,docker0",
+    "PORT": "29501",
+    "NNODES": "1",
+    "OMP_NUM_THREADS": "8"
+  },
+  "disk_free_gb": 339480.2,
+  "data_sha256": {
+    "test.jsonl": "941c8a48a443c3db756831e91e466ad6a2239036dbb9801e63dc465525b1853c",
+    "train.jsonl": "d972de945cc5616ab2cde963fbaa7ae5ac50390d781c458a60a76c26a4198b1a",
+    "val.jsonl": "889a83433476f1a9497ec735a9585263dbb4f24159e39e30a522c28812407fc8"
+  },
+  "torch": "2.14.0a0+4fdf77b940.nv26.08",
+  "cuda": "13.4",
+  "cuda_available": true,
+  "gpu": "NVIDIA GB10",
+  "gpu_capability": "12.1",
+  "nccl": "2.30.7",
+  "nemo_automodel_version": "0.7.0+efb2eb5df",
+  "transformers_version": "5.18.0",
+  "mamba_ssm_version": "2.3.0",
+  "causal_conv1d_version": "1.6.0",
+  "peft_version": "0.20.0"
+}

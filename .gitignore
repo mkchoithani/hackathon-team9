@@ -26,3 +26,4 @@ fuzzball/rendered/
 
 # Test configs
 configs/*-test.yaml
+artifacts/

@@ -1,0 +1,216 @@
+cfg-path: /shared/hackathon-team9/configs/single-1n.yaml
+W1114 18:44:26.721000 197 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1114 18:44:26.746000 197 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+W1114 18:44:28.403000 197 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 18:44:28.404000 197 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1114 18:44:28.405000 197 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 18:44:28.406000 197 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1114 18:44:28.407000 197 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 18:44:28.407000 197 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1114 18:44:28.408000 197 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1114 18:44:28.408000 197 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+> initializing torch distributed with 1 workers.
+2026-11-14 18:44:40 | INFO | nemo_automodel.components.loggers.log_utils | Setting logging level to 20
+2026-11-14 18:44:41 | INFO | nemo_automodel.shared.te_patches | Applied FusedAdam empty-shard monkey-patch.
+2026-11-14 18:44:41 | INFO | root | Experiment_details:
+2026-11-14 18:44:41 | INFO | root | Timestamp: '2026-11-14T18:44:41'
+2026-11-14 18:44:41 | INFO | root | User: team9@fb-hack.local
+2026-11-14 18:44:41 | INFO | root | Host: train-1node
+2026-11-14 18:44:41 | INFO | root | World size: 1
+2026-11-14 18:44:41 | INFO | root | Backend: nccl
+2026-11-14 18:44:41 | INFO | root | Recipe: TrainFinetuneRecipeForNextTokenPrediction
+2026-11-14 18:44:41 | INFO | root | Model name: /shared/nemotron-3-nano-30b-a3b-bf16
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 20
+  val_every_steps: 20
+  max_steps: 20
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /shared/nemotron-3-nano-30b-a3b-bf16
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: true
+  checkpoint_dir: results/runs/single-1n/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: fsdp2
+  dp_size: 1
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  sequence_parallel: false
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr: 0.0001
+  weight_decay: 0
+validation_dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/val.jsonl
+  seq_length: 3072
+  truncation: longest_first
+validation_dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+2026-11-14 18:44:41 | INFO | root | Library versions:
+2026-11-14 18:44:41 | INFO | root | - nemo_automodel: 0.7.0+efb2eb5df (/opt/Automodel/nemo_automodel/__init__.py)
+2026-11-14 18:44:41 | INFO | root | - transformers: 5.18.0 (/opt/venv/lib/python3.12/site-packages/transformers/__init__.py)
+2026-11-14 18:44:41 | INFO | root | - torch: 2.14.0a0+4fdf77b940.nv26.08 CUDA 13.4
+2026-11-14 18:44:41 | INFO | root | No clip_grad_norm.max_norm specified in config, using default value of 1.0
+2026-11-14 18:44:41 | WARNING | nemo_automodel.components.models.common.utils | rope_fusion is temporarily force-disabled globally (see #3027).
+2026-11-14 18:44:41 | INFO | nemo_automodel._transformers.model_init | Using custom model implementation for NemotronHForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+2026-11-14 18:44:41 | INFO | nemo_automodel._transformers.kernel_patches | Set global SDPA backends to [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-14 18:44:41 | INFO | nemo_automodel._transformers.kernel_patches | Patched model with SDPA method= [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-14 18:44:41 | INFO | nemo_automodel.components.distributed.parallelizer | Structurally discovered layer groups for NemotronHForCausalLM: ('language',)
+2026-11-14 18:44:41 | INFO | nemo_automodel.components.distributed.parallelizer | Activation checkpointing scope ('all',) selected 52/52 trainable layers; groups={'language': 52} selected_groups={'language': 52} skipped_frozen=0
+2026-11-14 18:44:41 | INFO | nemo_automodel.components.distributed.activation_checkpointing | Applied submodule activation checkpointing to 52 layers: {'mlp': 23, 'attention': 29, 'pre_norm': 0, 'post_norm': 0, 'mot': 0}
+2026-11-14 19:33:40 | INFO | root | load_model: 58.82 GB loaded in 2933.97s (0.02 GB/s overall | destinations 0.11s, storage read 2933.74s, adapt 0.06s, install 0.07s)
+2026-11-14 19:33:41 | INFO | root | Model summary:
+2026-11-14 19:33:41 | INFO | root | --------------------------------
+2026-11-14 19:33:41 | INFO | root | Trainable parameters: 13,499,392
+2026-11-14 19:33:41 | INFO | root | Total parameters: 31,591,436,736
+2026-11-14 19:33:41 | INFO | root | Trainable parameters percentage: 0.04%
+2026-11-14 19:33:41 | INFO | root | Param L2 norm: 3990.6451
+2026-11-14 19:33:41 | INFO | root | --------------------------------
+2026-11-14 19:33:41 | INFO | root | Using model config to instantiate tokenizer
+2026-11-14 19:33:43 | WARNING | nemo_automodel._transformers.tokenization.nemo_auto_tokenizer | Tokenizer '/shared/nemotron-3-nano-30b-a3b-bf16' has pad_token_id=None; defaulting to 0. This can cause incorrect MoE auxiliary loss calculations if valid tokens share token ID 0. Set pad_token_id explicitly in your tokenizer config to avoid this.
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+2026-11-14 19:33:43 | INFO | root | Signal handler installed for SIGTERM
+2026-11-14 19:33:43 | INFO | root | Model Part 0:
+2026-11-14 19:33:43 | INFO | root | NemotronHForCausalLM(
+2026-11-14 19:33:43 | INFO | root |   (model): NemotronV3Model(
+2026-11-14 19:33:43 | INFO | root |     (embed_tokens): Embedding(131072, 2688)
+2026-11-14 19:33:43 | INFO | root |     (layers): ModuleDict(
+2026-11-14 19:33:43 | INFO | root |       (0): NemotronV3Block(
+2026-11-14 19:33:43 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-14 19:33:43 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-14 19:33:43 | INFO | root |           (_checkpoint_wrapped_module): NemotronV3Mamba2Mixer(
+2026-11-14 19:33:43 | INFO | root |             (in_proj): PatchedLinearLoRA(
+2026-11-14 19:33:43 | INFO | root |               in_features=2688, out_features=10304, bias=False
+2026-11-14 19:33:43 | INFO | root |               (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-14 19:33:43 | INFO | root |               (lora_B): Linear(in_features=16, out_features=10304, bias=False)
+2026-11-14 19:33:43 | INFO | root |             )
+2026-11-14 19:33:43 | INFO | root |             (conv1d): Conv1d(6144, 6144, kernel_size=(4,), stride=(1,), padding=(3,), groups=6144)
+2026-11-14 19:33:43 | INFO | root |             (_fp32_params): NemotronV3MambaFP32Params()
+2026-11-14 19:33:43 | INFO | root |             (norm): NemotronV3MambaRMSNormGated()
+2026-11-14 19:33:43 | INFO | root |             (out_proj): Linear(in_features=4096, out_features=2688, bias=False)
+2026-11-14 19:33:43 | INFO | root |           )
+2026-11-14 19:33:43 | INFO | root |         )
+2026-11-14 19:33:43 | INFO | root |       )
+2026-11-14 19:33:43 | INFO | root |       (1): NemotronV3Block(
+2026-11-14 19:33:43 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-14 19:33:43 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-14 19:33:43 | INFO | root |           (_checkpoint_wrapped_module): MoE(
+2026-11-14 19:33:43 | INFO | root |             (gate): Gate(
+2026-11-14 19:33:43 | INFO | root |               (routing_core): _GateRoutingCore()
+2026-11-14 19:33:43 | INFO | root |             )
+2026-11-14 19:33:43 | INFO | root |             (experts): GroupedExperts()
+2026-11-14 19:33:43 | INFO | root |             (shared_experts): MLP(
+2026-11-14 19:33:43 | INFO | root |               (up_proj): PatchedLinearLoRA(
+2026-11-14 19:33:43 | INFO | root |                 in_features=2688, out_features=3712, bias=False
+2026-11-14 19:33:43 | INFO | root |                 (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-14 19:33:43 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=3712, bias=False)
+2026-11-14 19:33:43 | INFO | root |               )
+2026-11-14 19:33:43 | INFO | root |               (down_proj): PatchedLinearLoRA(
+2026-11-14 19:33:43 | INFO | root |                 in_features=3712, out_features=2688, bias=False
+2026-11-14 19:33:43 | INFO | root |                 (lora_A): Linear(in_features=3712, out_features=16, bias=False)
+2026-11-14 19:33:43 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=2688, bias=False)
+2026-11-14 19:33:43 | INFO | root |               )
+2026-11-14 19:33:43 | INFO | root |             )
+2026-11-14 19:33:43 | INFO | root | ...
+2026-11-14 19:33:43 | INFO | root | Optimizer:
+2026-11-14 19:33:43 | INFO | root | Adam (
+2026-11-14 19:33:43 | INFO | root | Parameter Group 0
+2026-11-14 19:33:43 | INFO | root |     amsgrad: False
+2026-11-14 19:33:43 | INFO | root |     betas: (0.9, 0.999)
+2026-11-14 19:33:43 | INFO | root |     capturable: False
+2026-11-14 19:33:43 | INFO | root |     decoupled_weight_decay: False
+2026-11-14 19:33:43 | INFO | root |     differentiable: False
+2026-11-14 19:33:43 | INFO | root |     eps: 1e-08
+2026-11-14 19:33:43 | INFO | root |     foreach: None
+2026-11-14 19:33:43 | INFO | root |     fused: None
+2026-11-14 19:33:43 | INFO | root |     lr: 0.0001
+2026-11-14 19:33:43 | INFO | root |     maximize: False
+2026-11-14 19:33:43 | INFO | root |     weight_decay: 0
+2026-11-14 19:33:43 | INFO | root | )
+2026-11-14 19:33:43 | INFO | root | LR scheduler: <unavailable>
+2026-11-14 19:33:43 | WARNING | nemo_automodel._transformers.mfu | Unable to determine the theoretical peak for the current device; MFU will be reported as 0%. Pass a supported device or peak_tflops directly, or set mfu.device or mfu.peak_tflops in recipe YAML.
+2026-11-14 19:33:43 | INFO | root | Step scheduler:
+2026-11-14 19:33:43 | INFO | root | - Gradient accumulation steps: 16
+2026-11-14 19:33:43 | INFO | root | - Checkpoint every steps: 20
+2026-11-14 19:33:43 | INFO | root | - Garbage collect every steps: None
+2026-11-14 19:33:43 | INFO | root | - Current Epoch: 0
+2026-11-14 19:33:43 | INFO | root | - Number of epochs: 10
+2026-11-14 19:33:43 | INFO | root | - Validation every steps: 20
+2026-11-14 19:33:43 | INFO | root | - Max train steps: 20
+2026-11-14 19:33:43 | INFO | root | - Checkpoint retention: disabled; keeping all checkpoints (checkpoint.max_recent_checkpoints=None)
+Training:   0%|          | 0/20 [00:00<?, ?step/s]2026-11-14 19:36:28 | INFO | root | step 0 | epoch 0 | loss 1.1676 | grad_norm 2.0250 | lr 1.00e-04 | mem 61.85 GiB | tps 106.27(106.27/gpu) | num_label_tokens 1659
+Training:   0%|          | 0/20 [02:45<?, ?step/s, loss=1.1676, lr=1.00e-04, tps=106]Training:   5%|▌         | 1/20 [02:45<52:18, 165.19s/step, loss=1.1676, lr=1.00e-04, tps=106]2026-11-14 19:37:12 | INFO | root | step 1 | epoch 0 | loss 0.9770 | grad_norm 1.8492 | lr 1.00e-04 | mem 63.64 GiB | tps 450.89(450.89/gpu) | num_label_tokens 1672
+Training:   5%|▌         | 1/20 [03:28<52:18, 165.19s/step, loss=0.9770, lr=1.00e-04, tps=451]Training:  10%|█         | 2/20 [03:28<28:06, 93.70s/step, loss=0.9770, lr=1.00e-04, tps=451] 2026-11-14 19:37:45 | INFO | root | step 2 | epoch 0 | loss 0.9262 | grad_norm 1.7515 | lr 1.00e-04 | mem 61.52 GiB | tps 529.05(529.05/gpu) | num_label_tokens 1614
+Training:  10%|█         | 2/20 [04:01<28:06, 93.70s/step, loss=0.9262, lr=1.00e-04, tps=529]Training:  15%|█▌        | 3/20 [04:01<18:42, 66.01s/step, loss=0.9262, lr=1.00e-04, tps=529]2026-11-14 19:38:17 | INFO | root | step 3 | epoch 0 | loss 0.7267 | grad_norm 1.4218 | lr 1.00e-04 | mem 63.23 GiB | tps 559.81(559.81/gpu) | num_label_tokens 1740
+Training:  15%|█▌        | 3/20 [04:34<18:42, 66.01s/step, loss=0.7267, lr=1.00e-04, tps=560]Training:  20%|██        | 4/20 [04:34<14:04, 52.80s/step, loss=0.7267, lr=1.00e-04, tps=560]2026-11-14 19:38:49 | INFO | root | step 4 | epoch 0 | loss 0.7008 | grad_norm 1.2973 | lr 1.00e-04 | mem 62.13 GiB | tps 579.53(579.53/gpu) | num_label_tokens 1647
+Training:  20%|██        | 4/20 [05:06<14:04, 52.80s/step, loss=0.7008, lr=1.00e-04, tps=580]Training:  25%|██▌       | 5/20 [05:06<11:20, 45.34s/step, loss=0.7008, lr=1.00e-04, tps=580]2026-11-14 19:39:21 | INFO | root | step 5 | epoch 0 | loss 0.6360 | grad_norm 1.1591 | lr 1.00e-04 | mem 61.31 GiB | tps 523.70(523.70/gpu) | num_label_tokens 1706
+Training:  25%|██▌       | 5/20 [05:37<11:20, 45.34s/step, loss=0.6360, lr=1.00e-04, tps=524]Training:  30%|███       | 6/20 [05:37<09:27, 40.52s/step, loss=0.6360, lr=1.00e-04, tps=524]2026-11-14 19:39:53 | INFO | root | step 6 | epoch 0 | loss 0.5743 | grad_norm 0.9761 | lr 1.00e-04 | mem 62.33 GiB | tps 579.32(579.32/gpu) | num_label_tokens 1747
+Training:  30%|███       | 6/20 [06:10<09:27, 40.52s/step, loss=0.5743, lr=1.00e-04, tps=579]Training:  35%|███▌      | 7/20 [06:10<08:12, 37.91s/step, loss=0.5743, lr=1.00e-04, tps=579]2026-11-14 19:40:25 | INFO | root | step 7 | epoch 0 | loss 0.5584 | grad_norm 1.0116 | lr 1.00e-04 | mem 62.30 GiB | tps 607.68(607.68/gpu) | num_label_tokens 1684
+Training:  35%|███▌      | 7/20 [06:42<08:12, 37.91s/step, loss=0.5584, lr=1.00e-04, tps=608]Training:  40%|████      | 8/20 [06:42<07:12, 36.04s/step, loss=0.5584, lr=1.00e-04, tps=608]2026-11-14 19:40:57 | INFO | root | step 8 | epoch 0 | loss 0.4947 | grad_norm 0.9718 | lr 1.00e-04 | mem 62.52 GiB | tps 570.95(570.95/gpu) | num_label_tokens 1863
+Training:  40%|████      | 8/20 [07:13<07:12, 36.04s/step, loss=0.4947, lr=1.00e-04, tps=571]Training:  45%|████▌     | 9/20 [07:13<06:21, 34.65s/step, loss=0.4947, lr=1.00e-04, tps=571]2026-11-14 19:41:29 | INFO | root | step 9 | epoch 0 | loss 0.4735 | grad_norm 0.9906 | lr 1.00e-04 | mem 62.15 GiB | tps 553.71(553.71/gpu) | num_label_tokens 1803
+Training:  45%|████▌     | 9/20 [07:46<06:21, 34.65s/step, loss=0.4735, lr=1.00e-04, tps=554]Training:  50%|█████     | 10/20 [07:46<05:38, 33.89s/step, loss=0.4735, lr=1.00e-04, tps=554]2026-11-14 19:42:00 | INFO | root | step 10 | epoch 0 | loss 0.5012 | grad_norm 1.0298 | lr 1.00e-04 | mem 62.56 GiB | tps 579.98(579.98/gpu) | num_label_tokens 1554
+Training:  50%|█████     | 10/20 [08:17<05:38, 33.89s/step, loss=0.5012, lr=1.00e-04, tps=580]Training:  55%|█████▌    | 11/20 [08:17<04:57, 33.06s/step, loss=0.5012, lr=1.00e-04, tps=580]2026-11-14 19:42:32 | INFO | root | step 11 | epoch 0 | loss 0.4051 | grad_norm 0.9572 | lr 1.00e-04 | mem 62.77 GiB | tps 577.37(577.37/gpu) | num_label_tokens 1711
+Training:  55%|█████▌    | 11/20 [08:49<04:57, 33.06s/step, loss=0.4051, lr=1.00e-04, tps=577]Training:  60%|██████    | 12/20 [08:49<04:21, 32.69s/step, loss=0.4051, lr=1.00e-04, tps=577]2026-11-14 19:43:03 | INFO | root | step 12 | epoch 0 | loss 0.4334 | grad_norm 0.9142 | lr 1.00e-04 | mem 61.56 GiB | tps 576.32(576.32/gpu) | num_label_tokens 1714
+Training:  60%|██████    | 12/20 [09:19<04:21, 32.69s/step, loss=0.4334, lr=1.00e-04, tps=576]Training:  65%|██████▌   | 13/20 [09:19<03:44, 32.07s/step, loss=0.4334, lr=1.00e-04, tps=576]2026-11-14 19:43:34 | INFO | root | step 13 | epoch 0 | loss 0.4284 | grad_norm 0.9738 | lr 1.00e-04 | mem 62.02 GiB | tps 562.70(562.70/gpu) | num_label_tokens 1660
+Training:  65%|██████▌   | 13/20 [09:50<03:44, 32.07s/step, loss=0.4284, lr=1.00e-04, tps=563]Training:  70%|███████   | 14/20 [09:50<03:10, 31.75s/step, loss=0.4284, lr=1.00e-04, tps=563]2026-11-14 19:44:05 | INFO | root | step 14 | epoch 0 | loss 0.3748 | grad_norm 0.8445 | lr 1.00e-04 | mem 62.06 GiB | tps 556.93(556.93/gpu) | num_label_tokens 1786
+Training:  70%|███████   | 14/20 [10:22<03:10, 31.75s/step, loss=0.3748, lr=1.00e-04, tps=557]Training:  75%|███████▌  | 15/20 [10:22<02:38, 31.66s/step, loss=0.3748, lr=1.00e-04, tps=557]2026-11-14 19:44:36 | INFO | root | step 15 | epoch 0 | loss 0.3992 | grad_norm 0.8530 | lr 1.00e-04 | mem 61.75 GiB | tps 587.03(587.03/gpu) | num_label_tokens 1669
+Training:  75%|███████▌  | 15/20 [10:53<02:38, 31.66s/step, loss=0.3992, lr=1.00e-04, tps=587]Training:  80%|████████  | 16/20 [10:53<02:06, 31.53s/step, loss=0.3992, lr=1.00e-04, tps=587]2026-11-14 19:45:08 | INFO | root | step 16 | epoch 0 | loss 0.3559 | grad_norm 0.7390 | lr 1.00e-04 | mem 63.19 GiB | tps 625.84(625.84/gpu) | num_label_tokens 1956
+Training:  80%|████████  | 16/20 [11:25<02:06, 31.53s/step, loss=0.3559, lr=1.00e-04, tps=626]Training:  85%|████████▌ | 17/20 [11:25<01:34, 31.57s/step, loss=0.3559, lr=1.00e-04, tps=626]2026-11-14 19:45:40 | INFO | root | step 17 | epoch 0 | loss 0.3904 | grad_norm 0.8498 | lr 1.00e-04 | mem 62.21 GiB | tps 555.23(555.23/gpu) | num_label_tokens 1849
+Training:  85%|████████▌ | 17/20 [11:56<01:34, 31.57s/step, loss=0.3904, lr=1.00e-04, tps=555]Training:  90%|█████████ | 18/20 [11:56<01:03, 31.59s/step, loss=0.3904, lr=1.00e-04, tps=555]2026-11-14 19:46:10 | INFO | root | step 18 | epoch 0 | loss 0.3446 | grad_norm 0.8000 | lr 1.00e-04 | mem 61.64 GiB | tps 570.20(570.20/gpu) | num_label_tokens 1741
+Training:  90%|█████████ | 18/20 [12:27<01:03, 31.59s/step, loss=0.3446, lr=1.00e-04, tps=570]Training:  95%|█████████▌| 19/20 [12:27<00:31, 31.29s/step, loss=0.3446, lr=1.00e-04, tps=570]2026-11-14 19:46:42 | INFO | root | step 19 | epoch 0 | loss 0.3457 | grad_norm 0.8873 | lr 1.00e-04 | mem 62.48 GiB | tps 584.60(584.60/gpu) | num_label_tokens 1739
+Training:  95%|█████████▌| 19/20 [12:58<00:31, 31.29s/step, loss=0.3457, lr=1.00e-04, tps=585]Training: 100%|██████████| 20/20 [12:58<00:00, 31.34s/step, loss=0.3457, lr=1.00e-04, tps=585]2026-11-14 19:47:56 | INFO | root | [val] name "default" | step 19 | epoch 0 | loss 0.3173 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-14 19:47:56 | INFO | nemo_automodel.recipes.base_recipe | Saving checkpoint to results/runs/single-1n/ckpt/epoch_0_step_19
+2026-11-14 19:47:58 | INFO | nemo_automodel.components.checkpoint.lifecycle | Updated LOWEST_VAL checkpoint symlink to epoch_0_step_19 (val_loss=0.3173)
+Training: 100%|██████████| 20/20 [14:14<00:00, 42.73s/step, loss=0.3457, lr=1.00e-04, tps=585]
