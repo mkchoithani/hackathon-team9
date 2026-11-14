@@ -1,0 +1,4 @@
+run,layout,nodes,strategy,median_step_s,median_tps,peak_mem_gib,first_loss,last_loss,val_loss,wall_s,workflow_id
+single-1n,1 node,1,FSDP2,31.602,576.32,63.64,1.1676,0.3457,0.3173,3834,e80b5cf0-b406-4efb-bcbd-d9e122c2cbb3
+ddp-2n,2 nodes · data parallel,2,DDP,16.335,1098.97,63.66,1.1672,0.3349,0.3087,1091,41b8c2be-0e93-4191-9263-05da9042c081
+ep-2n,2 nodes · expert parallel,2,FSDP2 + expert parallel,16.746,1079.08,37.78,1.1706,0.3394,0.3141,640,448de03a-ce79-418f-9e6b-8e52c02d3f06

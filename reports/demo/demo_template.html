@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinScale on Two GB10s</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout idea: a presenter's console. Tabs across the top walk the story (how it works → speed → quality);
+   each view is one screen with the live element on the left and the numbers that explain it on the right. */
+:root {
+  --ink: #16213a;          /* text, node outlines */
+  --muted: #56617a;        /* secondary text */
+  --paper: #f4f6f9;        /* page */
+  --panel: #ffffff;        /* cards */
+  --line: #d9dee8;         /* hairlines */
+  --dp: #2f6feb;           /* data parallel */
+  --dp-text: #1f56c9;
+  --ep: #e07a1f;           /* expert parallel */
+  --ep-text: #a9560c;
+  --good: #1f8a4c; --bad: #c2362f; --warn: #b7791f;
+  --tint-dp: #e4ecfd; --tint-ep: #fbe9d7; --tint-shared: #e8ebf1;
+  --font-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e7ecf5; --muted: #9aa6bd; --paper: #0e1525; --panel: #161f33; --line: #2a3550;
+    --dp: #5b8ff5; --dp-text: #8fb2ff; --ep: #f0954a; --ep-text: #f6b27a;
+    --good: #4cc27f; --bad: #f07068; --warn: #e3b25a;
+    --tint-dp: #1c2c52; --tint-ep: #3a2a1a; --tint-shared: #222c44; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ink: #e7ecf5; --muted: #9aa6bd; --paper: #0e1525; --panel: #161f33; --line: #2a3550;
+  --dp: #5b8ff5; --dp-text: #8fb2ff; --ep: #f0954a; --ep-text: #f6b27a;
+  --good: #4cc27f; --bad: #f07068; --warn: #e3b25a;
+  --tint-dp: #1c2c52; --tint-ep: #3a2a1a; --tint-shared: #222c44; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 20px clamp(16px, 3vw, 32px) 48px; display: flex; flex-direction: column; gap: 20px; }
+header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.brand h1 { margin: 0; font-size: clamp(22px, 2.6vw, 30px); font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+nav.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+nav.tabs a { text-decoration: none; color: var(--muted); border: 1px solid var(--line); background: var(--panel); padding: 8px 14px; border-radius: 999px; font-weight: 500; font-size: 14px; }
+nav.tabs a .n { font-family: var(--font-mono); font-size: 12px; margin-right: 6px; opacity: .7; }
+nav.tabs a[aria-current="page"] { color: var(--panel); background: var(--ink); border-color: var(--ink); }
+nav.tabs a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, .row:focus-visible { outline: 3px solid var(--dp); outline-offset: 2px; }
+.view { display: none; }
+.view.on { display: grid; gap: 20px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-width: 0; }
+.card h2 { margin: 0 0 4px; font-size: 20px; font-weight: 600; text-wrap: balance; }
+.card h3 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.lede { margin: 0; color: var(--muted); max-width: 70ch; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.grid-2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 20px; }
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* How it works */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--paper); gap: 3px; }
+.seg button { border: 0; background: transparent; color: var(--muted); font: 600 14px var(--font-body); padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"].dp { background: var(--dp); color: #fff; }
+.seg button[aria-pressed="true"].ep { background: var(--ep); color: #fff; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: 500 14px var(--font-body); padding: 7px 14px; border-radius: 8px; cursor: pointer; }
+.stage { width: 100%; aspect-ratio: 16 / 9; display: block; }
+.phase { margin: 10px 0 0; min-height: 3em; font-size: 15px; }
+.phase b { color: var(--ink); }
+.facts { display: grid; gap: 14px; }
+.fact { border-top: 1px solid var(--line); padding-top: 12px; }
+.fact .num { font: 600 32px/1.1 var(--font-mono); font-variant-numeric: tabular-nums; }
+.fact .lbl { color: var(--muted); font-size: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); margin-top: 8px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+/* Speed */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+.kpi .num { font: 600 clamp(22px, 2.4vw, 30px)/1.15 var(--font-mono); white-space: nowrap; }
+.kpi .lbl { color: var(--muted); font-size: 13px; }
+.chart { width: 100%; position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart text { fill: var(--muted); font: 12px var(--font-body); }
+.chart .val { fill: var(--ink); font: 600 12px var(--font-mono); }
+.chart .grid line { stroke: var(--line); }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); box-shadow: 0 6px 18px rgba(0,0,0,.12); border-radius: 8px; padding: 6px 10px; font-size: 13px; white-space: nowrap; display: none; z-index: 2; }
+
+/* Explorer */
+.score { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.pending { border: 1px dashed var(--line); border-radius: 14px; padding: 16px 18px; color: var(--muted); background: var(--panel); }
+.pending b { color: var(--ink); }
+.ex { display: grid; grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .ex { grid-template-columns: 1fr; } }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.filters select, .filters input { font: 14px var(--font-body); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; min-width: 0; flex: 1 1 120px; }
+.list { max-height: 640px; overflow: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; }
+.row { text-align: left; border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 8px 10px; cursor: pointer; color: var(--ink); font: 14px var(--font-body); display: grid; gap: 2px; }
+.row[aria-selected="true"] { border-color: var(--ink); box-shadow: inset 3px 0 0 var(--ink); }
+.row .meta { color: var(--muted); font-size: 12px; font-family: var(--font-mono); }
+.row .marks { display: flex; gap: 4px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 2px 9px; font-size: 12px; font-weight: 600; background: var(--tint-shared); color: var(--ink); white-space: nowrap; }
+.chip.ok { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.chip.no { background: color-mix(in srgb, var(--bad) 16%, transparent); color: var(--bad); }
+.chip.sev-high { box-shadow: inset 0 0 0 1.5px var(--bad); }
+.chip.sev-medium { box-shadow: inset 0 0 0 1.5px var(--warn); }
+.chip.sev-low { box-shadow: inset 0 0 0 1.5px var(--good); }
+.passage { font-size: 15px; line-height: 1.65; max-width: 80ch; white-space: pre-wrap; }
+.passage mark { background: color-mix(in srgb, var(--dp) 22%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
+.answers { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 14px; }
+.ans { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; align-content: start; background: var(--paper); }
+.ans h4 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ans .q { font-size: 13px; color: var(--muted); font-style: italic; }
+.ans pre { margin: 0; white-space: pre-wrap; font: 12px var(--font-mono); color: var(--muted); max-height: 140px; overflow: auto; }
+.note { color: var(--muted); font-size: 13px; }
+footer { color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>FinScale: fine-tuning a 30B mixture-of-experts model on two GB10 nodes</h1>
+      <p>Team 9 · CIQ fb-hack (Fuzzball) · 14 Nov 2026 · NVIDIA Nemotron-3-Nano 30B-A3B, LoRA, SEC 10-K risk classification</p>
+    </div>
+    <nav class="tabs" aria-label="Demo sections">
+      <a href="#how" id="tab-how"><span class="n">1</span>How it works</a>
+      <a href="#speed" id="tab-speed"><span class="n">2</span>Speed &amp; memory</a>
+      <a href="#quality" id="tab-quality"><span class="n">3</span>Did fine-tuning help?</a>
+    </nav>
+  </header>
+
+  <!-- 1. How it works -->
+  <section class="view" id="view-how" aria-labelledby="tab-how">
+    <div class="grid-2">
+      <div class="card">
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Parallel layout">
+            <button type="button" class="dp" id="mode-dp" aria-pressed="true">Data parallel</button>
+            <button type="button" class="ep" id="mode-ep" aria-pressed="false">Expert parallel</button>
+          </div>
+          <button type="button" class="btn" id="play">Pause</button>
+        </div>
+        <svg class="stage" id="stage" viewBox="0 30 960 440" role="img" aria-label="Two GB10 nodes training one model; the animation shows tokens flowing through the layers and data crossing the link between nodes."></svg>
+        <p class="phase" id="phase" aria-live="polite"></p>
+        <div class="legend">
+          <span><i style="background:var(--ink)"></i>token (one example’s text)</span>
+          <span><i style="background:var(--dp)"></i>expert held by this node</span>
+          <span><i style="background:var(--line)"></i>expert held by the other node</span>
+          <span><i style="background:var(--good)"></i>gradient sync</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2 id="how-title">Data parallel</h2>
+        <p class="lede" id="how-lede"></p>
+        <div class="facts" id="how-facts" style="margin-top:16px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Speed & memory -->
+  <section class="view" id="view-speed" aria-labelledby="tab-speed">
+    <div class="kpis" id="kpis"></div>
+    <div class="grid-2">
+      <div class="card">
+        <h2>Two nodes process about twice the tokens per second</h2>
+        <p class="lede">Median tokens per second over 20 training steps, same model, data and batch in every run.</p>
+        <div class="chart" id="chart-tps"></div>
+      </div>
+      <div class="card">
+        <h2>Expert parallel needs far less memory</h2>
+        <p class="lede">Peak memory per node (GiB). Each GB10 has about 120 GB shared between CPU and GPU.</p>
+        <div class="chart" id="chart-mem"></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h2>All three runs learn the same</h2>
+        <p class="lede">Training loss at each step. Hover for values.</p>
+        <div class="chart" id="chart-loss"></div>
+      </div>
+      <div class="card">
+        <h2>Loading the model: 49 minutes to 1</h2>
+        <p class="lede">The trainer faulted the 59 GB model in over network storage at ~25 MB/s. Copying one 5 GB file at a time into memory with one sequential read, then loading from that copy, made it ~1 minute.</p>
+        <div class="chart" id="chart-load"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Quality -->
+  <section class="view" id="view-quality" aria-labelledby="tab-quality">
+    <div class="card">
+      <h2>Base model vs fine-tuned, on companies the model never saw</h2>
+      <p class="lede">152 risk-factor passages from MS, GOOGL, PFE and WMT 10-K filings (held out from training). For each, the model must name the most material risk class, its severity, and quote the passage word for word.</p>
+      <div class="score" id="score" style="margin-top:16px"></div>
+    </div>
+    <div class="ex">
+      <div class="card">
+        <div class="filters">
+          <label class="visually-hidden" for="f-co" hidden>Company</label>
+          <select id="f-co" aria-label="Company"></select>
+          <select id="f-cls" aria-label="Risk class"></select>
+          <select id="f-res" aria-label="Result"></select>
+          <input id="f-q" type="search" placeholder="Search text" aria-label="Search passages">
+        </div>
+        <div class="note" id="count"></div>
+        <div class="list" id="list" role="listbox" aria-label="Held-out passages"></div>
+      </div>
+      <div class="card" id="detail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <footer>All numbers are measured on the CIQ fb-hack cluster on 14 Nov 2026 (Fuzzball workflows; per-step logs and summary.json of each run). Correct labels come from the teacher model (Nemotron 3 Ultra) used to build the dataset; 60 of them are queued for human review in data/sft/gold_review.csv and none is reviewed yet.</footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'class') n.className = v; else if (k === 'text') n.textContent = v; else n.setAttribute(k, v);
+  }
+  kids.flat().forEach((c) => c != null && n.append(c));
+  return n;
+};
+const SVGNS = 'http://www.w3.org/2000/svg';
+const sv = (tag, attrs = {}) => { const n = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); return n; };
+const fmt = (v, d = 0) => Number(v).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+const RUNS = Object.fromEntries(DATA.runs.map((r) => [r.run, r]));
+const base = +RUNS['single-1n'].median_tps, ddp = RUNS['ddp-2n'], ep = RUNS['ep-2n'];
+const speedup = (r) => +r.median_tps / base;
+const LABEL = { 'single-1n': '1 node', 'ddp-2n': '2 nodes · data parallel', 'ep-2n': '2 nodes · expert parallel' };
+const COLOR = { 'single-1n': '--muted', 'ddp-2n': '--dp', 'ep-2n': '--ep' };
+
+/* ---------------- routing ---------------- */
+const VIEWS = ['how', 'speed', 'quality'];
+function route() {
+  const h = location.hash.replace('#', '');
+  const v = VIEWS.includes(h) ? h : 'how';
+  VIEWS.forEach((k) => {
+    $('#view-' + k).classList.toggle('on', k === v);
+    const t = $('#tab-' + k);
+    if (k === v) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current');
+  });
+  if (v === 'speed') drawSpeed();
+}
+window.addEventListener('hashchange', route);
+
+/* ---------------- 1. How it works: animation ---------------- */
+const stage = $('#stage');
+let mode = 'dp', playing = !reduce, t0 = performance.now(), tPaused = 0;
+const CYCLE = 6000; // ms per training step in the animation
+const NODES = [{ x: 40, y: 70, w: 360, h: 360, name: 'Node 1 · GB10' }, { x: 560, y: 70, w: 360, h: 360, name: 'Node 2 · GB10' }];
+const EXPERTS = 8; // drawn experts per model copy (illustrative; the real model has many more)
+// Per token: which node holds its half of the batch, which expert the router picks.
+const TOKENS = Array.from({ length: 12 }, (_, i) => ({ node: i < 6 ? 0 : 1, lane: i % 6, expert: [0, 5, 2, 7, 4, 1, 6, 3, 1, 4, 7, 2][i] }));
+const ownerOf = (e) => (e < EXPERTS / 2 ? 0 : 1); // expert-parallel ownership: first half on node 1
+
+function expertPos(n, e) {
+  const N = NODES[n], cols = 4, gap = 10, w = (N.w - 40 - gap * (cols - 1)) / cols, h = 44;
+  const c = e % cols, r = Math.floor(e / cols);
+  return { x: N.x + 20 + c * (w + gap), y: N.y + 170 + r * (h + gap), w, h };
+}
+function buildStage() {
+  stage.replaceChildren();
+  const g = sv('g');
+  // link between nodes
+  g.append(sv('rect', { x: 400, y: 245, width: 160, height: 30, rx: 15, fill: css('--tint-shared') }));
+  const linkTxt = sv('text', { x: 480, y: 300, 'text-anchor': 'middle', fill: css('--muted'), 'font-size': 16, 'font-family': 'IBM Plex Sans, Arial' });
+  linkTxt.textContent = 'RDMA link · 11.4 GB/s';
+  g.append(linkTxt);
+  NODES.forEach((N, n) => {
+    g.append(sv('rect', { x: N.x, y: N.y, width: N.w, height: N.h, rx: 16, fill: css('--panel'), stroke: css('--line'), 'stroke-width': 2 }));
+    const t = sv('text', { x: N.x + 20, y: N.y + 32, fill: css('--ink'), 'font-size': 22, 'font-weight': 600, 'font-family': 'IBM Plex Sans, Arial' });
+    t.textContent = N.name; g.append(t);
+    const batch = sv('text', { x: N.x + 20, y: N.y + 60, fill: css('--muted'), 'font-size': 16, 'font-family': 'IBM Plex Sans, Arial' });
+    batch.textContent = n === 0 ? 'Batch half: examples 1–8 of 16' : 'Batch half: examples 9–16 of 16'; g.append(batch);
+    // attention + router bar
+    g.append(sv('rect', { x: N.x + 20, y: N.y + 90, width: N.w - 40, height: 44, rx: 10, fill: css('--tint-shared') }));
+    const at = sv('text', { x: N.x + N.w / 2, y: N.y + 117, 'text-anchor': 'middle', fill: css('--ink'), 'font-size': 17, 'font-family': 'IBM Plex Sans, Arial' });
+    at.textContent = 'Attention + router (on both nodes)'; g.append(at);
+    for (let e = 0; e < EXPERTS; e++) {
+      const p = expertPos(n, e);
+      const held = mode === 'dp' || ownerOf(e) === n;
+      const col = mode === 'dp' ? css('--dp') : css('--ep');
+      g.append(sv('rect', { x: p.x, y: p.y, width: p.w, height: p.h, rx: 8, fill: held ? col : 'none', stroke: held ? col : css('--line'), 'stroke-width': 2, 'stroke-dasharray': held ? '' : '5 4', opacity: held ? 0.9 : 1 }));
+      const lt = sv('text', { x: p.x + p.w / 2, y: p.y + p.h / 2 + 5, 'text-anchor': 'middle', fill: held ? '#fff' : css('--muted'), 'font-size': 17, 'font-weight': 600, 'font-family': 'JetBrains Mono, monospace' });
+      lt.textContent = 'E' + (e + 1); g.append(lt);
+    }
+    const mem = sv('text', { x: N.x + 20, y: N.y + N.h - 22, fill: css('--muted'), 'font-size': 16, 'font-family': 'IBM Plex Sans, Arial' });
+    mem.textContent = mode === 'dp' ? 'Holds all experts · 63.7 GiB peak' : 'Holds experts ' + (n === 0 ? 'E1–E4' : 'E5–E8') + ' · 37.8 GiB peak';
+    g.append(mem);
+  });
+  stage.append(g);
+  stage.tokenLayer = sv('g'); stage.append(stage.tokenLayer);
+  stage.tokens = TOKENS.map(() => { const c = sv('circle', { r: 7, cx: -50, cy: -50, fill: css('--ink') }); stage.tokenLayer.append(c); return c; });
+  stage.grads = [0, 1].map(() => { const r = sv('rect', { width: 16, height: 16, rx: 3, fill: css('--good'), opacity: 0 }); stage.tokenLayer.append(r); return r; });
+}
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+function seg(t, a, b) { return Math.min(1, Math.max(0, (t - a) / (b - a))); }
+const PHASES = {
+  dp: [
+    [0.00, 'Each node takes <b>its half of the batch</b> (8 of 16 examples).'],
+    [0.22, 'The <b>router</b> on each node sends every token to an expert. Every expert is local, so <b>no token leaves its node</b>.'],
+    [0.55, 'Each node computes LoRA gradients for its own 8 examples.'],
+    [0.72, '<b>All-reduce:</b> the two nodes swap and average their small LoRA gradients, so both copies stay identical. That sync cost about 5% of throughput.'],
+  ],
+  ep: [
+    [0.00, 'Each node still takes <b>its half of the batch</b>, but holds only <b>half of the experts</b>.'],
+    [0.22, '<b>All-to-all:</b> a token whose chosen expert lives on the other node <b>crosses the link</b>, gets processed there, then comes back. This happens in every expert layer.'],
+    [0.55, 'Tokens return home with their expert’s output; each node computes gradients for its examples.'],
+    [0.72, 'Gradients are synced as before. The extra token traffic cost almost nothing: 1.87× vs 1.91×, with 41% less memory per node.'],
+  ],
+};
+function frame(now) {
+  const t = ((playing ? now - t0 : tPaused) % CYCLE) / CYCLE;
+  if (playing) tPaused = now - t0;
+  const ph = PHASES[mode].filter((p) => t >= p[0]).pop();
+  if ($('#phase').dataset.k !== mode + ph[0]) { $('#phase').innerHTML = ph[1]; $('#phase').dataset.k = mode + ph[0]; }
+  TOKENS.forEach((tk, i) => {
+    const N = NODES[tk.node];
+    const start = { x: N.x + 40 + tk.lane * 56, y: N.y + 70 };
+    const router = { x: N.x + 40 + tk.lane * 56, y: N.y + 112 };
+    const host = mode === 'dp' ? tk.node : ownerOf(tk.expert);
+    const ep = expertPos(host, tk.expert);
+    const ex = { x: ep.x + ep.w / 2 + ((i % 3) - 1) * 9, y: ep.y + ep.h / 2 };
+    let x, y;
+    const a = seg(t, 0.0, 0.18), b = seg(t, 0.22, 0.45), c = seg(t, 0.55, 0.70);
+    if (t < 0.22) { x = lerp(start.x, router.x, ease(a)); y = lerp(start.y, router.y, ease(a)); }
+    else if (t < 0.55) { x = lerp(router.x, ex.x, ease(b)); y = lerp(router.y, ex.y, ease(b)); }
+    else { x = lerp(ex.x, router.x, ease(c)); y = lerp(ex.y, router.y, ease(c)); }
+    const crossing = host !== tk.node && t >= 0.22 && t < 0.70;
+    const c0 = stage.tokens[i];
+    c0.setAttribute('cx', x); c0.setAttribute('cy', y);
+    c0.setAttribute('r', crossing ? 8 : 7);
+    c0.setAttribute('fill', crossing ? css('--ep') : css('--ink'));
+    c0.setAttribute('opacity', t > 0.95 ? (1 - seg(t, 0.95, 1)) : 1);
+  });
+  const g = seg(t, 0.74, 0.94);
+  stage.grads.forEach((r, k) => {
+    const from = k === 0 ? 380 : 564, to = k === 0 ? 564 : 380;
+    r.setAttribute('x', lerp(from, to, ease(g)) - 8); r.setAttribute('y', 252 + (k ? 8 : -8) - 8);
+    r.setAttribute('opacity', g > 0 && g < 1 ? 1 : 0);
+  });
+  requestAnimationFrame(frame);
+}
+function setMode(m) {
+  mode = m;
+  $('#mode-dp').setAttribute('aria-pressed', m === 'dp'); $('#mode-ep').setAttribute('aria-pressed', m === 'ep');
+  const isDp = m === 'dp';
+  $('#how-title').textContent = isDp ? 'Data parallel' : 'Expert parallel';
+  $('#how-title').style.color = isDp ? 'var(--dp-text)' : 'var(--ep-text)';
+  $('#how-lede').textContent = isDp
+    ? 'Each node keeps the whole model and trains on half of every batch. Once per step the nodes average their LoRA gradients. Simple, and close to 2× faster, but every node needs memory for the full model.'
+    : 'Each node keeps half of the experts. Tokens travel to whichever node holds the expert the router chose, in every expert layer, then come back. Almost as fast, with far less memory per node.';
+  const r = isDp ? ddp : ep;
+  const facts = isDp
+    ? [[speedup(r).toFixed(2) + '×', 'throughput vs 1 node (' + fmt(r.median_tps) + ' vs ' + fmt(base) + ' tokens/s)'],
+       [(speedup(r) / 2 * 100).toFixed(1) + '%', 'scaling efficiency'],
+       [(+r.peak_mem_gib).toFixed(1) + ' GiB', 'peak memory per node, same as 1 node'],
+       ['LoRA gradients', 'what crosses the network each step']]
+    : [[speedup(r).toFixed(2) + '×', 'throughput vs 1 node (' + fmt(r.median_tps) + ' tokens/s)'],
+       [(speedup(r) / 2 * 100).toFixed(1) + '%', 'scaling efficiency'],
+       [(+r.peak_mem_gib).toFixed(1) + ' GiB', 'peak memory per node, ' + Math.round((1 - r.peak_mem_gib / ddp.peak_mem_gib) * 100) + '% less than data parallel'],
+       ['Tokens + gradients', 'what crosses the network: tokens to experts and back, plus gradient sync']];
+  $('#how-facts').replaceChildren(...facts.map(([n, l]) => el('div', { class: 'fact' }, el('div', { class: 'num', text: n, style: 'color:' + (isDp ? 'var(--dp-text)' : 'var(--ep-text)') }), el('div', { class: 'lbl', text: l }))));
+  buildStage();
+  if (!playing) { tPaused = CYCLE * 0.4; }
+}
+$('#mode-dp').addEventListener('click', () => setMode('dp'));
+$('#mode-ep').addEventListener('click', () => setMode('ep'));
+$('#play').addEventListener('click', () => {
+  playing = !playing; $('#play').textContent = playing ? 'Pause' : 'Play';
+  if (playing) t0 = performance.now() - tPaused;
+});
+if (!playing) { $('#play').textContent = 'Play'; tPaused = CYCLE * 0.4; }
+
+/* ---------------- 2. Speed & memory ---------------- */
+function tipFor(box) { let t = box.querySelector('.tip'); if (!t) { t = el('div', { class: 'tip' }); box.append(t); } return t; }
+function showTip(box, evt, text) {
+  const t = tipFor(box); t.textContent = text; t.style.display = 'block';
+  const r = box.getBoundingClientRect(); let x = evt.clientX - r.left + 12; const y = evt.clientY - r.top - 34;
+  if (x + t.offsetWidth > r.width) x = evt.clientX - r.left - t.offsetWidth - 12;
+  t.style.left = Math.max(0, x) + 'px'; t.style.top = Math.max(0, y) + 'px';
+}
+function bars(box, rows, { unit, digits = 0, horizontal = false, colorOf }) {
+  box.replaceChildren();
+  const W = Math.max(300, box.clientWidth || 560), H = horizontal ? rows.length * 46 + 30 : 260, pad = horizontal ? Math.min(230, W * 0.42) : 48;
+  const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': rows.map((r) => `${r.label}: ${fmt(r.v, digits)} ${unit}`).join('; ') });
+  const top = Math.max(...rows.map((r) => r.v)) * 1.15;
+  const step = Math.pow(10, Math.floor(Math.log10(top / 4))); const nice = [1, 2, 2.5, 5, 10].map((m) => m * step).find((s) => top / s <= 5);
+  const max = Math.ceil(top / nice) * nice;
+  if (horizontal) {
+    rows.forEach((r, i) => {
+      const y = i * 46 + 6, w = (W - pad - 70) * r.v / max;
+      const lab = sv('text', { x: pad - 10, y: y + 20, 'text-anchor': 'end' }); lab.textContent = r.label; svg.append(lab);
+      const rect = sv('rect', { x: pad, y, width: Math.max(2, w), height: 28, rx: 5, fill: colorOf(r) });
+      rect.addEventListener('pointermove', (e) => showTip(box, e, `${r.label}: ${fmt(r.v, digits)} ${unit}`));
+      rect.addEventListener('pointerleave', () => (tipFor(box).style.display = 'none'));
+      svg.append(rect);
+      const v = sv('text', { x: pad + w + 8, y: y + 19, class: 'val' }); v.textContent = fmt(r.v, digits) + ' ' + unit; svg.append(v);
+    });
+  } else {
+    const bw = (W - pad - 20) / rows.length;
+    const y = (v) => (H - 50) - (H - 70) * v / max;
+    const grid = sv('g', { class: 'grid' });
+    for (let gv = 0; gv <= max + 1e-9; gv += nice) { grid.append(sv('line', { x1: pad, x2: W - 10, y1: y(gv), y2: y(gv) })); const gt = sv('text', { x: pad - 6, y: y(gv) + 4, 'text-anchor': 'end' }); gt.textContent = fmt(gv, 0); grid.append(gt); }
+    svg.append(grid);
+    rows.forEach((r, i) => {
+      const x = pad + i * bw + bw * 0.18, w = bw * 0.64;
+      const rect = sv('rect', { x, y: y(r.v), width: w, height: (H - 50) - y(r.v), rx: 6, fill: colorOf(r) });
+      rect.addEventListener('pointermove', (e) => showTip(box, e, `${r.label}: ${fmt(r.v, digits)} ${unit}`));
+      rect.addEventListener('pointerleave', () => (tipFor(box).style.display = 'none'));
+      svg.append(rect);
+      const v = sv('text', { x: x + w / 2, y: y(r.v) - 8, 'text-anchor': 'middle', class: 'val' }); v.textContent = fmt(r.v, digits) + (r.extra || ''); svg.append(v);
+      const parts = r.label.split(' · ');
+      parts.forEach((p, k) => { const lt = sv('text', { x: x + w / 2, y: H - 30 + k * 15, 'text-anchor': 'middle' }); lt.textContent = p; svg.append(lt); });
+    });
+  }
+  box.append(svg);
+}
+function lines(box) {
+  box.replaceChildren();
+  const W = Math.max(300, box.clientWidth || 560), H = 260, L = 44, R = 10, T = 10, B = 34;
+  const runs = ['single-1n', 'ddp-2n', 'ep-2n'];
+  const pts = runs.map((run) => DATA.steps.filter((s) => s.run === run).map((s) => ({ s: +s.step, v: +s.loss })).sort((a, b) => a.s - b.s));
+  const maxV = Math.max(...pts.flat().map((p) => p.v)) * 1.08;
+  const x = (s) => L + (W - L - R) * s / 19, y = (v) => T + (H - T - B) * (1 - v / maxV);
+  const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Training loss by step: all three runs fall from about 1.17 to about 0.34 and overlap.' });
+  const grid = sv('g', { class: 'grid' });
+  [0, 0.4, 0.8, 1.2].forEach((v) => { grid.append(sv('line', { x1: L, x2: W - R, y1: y(v), y2: y(v) })); const t = sv('text', { x: L - 6, y: y(v) + 4, 'text-anchor': 'end' }); t.textContent = v.toFixed(1); grid.append(t); });
+  [0, 5, 10, 15, 19].forEach((s) => { const t = sv('text', { x: x(s), y: H - 14, 'text-anchor': 'middle' }); t.textContent = s; grid.append(t); });
+  const xl = sv('text', { x: W - R, y: H - 0, 'text-anchor': 'end' }); xl.textContent = 'training step'; grid.append(xl);
+  svg.append(grid);
+  pts.forEach((p, k) => svg.append(sv('path', { d: p.map((q, i) => (i ? 'L' : 'M') + x(q.s) + ' ' + y(q.v)).join(' '), fill: 'none', stroke: css(COLOR[runs[k]]), 'stroke-width': 2.2 })));
+  const guide = sv('line', { y1: T, y2: H - B, stroke: css('--muted'), 'stroke-dasharray': '3 3', opacity: 0 }); svg.append(guide);
+  const hit = sv('rect', { x: L, y: T, width: W - L - R, height: H - T - B, fill: 'transparent' });
+  hit.addEventListener('pointermove', (e) => {
+    const r = svg.getBoundingClientRect(); const sx = (e.clientX - r.left) * W / r.width; const s = Math.max(0, Math.min(19, Math.round((sx - L) / (W - L - R) * 19)));
+    guide.setAttribute('x1', x(s)); guide.setAttribute('x2', x(s)); guide.setAttribute('opacity', 1);
+    showTip(box, e, `step ${s} · ` + runs.map((run, k) => `${LABEL[run]} ${(pts[k][s] || {}).v?.toFixed(3)}`).join(' · '));
+  });
+  hit.addEventListener('pointerleave', () => { guide.setAttribute('opacity', 0); tipFor(box).style.display = 'none'; });
+  svg.append(hit);
+  box.append(svg);
+  box.append(el('div', { class: 'legend' }, ...runs.map((run) => el('span', {}, el('i', { style: `background:var(${COLOR[run]})` }), LABEL[run]))));
+}
+let speedW = 0;
+window.addEventListener('resize', () => { if ($('#view-speed').classList.contains('on')) drawSpeed(); });
+function drawSpeed() {
+  const w = $('#chart-tps').clientWidth; if (w && w === speedW) return; speedW = w;
+  const loadFast = DATA.load.find((r) => r.method.startsWith('Fastload')), loadOld = DATA.load.find((r) => r.method.startsWith('Trainer mmap'));
+  const bw = DATA.nccl.find((r) => r.size_mb === '1024');
+  const k = [[speedup(ddp).toFixed(2) + '×', 'speedup, data parallel (2 nodes)', '--dp-text'], [speedup(ep).toFixed(2) + '×', 'speedup, expert parallel (2 nodes)', '--ep-text'],
+    [(+ep.peak_mem_gib).toFixed(1) + ' GiB', 'memory per node, expert parallel (vs ' + (+ddp.peak_mem_gib).toFixed(1) + ')', '--ep-text'],
+    [loadOld.load_min + ' → ' + loadFast.load_min + ' min', 'time to load the 59 GB model', '--ink'], [(+bw.busbw_gbs).toFixed(1) + ' GB/s', 'node-to-node RDMA bandwidth', '--ink']];
+  $('#kpis').replaceChildren(...k.map(([n, l, c]) => el('div', { class: 'kpi' }, el('div', { class: 'num', text: n, style: `color:var(${c})` }), el('div', { class: 'lbl', text: l }))));
+  const runs = ['single-1n', 'ddp-2n', 'ep-2n'];
+  bars($('#chart-tps'), runs.map((r) => ({ label: LABEL[r], v: +RUNS[r].median_tps, run: r, extra: '  (' + speedup(RUNS[r]).toFixed(2) + '×)' })), { unit: 'tokens/s', colorOf: (r) => css(COLOR[r.run]) });
+  bars($('#chart-mem'), runs.map((r) => ({ label: LABEL[r], v: +RUNS[r].peak_mem_gib, run: r })), { unit: 'GiB', digits: 1, colorOf: (r) => css(COLOR[r.run]) });
+  lines($('#chart-loss'));
+  bars($('#chart-load'), DATA.load.map((r) => ({ label: r.method.replace('Fastload hook: one shard at a time in RAM', 'One shard at a time in RAM (fix)').replace(' (original)', ''), v: +r.load_min, bad: /OOM|killed/i.test(r.result) })),
+    { unit: 'min', digits: 1, horizontal: true, colorOf: (r) => (r.bad ? css('--bad') : r.label.includes('(fix)') ? css('--good') : css('--muted')) });
+}
+
+/* ---------------- 3. Quality: scorecard + explorer ---------------- */
+const P = DATA.passages, PRED = DATA.preds, GOLD = DATA.gold;
+const SYS = [['base', 'Base model'], ['finetuned', 'Fine-tuned (LoRA)']].filter(([k]) => PRED[k]);
+const CLASSES = [...new Set(P.map((p) => p.cls))].sort();
+const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+function judge(p, pr) {
+  const j = pr && pr.parsed;
+  if (!j) return { valid: false, cls: false, sev: false, quote: false };
+  return { valid: true, cls: j.risk_class === p.cls, sev: j.severity === p.sev, quote: !!j.evidence_quote && norm(j.evidence_quote).length >= 20 && norm(p.text).includes(norm(j.evidence_quote)) };
+}
+function metrics(key) {
+  const rows = P.map((p) => ({ p, r: judge(p, PRED[key][p.id]), pr: PRED[key][p.id] }));
+  const n = rows.length, pct = (k) => rows.filter((x) => x.r[k]).length / n * 100;
+  const f1s = CLASSES.map((c) => {
+    const tp = rows.filter((x) => x.p.cls === c && x.pr?.parsed?.risk_class === c).length;
+    const fp = rows.filter((x) => x.p.cls !== c && x.pr?.parsed?.risk_class === c).length;
+    const fn = rows.filter((x) => x.p.cls === c && x.pr?.parsed?.risk_class !== c).length;
+    const pr = tp + fp ? tp / (tp + fp) : 0, rc = tp + fn ? tp / (tp + fn) : 0;
+    return pr + rc ? 2 * pr * rc / (pr + rc) : 0;
+  });
+  const lat = rows.map((x) => x.pr?.lat).filter((v) => v != null).sort((a, b) => a - b);
+  return { valid: pct('valid'), cls: pct('cls'), sev: pct('sev'), quote: pct('quote'), f1: f1s.reduce((a, b) => a + b, 0) / f1s.length * 100, lat: lat.length ? lat[Math.floor(lat.length / 2)] : null };
+}
+function drawScore() {
+  const box = $('#score');
+  if (!SYS.length) {
+    box.replaceChildren(el('div', { class: 'pending' }, el('b', { text: 'Evaluation running. ' }),
+      'The base and fine-tuned models are being scored on these 152 passages on the cluster (the fine-tuned adapter comes from a 140-step data-parallel run). Their answers and this scorecard appear here when it finishes. Until then the explorer shows each passage with its correct label.'));
+    return;
+  }
+  const M = Object.fromEntries(SYS.map(([k]) => [k, metrics(k)]));
+  const items = [['cls', 'Risk class accuracy'], ['f1', 'Risk class macro-F1'], ['sev', 'Severity accuracy'], ['quote', 'Quote copied word for word'], ['valid', 'Valid JSON answers']];
+  box.replaceChildren(...items.map(([k, label]) => el('div', { class: 'kpi' },
+    el('div', { class: 'lbl', text: label }),
+    ...SYS.map(([s, name]) => el('div', { style: 'display:flex;justify-content:space-between;gap:8px;align-items:baseline' },
+      el('span', { class: 'lbl', text: name }), el('span', { class: 'num', style: 'font-size:24px;color:' + (s === 'finetuned' ? 'var(--dp-text)' : 'var(--muted)'), text: fmt(M[s][k], 0) + '%' }))))));
+}
+const fCo = $('#f-co'), fCls = $('#f-cls'), fRes = $('#f-res'), fQ = $('#f-q');
+fCo.append(el('option', { value: '', text: 'All companies' }), ...[...new Set(P.map((p) => p.ticker))].sort().map((t) => el('option', { value: t, text: t })));
+fCls.append(el('option', { value: '', text: 'All risk classes' }), ...CLASSES.map((c) => el('option', { value: c, text: c.replace('_', ' / ') })));
+fRes.append(el('option', { value: '', text: 'All results' }));
+if (Object.keys(GOLD).length) fRes.append(el('option', { value: 'gold', text: 'Human-checked only' }));
+if (PRED.finetuned && PRED.base) {
+  fRes.append(el('option', { value: 'fixed', text: 'Fine-tuning fixed it' }), el('option', { value: 'broke', text: 'Fine-tuning broke it' }), el('option', { value: 'bothwrong', text: 'Both wrong' }));
+}
+let selected = P[0].id;
+function filtered() {
+  const q = norm(fQ.value);
+  return P.filter((p) => (!fCo.value || p.ticker === fCo.value) && (!fCls.value || p.cls === fCls.value) && (!q || norm(p.text).includes(q)) && (() => {
+    if (!fRes.value) return true;
+    if (fRes.value === 'gold') return !!GOLD[p.id];
+    const b = judge(p, PRED.base?.[p.id]).cls, f = judge(p, PRED.finetuned?.[p.id]).cls;
+    return fRes.value === 'fixed' ? f && !b : fRes.value === 'broke' ? b && !f : !b && !f;
+  })());
+}
+function drawList() {
+  const rows = filtered();
+  $('#count').textContent = `${rows.length} of ${P.length} passages`;
+  $('#list').replaceChildren(...rows.map((p) => {
+    const marks = el('span', { class: 'marks' }, el('span', { class: 'chip sev-' + p.sev, text: p.cls.replace('_', ' / ') }));
+    SYS.forEach(([k, name]) => { const ok = judge(p, PRED[k][p.id]).cls; marks.append(el('span', { class: 'chip ' + (ok ? 'ok' : 'no'), text: (k === 'base' ? 'base ' : 'tuned ') + (ok ? '✓' : '✗'), title: name + (ok ? ' correct' : ' wrong') })); });
+    const b = el('button', { class: 'row', type: 'button', role: 'option', 'aria-selected': p.id === selected },
+      el('span', { class: 'meta', text: `${p.ticker} · Item ${p.item} · ${p.id.split('-').pop()}` }),
+      el('span', { text: p.text.slice(0, 90).replace(/\s+\S*$/, '') + '…' }), marks);
+    b.addEventListener('click', () => { selected = p.id; drawList(); drawDetail(); });
+    return b;
+  }));
+}
+function highlight(text, quote) {
+  const box = el('div', { class: 'passage' });
+  const i = quote ? text.indexOf(quote) : -1;
+  if (i < 0) { box.textContent = text; return box; }
+  box.append(text.slice(0, i), el('mark', { text: quote }), text.slice(i + quote.length));
+  return box;
+}
+function answerCard(title, cls, sev, quote, extra, verdict) {
+  return el('div', { class: 'ans' }, el('h4', { text: title }),
+    el('div', { class: 'marks', style: 'display:flex;gap:6px;flex-wrap:wrap' }, el('span', { class: 'chip sev-' + (sev || ''), text: cls ? cls.replace('_', ' / ') : 'no class' }), el('span', { class: 'chip', text: 'severity: ' + (sev || '—') }), verdict || null),
+    quote ? el('div', { class: 'q', text: '“' + quote + '”' }) : null, extra || null);
+}
+function drawDetail() {
+  const p = P.find((x) => x.id === selected);
+  const g = GOLD[p.id];
+  const kids = [el('div', { class: 'meta mono', style: 'color:var(--muted);font-size:13px', text: `${p.company} (${p.ticker}) · 10-K filed ${p.date} · Item ${p.item}: ${p.title} · ${p.id}` })];
+  kids.push(highlight(p.text, p.quote));
+  const answers = el('div', { class: 'answers' });
+  answers.append(answerCard('Correct label' + (g ? ' · human-checked' : ''), g ? g.cls : p.cls, g?.sev || p.sev, p.quote, el('div', { class: 'note', text: p.why })));
+  if (!SYS.length) answers.append(el('div', { class: 'ans' }, el('h4', { text: 'Base vs fine-tuned' }), el('div', { class: 'note', text: 'Model answers appear here when the evaluation on the cluster finishes.' })));
+  SYS.forEach(([k, name]) => {
+    const pr = PRED[k][p.id], j = pr?.parsed, r = judge(p, pr);
+    const verdict = el('span', { class: 'chip ' + (r.cls ? 'ok' : 'no'), text: r.cls ? 'class correct' : 'class wrong' });
+    answers.append(j ? answerCard(name, j.risk_class, j.severity, j.evidence_quote, el('div', { class: 'note', text: (r.quote ? 'Quote found in passage' : 'Quote not found in passage') + (pr.lat != null ? ` · ${pr.lat.toFixed(1)} s` : '') }), verdict)
+      : el('div', { class: 'ans' }, el('h4', { text: name }), el('span', { class: 'chip no', text: 'no valid JSON' }), el('pre', { text: pr?.raw || '(no answer)' })));
+  });
+  kids.push(answers);
+  $('#detail').replaceChildren(...kids);
+}
+[fCo, fCls, fRes].forEach((s) => s.addEventListener('change', drawList));
+fQ.addEventListener('input', drawList);
+
+setMode('dp');
+drawScore(); drawList(); drawDetail();
+route();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

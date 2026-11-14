@@ -1,0 +1,5 @@
+method,load_min,result,detail
+Trainer mmap over NFS (original),49,Works but slow,~22 MB/s: the trainer faults pages in one at a time from the storage server
+Full copy to /tmp,0.7,Trainer OOM-killed,/tmp in a job is RAM (shared with the GPU on GB10): 59 GB copy + 62 GB model did not fit
+Pre-warm page cache first,40,No real gain,mmap faults still went to the storage server; stopped early (time is projected from read rate)
+Fastload hook: one shard at a time in RAM,1,Works,13 shards copied at 0.7–1.8 GiB/s with ~5 GB extra RAM (commit 1550a32)
