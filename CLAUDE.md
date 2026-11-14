@@ -160,6 +160,19 @@ Start with step 1. Keep each script small, documented, and resumable. Ask me for
   NCCL settings via env (example NCCL_SOCKET_IFNAME=eth0; confirm the real NIC from the probe).
 - Workflow outputs must be egressed to the Fuzzball object cache to be readable afterwards.
 
+# Setup run results (2026-11-14, workflow 83851c7d, on SPARK18) — Step 2 PASSED
+- Model on volume `models` at /<mount>/nemotron-3-nano-30b-a3b-bf16: 13/13 shards, 59 GB. Ingress took
+  ~54 min (venue internet; looked like ~1 MB/s early on, then sped up). Do NOT download again.
+- Image nemo-automodel:26.10.00 pulled + converted to SIF (~70 min first time; cached for team9 now).
+  Inside: torch 2.14.0a0 (nv26.08) CUDA 13.4, nemo_automodel 0.7.0, transformers 5.18.0,
+  mamba_ssm 2.3.0, causal_conv1d 1.6.0, peft 0.20.0, recipe present. Matches RunPod rehearsal.
+- GB10: driver 580.173.02, MemTotal 127.5 GB, MemAvailable 113 GB; nvidia-smi memory "Not Supported".
+- NICs seen in a single-node job: lan0, enp1s0f0np0 (busy), enp1s0f1np1, enP2p1s0f0np0,
+  enP2p1s0f1np1, wlP9s9. Confirm which links SPARK17<->18 from the NCCL test logs.
+- Cluster is flaky: Postgres and fuzzball-objectcache dropped out several times (10:00, 11:20).
+  Symptom "failed to probe image cache ... fuzzball-objectcache no such host" = retry later.
+- `fuzzball group use team9` fails for non-owners: use the ID 30741bdf-f811-4091-9d5b-5f1baed46b05.
+
 # Event plan
 
 ## Step 2: Setup run on the cluster (about 30–40 min, mostly waiting)
