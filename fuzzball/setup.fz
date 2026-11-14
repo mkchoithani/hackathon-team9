@@ -1,0 +1,78 @@
+version: v4
+# Step 2 setup run (team9):
+#   1. ingress Nemotron 3 Nano 30B-A3B BF16 (~59 GB) onto the persistent `models` volume (once)
+#   2. probe the NeMo AutoModel image on one GB10: chip, library versions, memory, NIC names
+#   3. verify the model directory has all 13 safetensors shards
+# The probe report is egressed to fb://group/setup/probe.txt (the only readable output).
+
+volumes:
+  models:
+    use: team9
+    name: models
+    ingress:
+      - source:
+          uri: hf://nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16
+          secret: secret://user/hf-token
+        destination:
+          uri: file://nemotron-3-nano-30b-a3b-bf16
+        policy:
+          timeout:
+            execute: 2h
+  report:
+    egress:
+      - source:
+          uri: file://probe.txt
+        destination:
+          uri: fuzzball://group/setup/probe.txt
+
+jobs:
+  probe:
+    image:
+      uri: docker://nvcr.io/nvidia/nemo-automodel:26.10.00
+    mounts:
+      /models:
+        volume: models
+      /report:
+        volume: report
+    env:
+      - MODEL_DIR=/models/nemotron-3-nano-30b-a3b-bf16
+    script: |
+      #!/bin/bash
+      exec > >(tee /report/probe.txt) 2>&1
+      echo "=== host ==="; hostname; date -u; uname -a
+      echo "=== gpu ==="; nvidia-smi || echo "nvidia-smi failed"
+      nvidia-smi --query-gpu=name,driver_version --format=csv || true
+      echo "=== memory ==="; grep -E 'MemTotal|MemAvailable' /proc/meminfo
+      echo "=== network interfaces ==="; (ip -o -4 addr show || ifconfig -a || cat /proc/net/dev) 2>&1
+      echo "=== versions ==="
+      python - <<'PY'
+      import importlib, torch
+      print("torch", torch.__version__, "cuda", torch.version.cuda, "available", torch.cuda.is_available())
+      if torch.cuda.is_available():
+          print("device", torch.cuda.get_device_name(0))
+      for m in ["nemo_automodel", "transformers", "mamba_ssm", "causal_conv1d", "peft"]:
+          try:
+              mod = importlib.import_module(m)
+              print(m, getattr(mod, "__version__", "?"))
+          except Exception as e:
+              print(m, "IMPORT FAILED:", e)
+      PY
+      echo "=== recipe ==="
+      ls -l /opt/Automodel/examples/llm_finetune/nemotron/nemotron_nano_v3_singlegpu_lora.yaml || echo "recipe missing"
+      echo "=== model files ==="
+      du -sh "$MODEL_DIR" 2>&1
+      n=$(ls "$MODEL_DIR"/*.safetensors 2>/dev/null | wc -l)
+      echo "safetensors shards: $n (expected 13)"
+      ls -l "$MODEL_DIR"
+      [ "$n" -eq 13 ] && echo MODEL_CHECK=OK || echo MODEL_CHECK=FAIL
+      echo PROBE_DONE
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 32GiB
+      devices:
+        nvidia.com/gpu: 1
+    policy:
+      timeout:
+        execute: 1h
