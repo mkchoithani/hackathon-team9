@@ -47,7 +47,9 @@ done
   echo "export PORT=${PORT}"
   echo "export NNODES=${NNODES:-2}"
   echo "export MODEL_DIR=${MODEL_DIR}"
-  echo "export LOCAL_MODEL_DIR=${LOCAL_MODEL_DIR:-/tmp/nemotron-local}   # copy weights to node-local disk (NFS load hung)"
+  # LOCAL_MODEL_DIR is opt-in only: /tmp is RAM on the GB10 nodes, the full copy OOM-kills the trainer.
+  # Slow NFS loads are handled by scripts/fastload (on by default in launch_train.sh).
+  [[ -n "${LOCAL_MODEL_DIR:-}" ]] && echo "export LOCAL_MODEL_DIR=${LOCAL_MODEL_DIR}"
   [[ -n "${NCCL_IFACE:-}" ]] && echo "export NCCL_SOCKET_IFNAME=${NCCL_IFACE}"
   [[ -n "${NCCL_IB_HCA:-}" ]] && echo "export NCCL_IB_HCA=${NCCL_IB_HCA}"
   [[ -n "${NCCL_IB_DISABLE:-}" ]] && echo "export NCCL_IB_DISABLE=${NCCL_IB_DISABLE}"

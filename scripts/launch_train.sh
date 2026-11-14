@@ -28,6 +28,8 @@ mkdir -p "$RUN_DIR/logs" "$RUN_DIR/nodes"
 # from there. On the fb-hack GB10s, loading straight from the NFS volume hung inside load_model for
 # 25 min (memory reserved, GPU idle) although plain NFS reads run at ~1.5 GB/s; RunPod loaded from
 # local disk in 12 s. The run name and results dir stay those of the original config.
+# DO NOT use on the fb-hack GB10s: /tmp in a Fuzzball job is RAM (= GPU memory on GB10), so the 59 GB
+# copy OOM-kills the trainer (SIGKILL in load_model). The fastload hook below fixes the slow load instead.
 if [[ -n "${LOCAL_MODEL_DIR:-}" ]]; then
   SRC_MODEL=$(awk '/pretrained_model_name_or_path:/ {print $2; exit}' "$CONFIG")
   if [[ ! -f "$LOCAL_MODEL_DIR/.copy_done" ]]; then
@@ -55,6 +57,16 @@ if [[ -n "${DUMP_STACKS_EVERY:-}" ]]; then
   export PYTHONPATH="$DIAG${PYTHONPATH:+:$PYTHONPATH}"
 fi
 
+# Fast load (default on; FASTLOAD=0 to disable): the NeMo reader mmaps each shard and faults it in
+# over NFS at ~25 MB/s (~49 min for the model). scripts/fastload/sitecustomize.py copies one shard at a
+# time into RAM with a sequential read (~1 GB/s) and mmaps that instead: ~1 min, ~5 GB extra RAM.
+# Must come after the DUMP_STACKS_EVERY block: it goes first on PYTHONPATH and chains to that one.
+if [[ "${FASTLOAD:-1}" != "0" ]]; then
+  export FASTLOAD_SRC=${FASTLOAD_SRC:-$(awk '/pretrained_model_name_or_path:/ {print $2; exit}' "$CONFIG")}
+  export FASTLOAD_DIR=${FASTLOAD_DIR:-/tmp/fastload_shards}
+  export PYTHONPATH="$(pwd)/scripts/fastload${PYTHONPATH:+:$PYTHONPATH}"
+fi
+
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-8} MKL_NUM_THREADS=${MKL_NUM_THREADS:-8}
 export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
 # Everything is local: never call the Hub (venue internet is slow) and keep caches (and their file
@@ -71,7 +83,7 @@ if [[ -z "${NO_TELEMETRY:-}" ]]; then
   python3 scripts/telemetry.py --output "$RUN_DIR/telemetry-$HOST.csv" --interval 2 >/dev/null 2>&1 &
   TPID=$!
 fi
-cleanup() { [[ -n "$TPID" ]] && kill "$TPID" 2>/dev/null || true; }
+cleanup() { [[ -n "$TPID" ]] && kill "$TPID" 2>/dev/null || true; rm -rf "${FASTLOAD_DIR:-/tmp/fastload_shards}"; }
 trap cleanup EXIT
 
 if [[ "$NNODES" == "1" ]]; then
