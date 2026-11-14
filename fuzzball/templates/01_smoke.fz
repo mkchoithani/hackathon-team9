@@ -32,7 +32,7 @@ jobs:
       nvidia-smi
       python3 scripts/00_preflight.py --need-gpu --model-dir @MODEL_DIR@ || exit 1
       [ -f fuzzball/cluster.env ] && . fuzzball/cluster.env
-      NNODES=1 bash scripts/launch_train.sh configs/smoke-1n.yaml
+      NNODES=1 DUMP_STACKS_EVERY=300 bash scripts/launch_train.sh configs/smoke-1n.yaml
       RC=$?
       cat results/runs/smoke-1n/summary.json 2>/dev/null || true
       tar czf /out/results.tgz results/runs/smoke-1n results/preflight 2>/dev/null || true

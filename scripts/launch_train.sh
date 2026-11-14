@@ -24,8 +24,39 @@ RUN_DIR=${RESULTS_DIR:-results/runs}/$RUN
 HOST=$(hostname -s)${NODE_RANK:+-n$NODE_RANK}   # rank suffix keeps files apart when 2 "nodes" share a host (rehearsal)
 mkdir -p "$RUN_DIR/logs" "$RUN_DIR/nodes"
 
+# LOCAL_MODEL_DIR=/tmp/model: copy the weights from shared storage to node-local disk first and train
+# from there. On the fb-hack GB10s, loading straight from the NFS volume hung inside load_model for
+# 25 min (memory reserved, GPU idle) although plain NFS reads run at ~1.5 GB/s; RunPod loaded from
+# local disk in 12 s. The run name and results dir stay those of the original config.
+if [[ -n "${LOCAL_MODEL_DIR:-}" ]]; then
+  SRC_MODEL=$(awk '/pretrained_model_name_or_path:/ {print $2; exit}' "$CONFIG")
+  if [[ ! -f "$LOCAL_MODEL_DIR/.copy_done" ]]; then
+    echo "[finscale] copying model $SRC_MODEL -> $LOCAL_MODEL_DIR"
+    T0=$(date +%s); mkdir -p "$LOCAL_MODEL_DIR"
+    cp -r "$SRC_MODEL"/. "$LOCAL_MODEL_DIR"/ && touch "$LOCAL_MODEL_DIR/.copy_done"
+    echo "[finscale] model copy done in $(( $(date +%s) - T0 ))s ($(du -sh "$LOCAL_MODEL_DIR" | cut -f1))"
+  fi
+  LOCAL_CONFIG=$(mktemp /tmp/"$RUN".XXXX.yaml)
+  sed "s#pretrained_model_name_or_path: .*#pretrained_model_name_or_path: $LOCAL_MODEL_DIR#" "$CONFIG" > "$LOCAL_CONFIG"
+  cp "$CONFIG" "$RUN_DIR/config.yaml"   # keep the original next to the results
+  CONFIG=$LOCAL_CONFIG
+fi
+
+# Hang diagnosis: every DUMP_STACKS_EVERY seconds, print all Python thread stacks to the log.
+if [[ -n "${DUMP_STACKS_EVERY:-}" ]]; then
+  DIAG=$(mktemp -d /tmp/diag.XXXX)
+  printf 'import faulthandler, sys\nfaulthandler.dump_traceback_later(%s, repeat=True, file=sys.stderr)\n' \
+    "$DUMP_STACKS_EVERY" > "$DIAG/sitecustomize.py"
+  export PYTHONPATH="$DIAG${PYTHONPATH:+:$PYTHONPATH}"
+fi
+
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-8} MKL_NUM_THREADS=${MKL_NUM_THREADS:-8}
 export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
+# Everything is local: never call the Hub (venue internet is slow) and keep caches (and their file
+# locks) on node-local disk, not on the NFS volume.
+export HF_HUB_OFFLINE=${HF_HUB_OFFLINE:-1} TRANSFORMERS_OFFLINE=${TRANSFORMERS_OFFLINE:-1} \
+       HF_DATASETS_OFFLINE=${HF_DATASETS_OFFLINE:-1} HF_HOME=${HF_HOME:-/tmp/hf_home} \
+       TRITON_CACHE_DIR=${TRITON_CACHE_DIR:-/tmp/triton_cache} XDG_CACHE_HOME=${XDG_CACHE_HOME:-/tmp/xdg_cache}
 
 python3 scripts/node_manifest.py --out "$RUN_DIR/nodes/$HOST.json" --config "$CONFIG" || true
 
