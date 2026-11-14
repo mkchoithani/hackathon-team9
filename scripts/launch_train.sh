@@ -36,6 +36,11 @@ if [[ -n "${LOCAL_MODEL_DIR:-}" ]]; then
     cp -r "$SRC_MODEL"/. "$LOCAL_MODEL_DIR"/ && touch "$LOCAL_MODEL_DIR/.copy_done"
     echo "[finscale] model copy done in $(( $(date +%s) - T0 ))s ($(du -sh "$LOCAL_MODEL_DIR" | cut -f1))"
   fi
+  # GB10 unified memory: the copy leaves ~59 GB of page cache that CUDA cannot use -> drop it now and
+  # keep dropping it while the weights are read (see scripts/evict_page_cache.py).
+  python3 scripts/evict_page_cache.py "$LOCAL_MODEL_DIR" "$SRC_MODEL"
+  python3 scripts/evict_page_cache.py "$LOCAL_MODEL_DIR" --every 2 --for "${EVICT_SECONDS:-900}" \
+    > "$RUN_DIR/logs/evict-$HOST.log" 2>&1 &
   LOCAL_CONFIG=$(mktemp /tmp/"$RUN".XXXX.yaml)
   sed "s#pretrained_model_name_or_path: .*#pretrained_model_name_or_path: $LOCAL_MODEL_DIR#" "$CONFIG" > "$LOCAL_CONFIG"
   cp "$CONFIG" "$RUN_DIR/config.yaml"   # keep the original next to the results
@@ -57,6 +62,7 @@ export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
 export HF_HUB_OFFLINE=${HF_HUB_OFFLINE:-1} TRANSFORMERS_OFFLINE=${TRANSFORMERS_OFFLINE:-1} \
        HF_DATASETS_OFFLINE=${HF_DATASETS_OFFLINE:-1} HF_HOME=${HF_HOME:-/tmp/hf_home} \
        TRITON_CACHE_DIR=${TRITON_CACHE_DIR:-/tmp/triton_cache} XDG_CACHE_HOME=${XDG_CACHE_HOME:-/tmp/xdg_cache}
+export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 
 python3 scripts/node_manifest.py --out "$RUN_DIR/nodes/$HOST.json" --config "$CONFIG" || true
 
