@@ -14,6 +14,10 @@ What: when mmap is asked to map a ``$FASTLOAD_SRC/*.safetensors`` file, copy tha
 is deleted first, so only ~5 GB of extra RAM is used at a time. Measured on 2026-11-14: 13 shards in
 ~1 min instead of ~49 min, same step-0 loss (1.167) and memory (61.9 GiB).
 
+Hugging Face loading (scripts/07_predict.py --backend hf) goes through safetensors.safe_open instead;
+that is replaced by a pread()-based reader (see below). To use it outside launch_train.sh:
+  FASTLOAD_SRC=/shared/nemotron-3-nano-30b-a3b-bf16 PYTHONPATH=scripts/fastload python3 scripts/07_predict.py ...
+
 Env:
   FASTLOAD_SRC  path prefix to accelerate (set by launch_train.sh to the model dir); unset = no-op
   FASTLOAD_DIR  where shard copies go (default /tmp/fastload_shards)
@@ -89,23 +93,115 @@ if _SRC:
         _log(f"hook NOT installed: {e!r}")
 
     # Hugging Face transformers (scripts/07_predict.py --backend hf) loads shards with
-    # safetensors.safe_open, which mmaps in Rust and never calls Python's mmap: stage those too.
+    # safetensors.safe_open, which mmaps in Rust and never calls Python's mmap. Staging those shards
+    # in RAM does NOT work: transformers keeps every shard open until loading ends, so the staged
+    # copies can't be freed (59 GB of copies + 59 GB of weights -> OOM-killed, seen 2026-11-14), and
+    # pre-warming the page cache doesn't hold either (on GB10 the GPU's own allocation evicts it).
+    # Instead, read each tensor with plain pread() in one large read (~1.5 GB/s over NFS) and keep
+    # nothing resident: verified byte-identical to safe_open, model ready in ~70 s (2026-11-15).
     try:
+        import json
+        import struct
+
         import safetensors as _st
+        import torch
 
         _orig_safe_open = _st.safe_open
+        _DT = {"BF16": torch.bfloat16, "F16": torch.float16, "F32": torch.float32, "F64": torch.float64,
+               "I64": torch.int64, "I32": torch.int32, "I16": torch.int16, "I8": torch.int8, "U8": torch.uint8,
+               "BOOL": torch.bool}
+        for _k, _a in (("F8_E4M3", "float8_e4m3fn"), ("F8_E5M2", "float8_e5m2")):
+            if hasattr(torch, _a):
+                _DT[_k] = getattr(torch, _a)
 
-        def safe_open(filename, *args, **kwargs):
-            path = os.fspath(filename)
-            if path.startswith(_SRC) and path.endswith(".safetensors"):
+        class _Slice:
+            def __init__(self, f, name):
+                self._f, self._name = f, name
+                self._info = f._hdr[name]
+
+            def get_shape(self):
+                return list(self._info["shape"])
+
+            def get_dtype(self):
+                return self._info["dtype"]
+
+            @property
+            def shape(self):
+                return self.get_shape()
+
+            def __getitem__(self, idx):
+                return self._f.get_tensor(self._name)[idx]
+
+        class _PreadSafeOpen:
+            """The subset of safetensors.safe_open that transformers uses, backed by pread()."""
+
+            def __init__(self, path, framework="pt", device="cpu"):
+                self._path, self._device = os.fspath(path), device
+                self._fd = os.open(self._path, os.O_RDONLY)
+                (n,) = struct.unpack("<Q", os.pread(self._fd, 8, 0))
+                hdr = json.loads(os.pread(self._fd, n, 8))
+                self._meta = hdr.pop("__metadata__", None)
+                self._hdr, self._base = hdr, 8 + n
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc):
+                self.close()
+                return False
+
+            def close(self):
+                if self._fd is not None:
+                    os.close(self._fd)
+                    self._fd = None
+
+            def __del__(self):
                 try:
-                    path = _stage(path)
-                except Exception as e:
-                    _log(f"staging failed for {path}, using NFS: {e!r}")
-            return _orig_safe_open(path, *args, **kwargs)
+                    self.close()
+                except Exception:
+                    pass
+
+            def keys(self):
+                return list(self._hdr.keys())
+
+            def offset_keys(self):
+                return sorted(self._hdr, key=lambda k: self._hdr[k]["data_offsets"][0])
+
+            def metadata(self):
+                return self._meta
+
+            def get_slice(self, name):
+                return _Slice(self, name)
+
+            def get_tensor(self, name):
+                info = self._hdr[name]
+                a, b = info["data_offsets"]
+                buf = bytearray(b - a)
+                mv, got = memoryview(buf), 0
+                while got < len(buf):  # pread may return short reads on large sizes
+                    chunk = os.pread(self._fd, min(len(buf) - got, 1 << 30), self._base + a + got)
+                    if not chunk:
+                        raise IOError(f"short read in {self._path} for {name}")
+                    mv[got:got + len(chunk)] = chunk
+                    got += len(chunk)
+                dt = _DT[info["dtype"]]
+                t = torch.frombuffer(buf, dtype=dt) if len(buf) else torch.empty(0, dtype=dt)
+                t = t.reshape(info["shape"])
+                return t.to(self._device) if self._device not in (None, "cpu") else t
+
+        def safe_open(filename, framework="pt", device="cpu", *args, **kwargs):
+            path = os.fspath(filename)
+            if path.startswith(_SRC) and path.endswith(".safetensors") and framework in ("pt", "torch"):
+                return _PreadSafeOpen(path, framework, device)
+            return _orig_safe_open(filename, framework, device, *args, **kwargs)
 
         _st.safe_open = safe_open
-        _log(f"safe_open hook active in pid {os.getpid()}")
+        try:
+            import safetensors.torch as _stt
+            _stt.safe_open = safe_open
+        except Exception:
+            pass
+        _log(f"pread safe_open active in pid {os.getpid()}")
     except Exception as e:
         _log(f"safe_open hook NOT installed: {e!r}")
 
