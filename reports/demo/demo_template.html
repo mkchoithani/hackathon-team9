@@ -215,7 +215,7 @@ footer { color: var(--muted); font-size: 13px; }
     </div>
   </section>
 
-  <footer>All numbers are measured on the CIQ fb-hack cluster on 14 Nov 2026 (Fuzzball workflows; per-step logs and summary.json of each run). Correct labels come from the teacher model (Nemotron 3 Ultra) used to build the dataset; 60 of them are queued for human review in data/sft/gold_review.csv and none is reviewed yet.</footer>
+  <footer>All numbers are measured on the CIQ fb-hack cluster on 14–15 Nov 2026 (Fuzzball workflows; per-step logs and summary.json of each run). Fine-tuned = LoRA adapter from step 91 of a 140-step data-parallel run (best validation loss); answers generated greedily, max 300 tokens; scores match scripts/08_score.py. Correct labels come from the teacher model (Nemotron 3 Ultra) used to build the dataset; 60 of them are queued for human review in data/sft/gold_review.csv and none is reviewed yet.</footer>
 </div>
 
 <script>
@@ -477,11 +477,13 @@ function drawSpeed() {
 const P = DATA.passages, PRED = DATA.preds, GOLD = DATA.gold;
 const SYS = [['base', 'Base model'], ['finetuned', 'Fine-tuned (LoRA)']].filter(([k]) => PRED[k]);
 const CLASSES = [...new Set(P.map((p) => p.cls))].sort();
-const norm = (s) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+// Same normalisation as finscale/common.py norm_text / quote_in_passage (the official scorer).
+const norm = (s) => String(s || '').replace(/[\u2019\u2018]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/[\u2014\u2013]/g, '-').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+const quoteOk = (q, text) => { const n = norm(q).replace(/^[ ."']+|[ ."']+$/g, ''); return n.length >= 20 && norm(text).includes(n); };
 function judge(p, pr) {
   const j = pr && pr.parsed;
   if (!j) return { valid: false, cls: false, sev: false, quote: false };
-  return { valid: true, cls: j.risk_class === p.cls, sev: j.severity === p.sev, quote: !!j.evidence_quote && norm(j.evidence_quote).length >= 20 && norm(p.text).includes(norm(j.evidence_quote)) };
+  return { valid: true, cls: j.risk_class === p.cls, sev: j.severity === p.sev, quote: !!j.evidence_quote && quoteOk(j.evidence_quote, p.text) };
 }
 function metrics(key) {
   const rows = P.map((p) => ({ p, r: judge(p, PRED[key][p.id]), pr: PRED[key][p.id] }));
