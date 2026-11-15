@@ -1,0 +1,8 @@
+metric,label,kind,base,finetuned
+json_valid_rate,Valid JSON answer,pct,0.9605,1.0
+class_accuracy,Risk class accuracy,pct,0.6711,0.7961
+class_macro_f1,Risk class macro-F1,f1,0.612,0.7823
+severity_accuracy,Severity accuracy,pct,0.3816,0.7697
+quote_fidelity,Quote found word for word,pct,0.9276,0.9474
+fully_valid_rate,Fully valid answer (all fields),pct,0.6776,0.9013
+median_latency_s,Median seconds per answer,sec,10.656,6.765
