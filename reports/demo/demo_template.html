@@ -90,6 +90,18 @@ nav.tabs a:focus-visible, button:focus-visible, select:focus-visible, input:focu
 .chart .grid line { stroke: var(--line); }
 .tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); box-shadow: 0 6px 18px rgba(0,0,0,.12); border-radius: 8px; padding: 6px 10px; font-size: 13px; white-space: nowrap; display: none; z-index: 2; }
 
+.eval-headline { grid-column: 1 / -1; margin: 0; font-size: clamp(18px, 2vw, 22px); font-weight: 600; text-wrap: balance; }
+.eval-headline b { color: var(--dp-text); }
+.eval-stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.eval-stat .num { font: 600 clamp(24px, 2.6vw, 32px)/1.15 var(--font-mono); color: var(--dp-text); white-space: nowrap; }
+.eval-stat .lbl { color: var(--muted); font-size: 14px; }
+.eval-tablewrap { grid-column: 1 / -1; overflow-x: auto; }
+.eval-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.eval-table th, .eval-table td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.eval-table th { color: var(--muted); font-weight: 600; font-size: 13px; }
+.eval-table th:first-child, .eval-table td:first-child { text-align: left; white-space: normal; }
+.eval-table .ft { color: var(--dp-text); font-weight: 600; }
+#score .note { grid-column: 1 / -1; margin: 0; }
 /* Explorer */
 .score { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
 .pending { border: 1px dashed var(--line); border-radius: 14px; padding: 16px 18px; color: var(--muted); background: var(--panel); }
@@ -126,7 +138,7 @@ footer { color: var(--muted); font-size: 13px; }
   <header class="top">
     <div class="brand">
       <h1>FinScale: fine-tuning a 30B mixture-of-experts model on two GB10 nodes</h1>
-      <p>Team 9 · CIQ fb-hack (Fuzzball) · 14 Nov 2026 · NVIDIA Nemotron-3-Nano 30B-A3B, LoRA, SEC 10-K risk classification</p>
+      <p>Team 9 · CIQ fb-hack (Fuzzball) · 14–15 Nov 2026 · NVIDIA Nemotron-3-Nano 30B-A3B, LoRA, SEC 10-K risk classification</p>
     </div>
     <nav class="tabs" aria-label="Demo sections">
       <a href="#how" id="tab-how"><span class="n">1</span>How it works</a>
@@ -503,6 +515,34 @@ function drawScore() {
   if (!SYS.length) {
     box.replaceChildren(el('div', { class: 'pending' }, el('b', { text: 'Evaluation running. ' }),
       'The base and fine-tuned models are being scored on these 152 passages on the cluster (the fine-tuned adapter comes from a 140-step data-parallel run). Their answers and this scorecard appear here when it finishes. Until then the explorer shows each passage with its correct label.'));
+    return;
+  }
+  const O = DATA.scores;
+  if (O && O.base && O.finetuned) {
+    // Official numbers from scripts/08_score.py (results/eval/scores.json), same as slide 5 and the PDF.
+    const b = O.base, f = O.finetuned, pct = (v) => fmt(v * 100, 0) + '%', pct1 = (v) => fmt(v * 100, 1) + '%';
+    const faster = Math.round((1 - f.median_latency_s / b.median_latency_s) * 100);
+    const headline = el('p', { class: 'eval-headline' }, 'On companies it never saw, the fine-tuned model ',
+      el('b', { text: f.severity_accuracy >= 1.9 * b.severity_accuracy ? 'doubled severity accuracy' : 'improved severity accuracy' }), '.');
+    const stats = el('div', { class: 'eval-stats' }, ...[
+      [pct(b.severity_accuracy) + ' → ' + pct(f.severity_accuracy), 'severity accuracy, base → fine-tuned'],
+      [pct(b.class_accuracy) + ' → ' + pct(f.class_accuracy), 'risk class accuracy, base → fine-tuned'],
+      [pct(f.json_valid_rate), `valid JSON answers (base ${pct(b.json_valid_rate)}), and ${faster}% faster per answer`],
+    ].map(([n, l]) => el('div', { class: 'eval-stat' }, el('div', { class: 'num', text: n }), el('div', { class: 'lbl', text: l }))));
+    const rows = [
+      ['Risk class accuracy', pct1(b.class_accuracy), pct1(f.class_accuracy)],
+      ['Risk class macro-F1', b.class_macro_f1.toFixed(3), f.class_macro_f1.toFixed(3)],
+      ['Severity accuracy', pct1(b.severity_accuracy), pct1(f.severity_accuracy)],
+      ['Quote copied word for word from the passage', pct1(b.quote_fidelity), pct1(f.quote_fidelity)],
+      ['Fully valid answer (every field)', pct1(b.fully_valid_rate), pct1(f.fully_valid_rate)],
+      ['Valid JSON answer', pct1(b.json_valid_rate), pct1(f.json_valid_rate)],
+      ['Median time per answer', b.median_latency_s.toFixed(1) + ' s', f.median_latency_s.toFixed(1) + ' s'],
+    ];
+    const table = el('div', { class: 'eval-tablewrap' }, el('table', { class: 'eval-table' },
+      el('thead', {}, el('tr', {}, el('th', { text: `Measured on the ${b.n} held-out passages` }), el('th', { text: 'Base model' }), el('th', { text: 'Fine-tuned', class: 'ft' }))),
+      el('tbody', {}, ...rows.map(([m, x, y]) => el('tr', {}, el('td', { text: m }), el('td', { text: x }), el('td', { text: y, class: 'ft' }))))));
+    const note = el('p', { class: 'note', text: `${b.n} risk-factor passages from MS, GOOGL, PFE and WMT 10-Ks, all held out of training. Scored with scripts/08_score.py against the teacher model’s labels (Nemotron 3 Ultra; not yet human-reviewed). Fine-tuned = LoRA adapter from step 91 of a 140-step data-parallel run.` });
+    box.replaceChildren(headline, stats, table, note);
     return;
   }
   const M = Object.fromEntries(SYS.map(([k]) => [k, metrics(k)]));

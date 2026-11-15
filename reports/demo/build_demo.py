@@ -16,6 +16,7 @@ ap.add_argument("repo")
 ap.add_argument("out")
 ap.add_argument("--pred-base")
 ap.add_argument("--pred-ft")
+ap.add_argument("--scores", default=None, help="results/eval/scores.json from scripts/08_score.py (default: next to --pred-ft)")
 ap.add_argument("--report", default=str(Path(__file__).resolve().parents[1] / "data"),
                 help="dir with runs.csv / steps.csv / nccl.csv / load.csv (default: reports/data)")
 a = ap.parse_args()
@@ -52,10 +53,16 @@ def load_preds(p):
     return out
 
 
+scores_path = Path(a.scores) if a.scores else (Path(a.pred_ft).with_name("scores.json") if a.pred_ft else None)
+scores = json.loads(scores_path.read_text())["systems"] if scores_path and scores_path.exists() else None
+for sysd in (scores or {}).values():
+    sysd.pop("confusion", None)
+
 data = {
     "passages": passages,
     "gold": gold,
     "preds": {"base": load_preds(a.pred_base), "finetuned": load_preds(a.pred_ft)},
+    "scores": scores,
     "runs": read_csv(rep / "runs.csv"),
     "steps": read_csv(rep / "steps.csv"),
     "nccl": read_csv(rep / "nccl.csv"),
@@ -65,4 +72,5 @@ blob = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</",
 html = Path(__file__).with_name("demo_template.html").read_text().replace("/*__DATA__*/null", blob)
 Path(a.out).write_text(html)
 print(f"wrote {a.out} ({len(html) / 1024:.0f} KB) | passages {len(passages)} | gold {len(gold)} | "
-      f"base preds {len(data['preds']['base'] or {})} | finetuned preds {len(data['preds']['finetuned'] or {})}")
+      f"base preds {len(data['preds']['base'] or {})} | finetuned preds {len(data['preds']['finetuned'] or {})} | "
+      f"official scores {'yes' if scores else 'no'}")
